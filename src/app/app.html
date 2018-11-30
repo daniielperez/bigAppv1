@@ -1,1 +1,40 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-menu [content]="mainContent">
+  <ion-content id="side-menu21">
+    <img src="assets/img/FI2tbcGRDuS3DWWGlnnZ_untitled.png" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+    <ion-list id="menu-list1">
+      <ion-item-sliding>
+        <ion-item color="none" id="menu-list-item47">
+          <ion-avatar item-left>
+            <img src="assets/img/rFhqtb2RV2p4jWeTiwEw_Banners.jpg" />
+          </ion-avatar>
+          <h2>
+            Username
+          </h2>
+        </ion-item>
+        <ion-item-options side="left">
+          <button ion-button color="dark">
+            Salir
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+      <ion-item color="none" menuClose="" on-click="goToBigApp()" id="menu-list-item1">
+        Compras
+        <ion-icon name="cart" item-right></ion-icon>
+      </ion-item>
+      <ion-item color="none" menuClose="" on-click="goToConversaciones()" id="menu-list-item2">
+        Chat
+        <ion-icon name="chatbubbles" item-right></ion-icon>
+      </ion-item>
+      <ion-item color="none" menuClose="" on-click="goToPerfil()" id="menu-list-item3">
+        Social
+        <ion-icon name="person-add" item-right></ion-icon>
+      </ion-item>
+      <ion-item color="none" menuClose="" on-click="goToPerfil()" id="menu-list-item4">
+        Perfil
+        <ion-icon name="person" item-right></ion-icon>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-nav #mainContent [root]="rootPage"></ion-nav>
