@@ -1,59 +1,60 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>
-      Perfil
+      {{usuario.nombres}}
     </ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding id="page3">
-  <img src="assets/img/jsXvJpoTUCFeZt63qHkR_ANDRESPARRILLA.jpg" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+<ion-content id="page3" class="color-fondo">
+  <img src="http://192.168.1.75/bigApp/bigApp/web/uploads/usuario/fotosPortada/{{usuario.fotoPortada}}" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
   <ion-list id="perfil-list7">
     <ion-item color="none" id="perfil-list-item31">
       <ion-avatar item-left>
-        <img src="assets/img/3eBeDdrLQb2plWctov1T_ANDRESPARRILLA.png" />
+        <img src="http://192.168.1.75/bigApp/bigApp/web/uploads/usuario/fotosPerfil/{{usuario.fotoPerfil}}" />
       </ion-avatar>
       <h2>
-        David Perez
+        {{usuario.username}}
       </h2>
     </ion-item>
   </ion-list>
   <ion-card id="perfil-card27">
     <ion-list>
-      <h4 id="perfil-heading3" style="color:#000000;text-align:center;">
-        Publicaciones
-      </h4>
-      <div style="width:100%;height:220px;margin:0px 0px;line-height:250px;background-color:#e8ebef;text-align:center;">
-        <i class="icon ion-image" style="font-size:64px;color:#888;vertical-align:middle;"></i>
-      </div>
     </ion-list>
   </ion-card>
-  <ion-card id="perfil-card29">
-    <ion-list>
-      <ion-item color="none" id="perfil-list-item42">
-        <ion-avatar item-left>
-          <img src="assets/img/tkNpISNRge38rtPyxKAj_ANDRESPARRILLA.png" />
+  <ion-card *ngFor="let publicacion of publicaciones">
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="http://192.168.1.75/bigApp/bigApp/web/uploads/usuario/fotosPerfil/{{publicacion.fotoPerfil}}">
         </ion-avatar>
-        <h2>
-          David Perez
-        </h2>
+        <h2>{{publicacion.nombres}}</h2>
+        <p>November 5, 1955</p>
       </ion-item>
-      <img src="assets/img/W7PJyee8QR2HqXo7i2NT_Banners.jpg" />
-      <div style="width:100%;height:220px;margin:0px 0px;line-height:250px;background-color:#e8ebef;text-align:center;">
-        <i class="icon ion-image" style="font-size:64px;color:#888;vertical-align:middle;"></i>
-      </div>
-      <ion-item id="perfil-list-item-container17">
-        <div id="perfil-markdown20" style="text-align:justify;" class="show-list-numbers-and-dots">
-          <p style="margin-top:0px;color:#000000;">
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s,
-          </p>
-        </div>
-      </ion-item>
-      <button id="perfil-button21" ion-button color="positive" block on-click="goToComentarios()">
-        Comentarios
-      </button>
-    </ion-list>
-  </ion-card>
+      <img *ngIf="publicacion.imagen !=null" src="http://192.168.1.75/bigApp/bigApp/web/uploads/publicaciones/{{publicacion.imagen}}">
+      <iframe *ngIf="publicacion.urlVideo !=null" width="100%" height="315" [src]='sanitizer.bypassSecurityTrustResourceUrl(publicacion.urlVideo)' frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      <ion-card-content>
+        <p>{{publicacion.contenido}}</p>
+      </ion-card-content>
+      <ion-row>
+        <ion-col>
+          <button ion-button icon-start clear small>
+            <ion-icon name="thumbs-up"></ion-icon>
+            <div>12 Likes</div>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button icon-start clear small>
+            <ion-icon name="text"></ion-icon>
+            <div>4 Comments</div>
+          </button>
+        </ion-col>
+        <ion-col center text-center>
+          <ion-note>
+            11h ago
+          </ion-note>
+        </ion-col>
+      </ion-row>
+    </ion-card>
 </ion-content>

@@ -11,19 +11,20 @@ import { ChatPage } from '../pages/chat/chat';
 import { ConversacionesPage } from '../pages/conversaciones/conversaciones';
 import { ContactosPage } from '../pages/contactos/contactos';
 import { PerfilPage } from '../pages/perfil/perfil';
+import { LoginPage } from '../pages/login/login';
 import { ComentariosPage } from '../pages/comentarios/comentarios';
 
 
 import { BigAppPage } from '../pages/big-app/big-app';
 
 
-
+ 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
-    rootPage:any = BigAppPage;
+    rootPage:any = PerfilPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {

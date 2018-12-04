@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -8,30 +8,53 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding id="page10">
-  <form id="signup-form2">
+<ion-content class="color-fondo">
     <ion-list id="signup-list4">
       <ion-item id="signup-input3">
         <ion-label>
-          Name
+          Username
         </ion-label>
-        <ion-input type="text" placeholder=""></ion-input>
+        <ion-input [(ngModel)]="usuario.username" type="text" placeholder=""></ion-input>
       </ion-item>
       <ion-item id="signup-input4">
         <ion-label>
           Email
         </ion-label>
-        <ion-input type="email" placeholder=""></ion-input>
+        <ion-input [(ngModel)]="usuario.email" type="email" placeholder=""></ion-input>
       </ion-item>
+      <ion-item id="signup-input8">
+        <ion-label>
+          Nombres
+        </ion-label>
+        <ion-input [(ngModel)]="usuario.nombres" type="text" placeholder=""></ion-input>
+      </ion-item>
+      <ion-item id="signup-input8">
+        <ion-label>
+          Apellidos
+        </ion-label>
+        <ion-input [(ngModel)]="usuario.apellidos" type="text" placeholder=""></ion-input>
+      </ion-item>
+      <ion-item id="signup-input8">
+        <ion-label>
+          Celular
+        </ion-label>
+        <ion-input [(ngModel)]="usuario.celular" type="text" placeholder=""></ion-input>
+      </ion-item>
+          <ion-item>
+            <ion-label>Rol</ion-label>
+            <ion-select [(ngModel)]="usuario.rol">
+              <ion-option value="ROLE_USUARIO">Usuario</ion-option>
+              <ion-option value="ROLE_EMPRESA">Empresa</ion-option>
+            </ion-select>
+          </ion-item>
       <ion-item id="signup-input5">
         <ion-label>
           Password
         </ion-label>
-        <ion-input type="text" placeholder=""></ion-input>
+        <ion-input [(ngModel)]="usuario.password" type="password" placeholder=""></ion-input>
       </ion-item>
     </ion-list>
-    <button id="signup-button19" ion-button color="stable" block>
+    <button id="signup-button19" on-click="goToCreateUser()" ion-button color="stable" block>
       Sign up
     </button>
-  </form>
 </ion-content>

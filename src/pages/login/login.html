@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -8,28 +8,27 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding id="page9">
-  <form id="login-form1">
+<ion-content padding class="color-fondo">
+  <img src="assets/img/logoBig.png" />
     <ion-list id="login-list3">
       <ion-item id="login-input1">
         <ion-label>
           Email
         </ion-label>
-        <ion-input type="email" placeholder=""></ion-input>
+        <ion-input [(ngModel)]="usuario.username" type="email" placeholder="Email"></ion-input>
       </ion-item>
       <ion-item id="login-input2">
         <ion-label>
           Password
         </ion-label>
-        <ion-input type="password" placeholder=""></ion-input>
+        <ion-input [(ngModel)]="usuario.password" type="password" placeholder="Contraseña"></ion-input>
       </ion-item>
     </ion-list>
     <div class="spacer" style="height:40px;" id="login-spacer1"></div>
-    <button id="login-button17" ion-button color="stable" block on-click="goToBigApp()">
+    <button id="login-button17" ion-button color="stable" block on-click="onLogin()">
       Log in
     </button>
     <button id="login-button18" ion-button clear color="positive" block on-click="goToSignup()">
       Crear Cuenta
     </button>
-  </form>
 </ion-content>
