@@ -1,3 +1,21 @@
 page-big-app {
-
+ 
+    ion-slides {
+        height:13em; 
+        max-height: 300px;
+        margin-top: -3px;
+    }
+     
+    ion-card{
+        display: table-cell;
+        border: solid 1px #ffffff;
+    }
+    .scroll{
+        width: 100%; 
+        height: 13em;
+    }
+}
+.edit-opty-popover .popover-content{
+    width: 150px !important;
+    height: 199px !important;
 }

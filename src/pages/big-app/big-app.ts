@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, PopoverController  } from 'ionic-angular';
 import { MunicipiosPage } from '../municipios/municipios';
 import { EmpresasPage } from '../empresas/empresas';
 import { EmpresaPage } from '../empresa/empresa';
 import { MapaPage } from '../mapa/mapa';
 import { ChatPage } from '../chat/chat';
+import { PopoverEmpresaCardPage } from './popoverEmpresaCard';
 
 @Component({
   selector: 'page-big-app',
@@ -12,8 +13,16 @@ import { ChatPage } from '../chat/chat';
 })
 export class BigAppPage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController,public popoverCtrl: PopoverController) {
   }
+
+  presentPopover(myEvent) {
+    let popover = this.popoverCtrl.create(PopoverEmpresaCardPage,{}, { cssClass: 'edit-opty-popover' });
+    popover.present({
+      ev: myEvent
+    });
+  }
+
   goToMunicipios(params){
     if (!params) params = {};
     this.navCtrl.push(MunicipiosPage);
