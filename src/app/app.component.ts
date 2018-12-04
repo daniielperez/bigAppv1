@@ -24,9 +24,22 @@ import { BigAppPage } from '../pages/big-app/big-app';
 })
 export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
-    rootPage:any = PerfilPage;
+    rootPage:any = LoginPage;
+    
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+
+    // let status bar overlay webview
+    statusBar.overlaysWebView(true);
+
+    // set status bar to white
+    statusBar.backgroundColorByHexString('#231f20');
+    if (window.localStorage.getItem('username') == null) {
+      this.rootPage = LoginPage;
+    }else{
+      this.rootPage = BigAppPage;
+    }
+    // this.rootPage = LoginPage;
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.

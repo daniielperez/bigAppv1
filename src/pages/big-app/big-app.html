@@ -1,15 +1,7 @@
-<ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>
-      BigApp
-    </ion-title>
-  </ion-navbar>
-</ion-header>
-<ion-content id="page1">
+
+<ion-content id="page1" class="color-fondo" *ngIf="!spiner">
   <ion-slides pager>
+    
     <ion-slide>
         <img src="https://as01.epimg.net/meristation/imagenes/2017/04/21/noticia/1492737600_212349_1532094738_sumario_normal.jpg" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
     </ion-slide>
@@ -22,15 +14,17 @@
         <img src="https://i.blogs.es/ebf9a2/dota-2/450_1000.jpg" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;"/>
     </ion-slide> 
   </ion-slides>
-
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
     <ion-scroll scrollX="true" class="scroll">
         <ion-card>
             <ion-item>
-                
               <ion-avatar item-start>
-                <img src="https://i.blogs.es/ebf9a2/dota-2/450_1000.jpg">
+                <img on-click="goToEmpresa()" src="https://i.blogs.es/ebf9a2/dota-2/450_1000.jpg">
               </ion-avatar>
-              <h2>Marty McFly 
+              <h2> 
+                  Marty McFly
                   <p align="right" style="position:relative; top:-15px;">
                       <ion-icon align="right"  (click)="presentPopover($event)"  name="more"></ion-icon>
                   </p>
@@ -38,7 +32,7 @@
               <p style='margin-top: -16px;'>November 5, 1955  
                 </p>
             </ion-item>
-            <img src="https://i.blogs.es/ebf9a2/dota-2/450_1000.jpg">
+            <img on-click="goToEmpresa()" src="https://i.blogs.es/ebf9a2/dota-2/450_1000.jpg">
         </ion-card>
         <ion-card>
             <ion-item>
@@ -99,50 +93,37 @@
   <button id="bigApp-button6" ion-button color="positive" style="border-radius:0px 0px 0px 0px;" on-click="goToMunicipios()">
     Ver Mas
   </button> -->
-
-  <ion-card>
-      <img src="img/nin-live.png"/>
-      <ion-card-content>
-        <ion-card-title>
-          Nine Inch Nails Live
-          </ion-card-title>
-        <p>
-          The most popular industrial group ever, and largely
-          responsible for bringing the music to a mass audience.
-        </p>
-      </ion-card-content>
-    </ion-card>
-  
-
   <h4 id="bigApp-heading1" style="color:#000000;text-align:center;">
     Productos
   </h4>
-  <!-- <ion-card id="bigApp-card21" padding>
-    <ion-list>
-      <img src="assets/img/ULjWiduBQrKc7PIH3LwI_ANDRESPARRILLA.jpg" />
-      <ion-item id="bigApp-list-item-container2">
-        <div id="bigApp-markdown3" style="text-align:center;" class="show-list-numbers-and-dots">
-          <p style="margin-top:0px;color:#000000;">
-            $150000
-          </p>
-        </div>
-      </ion-item>
-      <div id="bigApp-markdown4" style="text-align:justify;" class="show-list-numbers-and-dots">
-        <p style="color:#000000;">
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s,
-        </p>
-      </div>
-      <button id="bigApp-button7" ion-button color="positive" style="border-radius:0px 0px 0px 0px;" on-click="goToEmpresa()">
-        Empresa
-      </button>
-      <button id="bigApp-button8" ion-button color="positive" style="border-radius:0px 0px 0px 0px;" on-click="goToChat()">
-        Chat
-      </button>
-      <button id="bigApp-button9" ion-button color="positive" style="border-radius:0px 0px 0px 0px;" on-click="goToMapa()">
-        Mapa
-      </button>
-    </ion-list>
-  </ion-card> -->
+  <ion-grid padding>
+      <ion-row>
+        <ion-col col-6 *ngFor="let producto of productos">
+          <ion-card>
+          <img src="http://192.168.1.61/bigApp/bigApp/web/uploads/producto/{{ producto.imagen }}"/>
+          <ion-card-content>
+            <ion-card-title>
+              <h2>{{producto.nombre}}</h2>
+              <p align="right" style="position:relative; top: -22px;">
+                  <ion-icon align="right"  (click)="presentPopoverProducto($event)"  name="more"></ion-icon>
+              </p>
+              </ion-card-title>
+            <p>
+                {{ producto.descripcion }}
+            </p>
+          </ion-card-content>
+        </ion-card>
 
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 </ion-content>
+
+<ion-grid *ngIf="spiner">
+  <ion-row >  
+    <ion-col col-12 text-center >
+      <ion-spinner name="crescent"></ion-spinner>
+    </ion-col>
+  </ion-row>
+</ion-grid>
     
