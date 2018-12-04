@@ -14,6 +14,7 @@ import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
 import { ContactosPage } from '../pages/contactos/contactos';
 import { ComentariosPage } from '../pages/comentarios/comentarios';
+import { PopoverEmpresaCardPage } from '../pages/big-app/popoverEmpresaCard';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -33,7 +34,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     LoginPage,
     SignupPage,
     ContactosPage,
-    ComentariosPage
+    ComentariosPage,
+    PopoverEmpresaCardPage
   ],
   imports: [
     BrowserModule,
@@ -53,7 +55,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     LoginPage,
     SignupPage,
     ContactosPage,
-    ComentariosPage
+    ComentariosPage,
+    PopoverEmpresaCardPage
   ],
   providers: [
     StatusBar,
