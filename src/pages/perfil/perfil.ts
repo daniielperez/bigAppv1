@@ -25,9 +25,11 @@ export class PerfilPage {
 
   constructor(public navCtrl: NavController,public _UsuarioService: UsuarioService,public sanitizer: DomSanitizer) {
   }
-  goToComentarios(params){
-    if (!params) params = {};
-    this.navCtrl.push(ComentariosPage);
+  goToComentarios(publicacionId){
+    console.log(publicacionId);
+    this.navCtrl.push(ComentariosPage,{
+      item:publicacionId,
+    });
   }
   ngOnInit(){
     this._UsuarioService.UsuarioAction(this.datos).subscribe(

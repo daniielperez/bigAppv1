@@ -17,6 +17,7 @@ import { ContactosPage } from '../pages/contactos/contactos';
 import { ComentariosPage } from '../pages/comentarios/comentarios';
 
 import { UsuarioService } from '../services/usuarioService';
+import { ComentarioService } from '../services/comentarioService';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -63,7 +64,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    UsuarioService
+    UsuarioService,
+    ComentarioService
   ]
 })
 export class AppModule {}

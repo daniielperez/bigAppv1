@@ -30,7 +30,7 @@
           <img src="http://192.168.1.75/bigApp/bigApp/web/uploads/usuario/fotosPerfil/{{publicacion.fotoPerfil}}">
         </ion-avatar>
         <h2>{{publicacion.nombres}}</h2>
-        <p>November 5, 1955</p>
+        <p>{{publicacion.fecha| date}}</p>
       </ion-item>
       <img *ngIf="publicacion.imagen !=null" src="http://192.168.1.75/bigApp/bigApp/web/uploads/publicaciones/{{publicacion.imagen}}">
       <iframe *ngIf="publicacion.urlVideo !=null" width="100%" height="315" [src]='sanitizer.bypassSecurityTrustResourceUrl(publicacion.urlVideo)' frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
@@ -39,15 +39,9 @@
       </ion-card-content>
       <ion-row>
         <ion-col>
-          <button ion-button icon-start clear small>
-            <ion-icon name="thumbs-up"></ion-icon>
-            <div>12 Likes</div>
-          </button>
-        </ion-col>
-        <ion-col>
-          <button ion-button icon-start clear small>
+          <button ion-button icon-start clear small on-click="goToComentarios(publicacion.id)">
             <ion-icon name="text"></ion-icon>
-            <div>4 Comments</div>
+            <div>Comentarios</div>
           </button>
         </ion-col>
         <ion-col center text-center>
