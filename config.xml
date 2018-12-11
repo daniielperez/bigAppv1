@@ -3,7 +3,7 @@
     <name>MyApp</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://192.168.1.61:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -87,5 +87,7 @@
         <variable name="API_KEY_FOR_IOS" value="AIzaSyB3py4U-oLTw1l1h2L02uk9Ff86clmVyvc" />
     </plugin>
     <plugin name="onesignal-cordova-plugin" spec="2.4.5" />
+    <allow-navigation href="http://192.168.1.61:8100" sessionid="57168a72" />
     <engine name="android" spec="7.1.4" />
+    <engine name="browser" spec="5.0.4" />
 </widget>

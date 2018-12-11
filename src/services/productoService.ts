@@ -17,6 +17,13 @@ export class ProductoService {
 		return this._http.get(this.url+"/index",{headers: new Headers({'Content-Type':'application/json','Authorization': 'Bearer ' + sessionStorage.getItem('token')})}).map(res => res.json());
 	}
 
+	IndexPaginatorAction(idPagina:any){
+		let json = JSON.stringify(idPagina);
+		let headers = new Headers({'Content-Type':'application/json','Authorization': 'Bearer ' + sessionStorage.getItem('token')});
+ 			return this._http.post(this.url+"/list/paginator", json, {headers: headers})
+			 .map(res => res.json()); 
+	}
+
 	productoTagAction(tags:any){
 		let json = JSON.stringify(tags);
 		let headers = new Headers({'Content-Type':'application/json','Authorization': 'Bearer ' + sessionStorage.getItem('token')});

@@ -1,5 +1,6 @@
 
-<ion-content id="page1" class="color-fondo" *ngIf="!spiner">
+<ion-content id="page1" class="color-fondo">
+  
   <ion-slides pager>
     
     <ion-slide>
@@ -61,6 +62,7 @@
                       <ion-icon align="right"  (click)="presentPopover($event)"  name="more"></ion-icon>
                   </p>
               </h2>
+              
               <p style='margin-top: -16px;'>November 5, 1955  
                 </p>
             </ion-item>
@@ -84,39 +86,63 @@
         </ion-card>
     </ion-scroll>
 
-  <!-- <button id="bigApp-button4" ion-button color="positive" style="text-align:left;border-radius:0px 0px 0px 0px;" on-click="goToEmpresa()">
-    Empresa 1
-  </button>
-  <button id="bigApp-button5" ion-button color="positive" style="border-radius:0px 0px 0px 0px;" on-click="goToEmpresa()">
-    Empresa 2
-  </button>
-  <button id="bigApp-button6" ion-button color="positive" style="border-radius:0px 0px 0px 0px;" on-click="goToMunicipios()">
-    Ver Mas
-  </button> -->
   <h4 id="bigApp-heading1" style="color:#000000;text-align:center;">
     Productos
   </h4>
-  <ion-grid padding>
-      <ion-row>
-        <ion-col col-6 *ngFor="let producto of productos">
-          <ion-card>
-          <img src="http://192.168.1.61/bigApp/bigApp/web/uploads/producto/{{ producto.imagen }}"/>
-          <ion-card-content>
-            <ion-card-title>
-              <h2>{{producto.nombre}}</h2>
-              <p align="right" style="position:relative; top: -22px;">
-                  <ion-icon align="right"  (click)="presentPopoverProducto($event)"  name="more"></ion-icon>
-              </p>
-              </ion-card-title>
-            <p>
-                {{ producto.descripcion }}
-            </p>
-          </ion-card-content>
-        </ion-card>
+<div class="padding1">
+  <ng-masonry-grid 
+                  (onNgMasonryInit)="onNgMasonryInit($event)"
+                  [masonryOptions]="{ transitionDuration: '0.8s', gutter: 10, columnWidth: 50}" 
+                  [useAnimation]="false" 
+                  [useImagesLoaded]="true"
+                  [scrollAnimationOptions]="{ animationEffect: 'effect-4', minDuration : 0.4, maxDuration : 0.7 }">
+    <!-- Masonry Grid Item -->
+      <ng-masonry-grid-item class="ancho" id="{{'producto-'+producto.id}}" *ngFor="let producto of productos" > 
+        <!-- Grid Content  --> 
+        <ion-card>
+            <img  src="http://192.168.1.61/bigApp/bigApp/web/uploads/producto/{{ producto.imagen }}"/>
+            <ion-card-content>
+              <ion-card-title>
+                <h2>{{ producto.nombre }}</h2>
+                <h3>${{ producto.valor }}</h3>
 
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+                <!-- <p align="right" style="position:relative; top: -22px;">
+                    <ion-icon align="right"  (click)="presentPopoverProducto($event,producto)"  name="more"></ion-icon>
+                </p> -->
+                </ion-card-title>  
+              <p> 
+                  {{ producto.descripcion }} 
+              </p>
+            </ion-card-content>
+            <div align="center">
+                <ion-note align="center">
+                 11h ago
+                </ion-note>
+            </div>
+            <ion-row>
+                <ion-col col-4>
+                  <button on-click="goToChat()" style="color:#c62828" ion-button icon-start clear small>
+                    <ion-icon name="text"></ion-icon>
+                  </button>
+                </ion-col>
+                <ion-col col-4>
+                  <button on-click="goToMap(producto)" ion-button icon-start clear small>
+                    <ion-icon name="navigate" style="color:#8e0000"></ion-icon>
+                  </button>
+                </ion-col>
+                <ion-col col-4>
+                  <button on-click="goToEmpresa()" style="color:#ff5f52" ion-button icon-start clear small>
+                    <ion-icon name="briefcase"></ion-icon>
+                  </button>
+                </ion-col>
+              </ion-row>
+        </ion-card>
+      </ng-masonry-grid-item>
+  </ng-masonry-grid>
+</div>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </ion-content>
 
 <ion-grid *ngIf="spiner">

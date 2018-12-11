@@ -8,40 +8,59 @@ import { ChatPage } from '../chat/chat';
 import { PopoverEmpresaCardPage } from './popoverEmpresaCard';
 import { PopoverProductoCardPage } from './popoverProductoCard';
 import { ProductoService } from '../../services/productoService';
+import { EmpresaService } from '../../services/empresaService'; 
+import { Masonry, MasonryGridItem } from 'ng-masonry-grid';
+
 
 @Component({
   selector: 'page-big-app',
   templateUrl: 'big-app.html',
   providers: [
-    ProductoService
+    ProductoService,
+    EmpresaService,
   ],
 })
 export class BigAppPage {
   spiner:any=false;
+  _masonry: Masonry;
+  masonryItems:any[];
   productos:string[];
   errorMessage:any;
+  infiniteScroll:any;
+  idPagina:any = 1;
 
   constructor(
     public navCtrl: NavController,
     public popoverCtrl: PopoverController,
     public _ProductoService: ProductoService,
+    public _EmpresaService: EmpresaService,
   ) {
   }
 
   ngOnInit() { 
-    this.spiner=true;
-    this._ProductoService.IndexAction().subscribe(
+    this.idPagina = 1;
+    this.productos = null;
+    let data = {
+      'idPagina':this.idPagina,
+    }
+    this._ProductoService.IndexPaginatorAction(data).subscribe(
       response => {
         if(response.status ='success'){
-            this.productos=response.datos;
-            this.spiner=false;
+          if (this._masonry) {
+              this.productos=response.datos;
+            }
           }
-      },  
+      },   
       error => {
           this.errorMessage = <any>error;
           console.log(error);
         }
     );
+  }
+
+  onNgMasonryInit($event: Masonry) {
+    console.log('ok'); 
+    this._masonry = $event;
   }
 
   presentPopover(myEvent) {
@@ -50,8 +69,9 @@ export class BigAppPage {
       ev: myEvent
     });
   }
-  presentPopoverProducto(myEvent) {
-    let popover = this.popoverCtrl.create(PopoverProductoCardPage,{idProducto:1}, { cssClass: 'edit-opty-popover-producto' });
+  presentPopoverProducto(myEvent,producto) {
+    let popover = this.popoverCtrl.create(PopoverProductoCardPage,{lat:producto.lat,lng:producto.lng,label:producto.nombre}, { cssClass: 'edit-opty-popover-producto' });
+    
     popover.present({
       ev: myEvent
     });
@@ -75,14 +95,21 @@ export class BigAppPage {
   }
 
   doRefresh(refresher) {
-    this._ProductoService.IndexAction().subscribe(
+    this.idPagina = 1;
+    this.productos = null;
+    let data = {
+      'idPagina':this.idPagina,
+    }
+    this._ProductoService.IndexPaginatorAction(data).subscribe(
       response => {
         if(response.status ='success'){
-            this.productos=response.datos;
-            refresher.complete();
-
+          if (this._masonry) {
+              this.productos=response.datos;
+              this.infiniteScroll.enable(true);
+              refresher.complete();
+            }
           }
-      },  
+      },   
       error => {
           this.errorMessage = <any>error;
           console.log(error);
@@ -90,4 +117,40 @@ export class BigAppPage {
     );
   }
 
+  goToMap(producto){
+    this.navCtrl.push(MapaPage, {
+      lat: producto.lat,
+      lng: producto.lng,
+      nombre: producto.nombre
+    });
+  }
+
+  doInfinite(infiniteScroll) {
+    this.infiniteScroll = infiniteScroll;
+    this.idPagina++;
+    let data = {
+      'idPagina':this.idPagina,
+    }
+    this._ProductoService.IndexPaginatorAction(data).subscribe(
+      response => {
+        if(response.status ='success'){
+            if (this._masonry) {
+              let productosOerder =response.datos;
+              if (productosOerder) {
+                productosOerder.forEach(element => {
+                  this.productos.push( element );
+                  this.infiniteScroll.complete();
+                });
+              }else{
+                this.infiniteScroll.enable(false);
+              }
+            }
+          }
+      },   
+      error => {
+          this.errorMessage = <any>error;
+          console.log(error);
+        }
+    );
+  }
 }

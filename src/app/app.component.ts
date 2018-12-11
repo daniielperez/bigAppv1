@@ -13,6 +13,9 @@ import { ContactosPage } from '../pages/contactos/contactos';
 import { PerfilPage } from '../pages/perfil/perfil';
 import { LoginPage } from '../pages/login/login';
 import { ComentariosPage } from '../pages/comentarios/comentarios';
+import { OneSignal, OSNotificationPayload } from '@ionic-native/onesignal';
+import { isCordovaAvailable } from '../common/is-cordova-available';
+import { oneSignalAppId, sender_id } from '../config';
 
 
 import { BigAppPage } from '../pages/big-app/big-app';
@@ -27,13 +30,15 @@ export class MyApp {
     rootPage:any = LoginPage;
     
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,private oneSignal: OneSignal) {
 
     // let status bar overlay webview
     statusBar.overlaysWebView(true);
 
     // set status bar to white
-    statusBar.backgroundColorByHexString('#231f20');
+    statusBar.backgroundColorByHexString('#ffffff');
+    statusBar.styleBlackTranslucent();
+    statusBar.show();
     if (window.localStorage.getItem('username') == null) {
       this.rootPage = LoginPage;
     }else{
@@ -46,6 +51,13 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
     });
+    if (isCordovaAvailable()){
+      this.oneSignal.startInit(oneSignalAppId, sender_id);
+      this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.Notification);
+      this.oneSignal.handleNotificationReceived().subscribe(data => this.onPushReceived(data.payload));
+      this.oneSignal.handleNotificationOpened().subscribe(data => this.onPushOpened(data.notification.payload));
+      this.oneSignal.endInit();
+    }
   }
   goToBigApp(params){
     if (!params) params = {};
@@ -77,5 +89,12 @@ export class MyApp {
   }goToComentarios(params){
     if (!params) params = {};
     this.navCtrl.setRoot(ComentariosPage);
+  }
+  private onPushReceived(payload: OSNotificationPayload) {
+    alert('Push recevied:' + payload.body);
+  }
+  
+  private onPushOpened(payload: OSNotificationPayload) {
+    alert('Push opened: ' + payload.body);
   }
 }

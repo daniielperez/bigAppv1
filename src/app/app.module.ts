@@ -17,8 +17,11 @@ import { ContactosPage } from '../pages/contactos/contactos';
 import { ComentariosPage } from '../pages/comentarios/comentarios';
 import { PopoverEmpresaCardPage } from '../pages/big-app/popoverEmpresaCard';
 import { PopoverProductoCardPage } from '../pages/big-app/popoverProductoCard'; 
+import { NgMasonryGridModule } from 'ng-masonry-grid';
+import { GoogleMaps } from '@ionic-native/google-maps';
 
 import { UsuarioService } from '../services/usuarioService';
+import { OneSignal } from '@ionic-native/onesignal';  
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -45,6 +48,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   imports: [
     BrowserModule,
     HttpModule,
+    NgMasonryGridModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -69,7 +73,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    UsuarioService
+    UsuarioService,
+    GoogleMaps,
+    OneSignal
   ]
 })
 export class AppModule {}
