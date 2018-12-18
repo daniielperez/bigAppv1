@@ -24,7 +24,7 @@ import { BigAppPage } from '../pages/big-app/big-app';
 })
 export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
-    rootPage:any = PerfilPage;
+    rootPage:any = PerfilPage ;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {

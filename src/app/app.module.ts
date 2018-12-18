@@ -15,7 +15,13 @@ import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
 import { ContactosPage } from '../pages/contactos/contactos';
 import { ComentariosPage } from '../pages/comentarios/comentarios';
+import { NewPostPage } from '../pages/new-post/new-post';
 import { PopoverEmpresaCardPage } from '../pages/big-app/popoverEmpresaCard';
+import { MomentModule } from 'angular2-moment';
+
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
+import { Camera } from '@ionic-native/camera';
 
 import { UsuarioService } from '../services/usuarioService';
 import { ComentarioService } from '../services/comentarioService';
@@ -39,11 +45,13 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SignupPage,
     ContactosPage,
     ComentariosPage,
-    PopoverEmpresaCardPage
+    PopoverEmpresaCardPage,
+    NewPostPage
   ],
   imports: [
     BrowserModule,
     HttpModule,
+    MomentModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -61,14 +69,19 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SignupPage,
     ContactosPage,
     ComentariosPage,
-    PopoverEmpresaCardPage
+    PopoverEmpresaCardPage,
+    NewPostPage
   ],
   providers: [
-    StatusBar,
+    StatusBar,  
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UsuarioService,
-    ComentarioService
+    ComentarioService,
+    FileTransfer,
+    FileTransferObject,
+    File,
+    Camera
   ]
 })
 export class AppModule {}

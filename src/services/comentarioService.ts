@@ -18,6 +18,13 @@ export class ComentarioService {
 							  .map(res => res.json());
 	}
 
+	crearPublicacionAction(datos:any){
+		let json = JSON.stringify(datos);
+		let headers = new Headers({'Content-Type':'application/json','Authorization': 'Bearer ' + sessionStorage.getItem('token')});
+ 			return this._http.post(this.url+"/publicacion/show", json, {headers: headers})
+							  .map(res => res.json());
+	}
+
 	comentarioPublicacionDeleteAction(datos:any){
 		let json = JSON.stringify(datos);
 		let headers = new Headers({'Content-Type':'application/json','Authorization': 'Bearer ' + sessionStorage.getItem('token')});

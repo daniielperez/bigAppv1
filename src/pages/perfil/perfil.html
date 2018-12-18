@@ -19,11 +19,8 @@
         {{usuario.username}}
       </h2>
     </ion-item>
+    <button ion-button large color="dark" (click)='goToNewPostPage(usuario)' block>Crear Publicación</button>
   </ion-list>
-  <ion-card id="perfil-card27">
-    <ion-list>
-    </ion-list>
-  </ion-card>
   <ion-card *ngFor="let publicacion of publicaciones">
       <ion-item>
         <ion-avatar item-start>
@@ -46,7 +43,7 @@
         </ion-col>
         <ion-col center text-center>
           <ion-note>
-            11h ago
+            {{ publicacion.fecha | amLocale:'es' | amTimeAgo  }} 
           </ion-note>
         </ion-col>
       </ion-row>
