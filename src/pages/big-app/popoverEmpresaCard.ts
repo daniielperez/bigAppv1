@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ViewController  } from 'ionic-angular';
+import { NavController, ViewController,NavParams  } from 'ionic-angular';
 
 
 @Component({
@@ -13,10 +13,13 @@ import { NavController, ViewController  } from 'ionic-angular';
   `
 })
 export class PopoverEmpresaCardPage {
+  idEmpresa:any = this.navParams.get('key1');
 
-  constructor(public navCtrl: NavController,public viewCtrl: ViewController) {
+  constructor(public navCtrl: NavController,public viewCtrl: ViewController,public navParams: NavParams) {
   }
   close() {
     this.viewCtrl.dismiss();
+    alert(this.idEmpresa);
   }
+ 
 }

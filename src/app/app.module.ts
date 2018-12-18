@@ -23,8 +23,13 @@ import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-nati
 import { File } from '@ionic-native/file';
 import { Camera } from '@ionic-native/camera';
 
-import { UsuarioService } from '../services/usuarioService';
 import { ComentarioService } from '../services/comentarioService';
+import { PopoverProductoCardPage } from '../pages/big-app/popoverProductoCard'; 
+import { NgMasonryGridModule } from 'ng-masonry-grid';
+import { GoogleMaps } from '@ionic-native/google-maps';
+
+import { UsuarioService } from '../services/usuarioService';
+import { OneSignal } from '@ionic-native/onesignal';  
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -46,12 +51,14 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ContactosPage,
     ComentariosPage,
     PopoverEmpresaCardPage,
-    NewPostPage
+    NewPostPage,
+    PopoverProductoCardPage
   ],
   imports: [
     BrowserModule,
     HttpModule,
     MomentModule,
+    NgMasonryGridModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -70,7 +77,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ContactosPage,
     ComentariosPage,
     PopoverEmpresaCardPage,
-    NewPostPage
+    NewPostPage,
+    PopoverProductoCardPage
   ],
   providers: [
     StatusBar,  
@@ -81,7 +89,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     FileTransfer,
     FileTransferObject,
     File,
-    Camera
+    Camera,
+    GoogleMaps,
+    OneSignal
   ]
 })
 export class AppModule {}
