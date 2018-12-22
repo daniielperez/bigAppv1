@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { MapaPage } from '../mapa/mapa';
 import { ChatPage } from '../chat/chat';
 
@@ -11,8 +11,13 @@ import { ChatPage } from '../chat/chat';
 })
 
 export class EmpresaPage {
-
-  constructor(public navCtrl: NavController) {
+  idEmpresa:any;
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+  ) {
+    this.idEmpresa = this.navParams.get('idEmpresa');
+    alert(this.idEmpresa);  
   }
   goToMapa(params){
     if (!params) params = {};

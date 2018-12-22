@@ -8,8 +8,9 @@ import { ChatPage } from '../chat/chat';
 import { PopoverEmpresaCardPage } from './popoverEmpresaCard';
 import { PopoverProductoCardPage } from './popoverProductoCard';
 import { ProductoService } from '../../services/productoService';
+import { BanerPublicidadService } from '../../services/banerPublicidadService';
 import { EmpresaService } from '../../services/empresaService'; 
-import { Masonry, MasonryGridItem } from 'ng-masonry-grid';
+import { Masonry,} from 'ng-masonry-grid';
 
 
 @Component({
@@ -18,33 +19,70 @@ import { Masonry, MasonryGridItem } from 'ng-masonry-grid';
   providers: [
     ProductoService,
     EmpresaService,
+    BanerPublicidadService,
   ],
 })
 export class BigAppPage {
+ 
   spiner:any=false;
   _masonry: Masonry;
   masonryItems:any[];
-  productos:string[];
+  productos:string[] = null;
+  empresas:string[] = null;
+  publicidades:string[] = null;
   errorMessage:any;
-  infiniteScroll:any;
+  infiniteScroll:any= false;
   idPagina:any = 1;
+  show:any = true;
 
   constructor(
     public navCtrl: NavController,
     public popoverCtrl: PopoverController,
     public _ProductoService: ProductoService,
     public _EmpresaService: EmpresaService,
+    public _BanerPublicidadService: BanerPublicidadService,
   ) {
   }
 
+  
+
   ngOnInit() { 
     this.idPagina = 1;
-    this.productos = null;
+    this.productos = null; 
+    this.empresas = null;
+    this.publicidades = null;
     let data = {
-      'idPagina':this.idPagina,
+      'idPagina':1,
     }
+    this._EmpresaService.IndexPaginatorAction(data).subscribe(
+      response => {
+        if(response.status ='success'){
+          if (this._masonry) {
+              this.empresas=response.datos;
+            }
+          }
+      },   
+      error => {
+          this.errorMessage = <any>error;
+          console.log(error);
+        }
+    );
+    this._BanerPublicidadService.IndexPaginatorAction(data).subscribe(
+      response => {
+        if(response.status ='success'){
+          if (this._masonry) {
+              this.publicidades=response.datos;
+            }
+          }
+      },   
+      error => {
+          this.errorMessage = <any>error;
+          console.log(error);
+        }
+    );
     this._ProductoService.IndexPaginatorAction(data).subscribe(
       response => {
+       
         if(response.status ='success'){
           if (this._masonry) {
               this.productos=response.datos;
@@ -59,7 +97,7 @@ export class BigAppPage {
   }
 
   onNgMasonryInit($event: Masonry) {
-    console.log('ok'); 
+    console.log('ssssssssssssssssssss');
     this._masonry = $event;
   }
 
@@ -77,35 +115,67 @@ export class BigAppPage {
     });
   }
 
-  goToMunicipios(params){
+  goToMunicipiosProducto(params){
     if (!params) params = {};
-    this.navCtrl.push(MunicipiosPage);
+    this.navCtrl.push(MunicipiosPage, {
+      tipo: 'producto'
+    });
+  }goToMunicipiosEmpresa(params){
+    if (!params) params = {};
+    this.navCtrl.push(MunicipiosPage, {
+      tipo: 'empresa'
+    });
   }goToEmpresas(params){
     if (!params) params = {};
     this.navCtrl.push(EmpresasPage);
-  }goToEmpresa(params){
-    if (!params) params = {};
-    this.navCtrl.push(EmpresaPage);
-  }goToMapa(params){
-    if (!params) params = {};
-    this.navCtrl.push(MapaPage);
+  }goToEmpresa(empresa){
+    if (!empresa) empresa = {};
+    this.navCtrl.push(EmpresaPage, {
+      idEmpresa: empresa.id
+    });
   }goToChat(params){
     if (!params) params = {};
     this.navCtrl.push(ChatPage);
+  }goToMap(producto){
+    this.navCtrl.push(MapaPage, {
+      lat: producto.lat,
+      lng: producto.lng,
+      nombre: producto.nombre
+    });
   }
 
   doRefresh(refresher) {
+    this.show = false;
     this.idPagina = 1;
     this.productos = null;
+    this.empresas = null;
     let data = {
       'idPagina':this.idPagina,
     }
+    this._EmpresaService.IndexPaginatorAction(data).subscribe(
+      response => {
+        if(response.status ='success'){
+          this.show = true; 
+          console.log(this._masonry);
+          if (this._masonry) {
+              this.empresas=response.datos;
+            }
+          }
+      },   
+      error => {
+          this.errorMessage = <any>error;
+          console.log(error);
+        }
+    );
     this._ProductoService.IndexPaginatorAction(data).subscribe(
       response => {
         if(response.status ='success'){
           if (this._masonry) {
               this.productos=response.datos;
-              this.infiniteScroll.enable(true);
+              this.onNgMasonryInit(this._masonry);
+              if (this.infiniteScroll) {
+                this.infiniteScroll.enable(true);
+              }
               refresher.complete();
             }
           }
@@ -117,13 +187,7 @@ export class BigAppPage {
     );
   }
 
-  goToMap(producto){
-    this.navCtrl.push(MapaPage, {
-      lat: producto.lat,
-      lng: producto.lng,
-      nombre: producto.nombre
-    });
-  }
+  
 
   doInfinite(infiniteScroll) {
     this.infiniteScroll = infiniteScroll;

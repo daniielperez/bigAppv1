@@ -1,31 +1,28 @@
 
-<ion-content id="page1" class="color-fondo">
+<ion-content id="page1" class="color-fondo" >
   
   <ion-slides pager>
     
-    <ion-slide>
-        <img src="https://as01.epimg.net/meristation/imagenes/2017/04/21/noticia/1492737600_212349_1532094738_sumario_normal.jpg" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+    <ion-slide *ngFor="let publicidad of publicidades">
+        <img src="http://192.168.1.61/bigApp/bigApp/web/uploads/banerpublicidad/{{publicidad.url}}" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
     </ion-slide>
-      
-    <ion-slide >
-        <img src="https://i.blogs.es/de368e/dota-2-wallpaper/450_1000.jpg" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;"/>
-    </ion-slide>
-      
-    <ion-slide >
-        <img src="https://i.blogs.es/ebf9a2/dota-2/450_1000.jpg" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;"/>
-    </ion-slide> 
   </ion-slides>
+
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
+    <div align="right" style="background-color: #ffffff">
+        <br>
+        <button on-click="goToMunicipiosEmpresa()" ion-button small clear color="secondary">Ver mas</button>
+    </div>
     <ion-scroll scrollX="true" class="scroll">
-        <ion-card>
+        <ion-card *ngFor="let empresa of empresas">
             <ion-item>
               <ion-avatar item-start>
-                <img on-click="goToEmpresa()" src="https://i.blogs.es/ebf9a2/dota-2/450_1000.jpg">
+                <img on-click="goToEmpresa(empresa)" src="http://192.168.1.61/bigApp/bigApp/web/uploads/empresa/fotosLogo/{{empresa.logoEmpresa}}">
               </ion-avatar>
               <h2> 
-                  Marty McFly
+                  {{empresa.nombreEmpresa}}
                   <p align="right" style="position:relative; top:-15px;">
                       <ion-icon align="right"  (click)="presentPopover($event)"  name="more"></ion-icon>
                   </p>
@@ -33,69 +30,20 @@
               <p style='margin-top: -16px;'>November 5, 1955  
                 </p>
             </ion-item>
-            <img on-click="goToEmpresa()" src="https://i.blogs.es/ebf9a2/dota-2/450_1000.jpg">
-        </ion-card>
-        <ion-card>
-            <ion-item>
-                
-              <ion-avatar item-start>
-                <img src="https://i.blogs.es/ebf9a2/dota-2/450_1000.jpg">
-              </ion-avatar>
-              <h2>Marty McFly 
-                  <p align="right" style="position:relative; top:-15px;">
-                      <ion-icon align="right"  (click)="presentPopover($event)"  name="more"></ion-icon>
-                  </p>
-              </h2>
-              <p style='margin-top: -16px;'>November 5, 1955  
-                </p>
-            </ion-item>
-            <img src="https://i.blogs.es/ebf9a2/dota-2/450_1000.jpg">
-        </ion-card>
-        <ion-card>
-            <ion-item>
-                
-              <ion-avatar item-start>
-                <img src="https://i.blogs.es/ebf9a2/dota-2/450_1000.jpg">
-              </ion-avatar>
-              <h2>Marty McFly 
-                  <p align="right" style="position:relative; top:-15px;">
-                      <ion-icon align="right"  (click)="presentPopover($event)"  name="more"></ion-icon>
-                  </p>
-              </h2>
-              
-              <p style='margin-top: -16px;'>November 5, 1955  
-                </p>
-            </ion-item>
-            <img src="https://i.blogs.es/ebf9a2/dota-2/450_1000.jpg">
-        </ion-card>
-        <ion-card>
-            <ion-item>
-                
-              <ion-avatar item-start>
-                <img src="https://i.blogs.es/ebf9a2/dota-2/450_1000.jpg">
-              </ion-avatar>
-              <h2>Marty McFly 
-                  <p align="right" style="position:relative; top:-15px;">
-                      <ion-icon align="right"  (click)="presentPopover($event)"  name="more"></ion-icon>
-                  </p>
-              </h2>
-              <p style='margin-top: -16px;'>November 5, 1955  
-                </p>
-            </ion-item>
-            <img src="https://i.blogs.es/ebf9a2/dota-2/450_1000.jpg">
+            <img on-click="goToEmpresa(empresa)" src="http://192.168.1.61/bigApp/bigApp/web/uploads/empresa/fotosPortada/{{empresa.portadaEmpresa}}">
         </ion-card>
     </ion-scroll>
 
-  <h4 id="bigApp-heading1" style="color:#000000;text-align:center;">
-    Productos
+  <h4 on-click="goToMunicipiosProducto()" id="bigApp-heading1" style="color:#000000;text-align:center;">
+    Productos  <ion-icon ios="ios-options" md="md-options"></ion-icon>
   </h4>
-<div class="padding1">
+<div class="padding1" *ngIf='show'>
   <ng-masonry-grid 
                   (onNgMasonryInit)="onNgMasonryInit($event)"
-                  [masonryOptions]="{ transitionDuration: '0.8s', gutter: 10, columnWidth: 50}" 
+                  [masonryOptions]="{  columnWidth: 50 ,transitionDuration: '0.8s', gutter: 10}" 
                   [useAnimation]="false" 
                   [useImagesLoaded]="true"
-                  [scrollAnimationOptions]="{ animationEffect: 'effect-4', minDuration : 0.4, maxDuration : 0.7 }">
+                  [scrollAnimationOptions]="{ animationEffect: 'effect-1', minDuration : 0.4, maxDuration : 0.7 }">
     <!-- Masonry Grid Item -->
       <ng-masonry-grid-item class="ancho" id="{{'producto-'+producto.id}}" *ngFor="let producto of productos" > 
         <!-- Grid Content  --> 
@@ -131,7 +79,7 @@
                   </button>
                 </ion-col>
                 <ion-col col-4>
-                  <button on-click="goToEmpresa()" style="color:#ff5f52" ion-button icon-start clear small>
+                  <button on-click="goToEmpresa(producto.idEmpresa)" style="color:#ff5f52" ion-button icon-start clear small>
                     <ion-icon name="briefcase"></ion-icon>
                   </button>
                 </ion-col>
@@ -140,16 +88,7 @@
       </ng-masonry-grid-item>
   </ng-masonry-grid>
 </div>
-    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-      <ion-infinite-scroll-content></ion-infinite-scroll-content>
-    </ion-infinite-scroll>
+<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+  <ion-infinite-scroll-content></ion-infinite-scroll-content>
+</ion-infinite-scroll>
 </ion-content>
-
-<ion-grid *ngIf="spiner">
-  <ion-row >  
-    <ion-col col-12 text-center >
-      <ion-spinner name="crescent"></ion-spinner>
-    </ion-col>
-  </ion-row>
-</ion-grid>
-    

@@ -8,6 +8,7 @@ import { ConversacionesPage } from '../pages/conversaciones/conversaciones';
 import { PerfilPage } from '../pages/perfil/perfil';
 import { MunicipiosPage } from '../pages/municipios/municipios';
 import { EmpresasPage } from '../pages/empresas/empresas';
+import { ProductosPage } from '../pages/productos/productos';
 import { EmpresaPage } from '../pages/empresa/empresa';
 import { ChatPage } from '../pages/chat/chat';
 import { MapaPage } from '../pages/mapa/mapa';
@@ -15,6 +16,7 @@ import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
 import { ContactosPage } from '../pages/contactos/contactos';
 import { ComentariosPage } from '../pages/comentarios/comentarios';
+import { CategoriasPage } from '../pages/categorias/categorias';
 import { PopoverEmpresaCardPage } from '../pages/big-app/popoverEmpresaCard';
 import { PopoverProductoCardPage } from '../pages/big-app/popoverProductoCard'; 
 import { NgMasonryGridModule } from 'ng-masonry-grid';
@@ -43,7 +45,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ContactosPage,
     ComentariosPage,
     PopoverEmpresaCardPage,
-    PopoverProductoCardPage
+    PopoverProductoCardPage,
+    CategoriasPage,
+    ProductosPage
   ],
   imports: [
     BrowserModule,
@@ -67,7 +71,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ContactosPage,
     ComentariosPage,
     PopoverEmpresaCardPage,
-    PopoverProductoCardPage
+    PopoverProductoCardPage,
+    CategoriasPage,
+    ProductosPage
   ],
   providers: [
     StatusBar,

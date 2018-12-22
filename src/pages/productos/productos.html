@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Productos
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding id="page5" class="color-fondo">
+    <ion-searchbar [(ngModel)]="productoNombre" (ionInput)="onFilltro()"></ion-searchbar>
+    <ion-grid *ngIf="!spiner">
+      <ion-row >  
+        <ion-col col-12 text-center >
+          <ion-spinner name="crescent"></ion-spinner>
+        </ion-col>
+      </ion-row> 
+    </ion-grid>
+    <div *ngIf="spiner">
+      <ion-card *ngFor="let producto of productos" >
+        <img  src="http://192.168.1.61/bigApp/bigApp/web/uploads/producto/{{ producto.imagen }}"/>
+        <ion-card-content>
+          <ion-card-title>
+            <h2>{{ producto.nombre }}</h2>
+            <h3>${{ producto.valor }}</h3>
+          </ion-card-title>  
+          <p>{{ producto.descripcion }}</p>
+        </ion-card-content>
+        <div align="center">
+            <ion-note align="center">
+             11h ago
+            </ion-note>
+        </div>
+        <ion-row>
+            <ion-col col-4>
+              <button on-click="goToChat()" style="color:#c62828" ion-button icon-start clear small>
+                <ion-icon name="text"></ion-icon>
+              </button>
+            </ion-col>
+            <ion-col col-4>
+              <button on-click="goToMap(producto)" ion-button icon-start clear small>
+                <ion-icon name="navigate" style="color:#8e0000"></ion-icon>
+              </button>
+            </ion-col>
+            <ion-col col-4>
+              <button on-click="goToEmpresa()" style="color:#ff5f52" ion-button icon-start clear small>
+                <ion-icon name="briefcase"></ion-icon>
+              </button>
+            </ion-col>
+          </ion-row>
+      </ion-card>
+    </div>
+    
+
+    
+</ion-content>

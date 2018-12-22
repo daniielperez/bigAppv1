@@ -7,9 +7,9 @@ import {
   GoogleMap,
   GoogleMapsEvent,
   GoogleMapOptions,
-  CameraPosition,
-  MarkerOptions,
-  Marker
+  // CameraPosition,
+  // MarkerOptions,
+  // Marker
 } from '@ionic-native/google-maps';
 
 @Component({ 
@@ -28,7 +28,7 @@ export class MapaPage implements OnInit{
   map: GoogleMap;
 
   
-  constructor(private googleMaps: GoogleMaps,public navCtrl: NavController,public navParams: NavParams, public _EmpresaService: EmpresaService,public sanitizer: DomSanitizer) {
+  constructor(public navCtrl: NavController,public navParams: NavParams, public _EmpresaService: EmpresaService,public sanitizer: DomSanitizer) {
     
       
   }  

@@ -5,13 +5,13 @@ import  {Http, Headers} from "@angular/http";
 import 'rxjs/add/operator/map';
 
 @Injectable()
-export class EmpresaService {
+export class BanerPublicidadService {
 	public Authorization = sessionStorage.getItem('token');
-	public url = "http://192.168.1.61/bigApp/bigApp/web/api/empresa";
+	public url = "http://192.168.1.61/bigApp/bigApp/web/api/banerPublicidad";
 	constructor(private _http: Http){
 	}
 
-	IndexPaginatorAction(idPagina:any){ 
+	IndexPaginatorAction(idPagina:any){
 		let json = JSON.stringify(idPagina);
 		let headers = new Headers({'Content-Type':'application/json','Authorization': 'Bearer ' + sessionStorage.getItem('token')});
  			return this._http.post(this.url+"/list/paginator", json, {headers: headers})
