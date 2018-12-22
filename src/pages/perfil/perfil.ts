@@ -3,6 +3,8 @@ import { NavController } from 'ionic-angular';
 import { ComentariosPage } from '../comentarios/comentarios';
 import { UsuarioService } from '../../services/usuarioService';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ModalController } from 'ionic-angular';
+import { NewPostPage } from '../new-post/new-post';
 
 @Component({
   selector: 'page-perfil',
@@ -23,11 +25,13 @@ export class PerfilPage {
 
   public errorMessage;
 
-  constructor(public navCtrl: NavController,public _UsuarioService: UsuarioService,public sanitizer: DomSanitizer) {
+  constructor(public modalCtrl: ModalController,public navCtrl: NavController,public _UsuarioService: UsuarioService,public sanitizer: DomSanitizer) {
   }
-  goToComentarios(params){
-    if (!params) params = {};
-    this.navCtrl.push(ComentariosPage);
+  goToComentarios(publicacionId){
+    console.log(publicacionId);
+    this.navCtrl.push(ComentariosPage,{
+      item:publicacionId,
+    });
   }
   ngOnInit(){
     this._UsuarioService.UsuarioAction(this.datos).subscribe(
@@ -44,5 +48,12 @@ export class PerfilPage {
         }
       }
   );
+  }
+
+  goToNewPostPage(usuario) {
+    console.log(usuario);
+    this.navCtrl.push(NewPostPage,{
+      usuario:usuario,
+    });
   }
 }

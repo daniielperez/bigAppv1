@@ -17,7 +17,15 @@ import { SignupPage } from '../pages/signup/signup';
 import { ContactosPage } from '../pages/contactos/contactos';
 import { ComentariosPage } from '../pages/comentarios/comentarios'; 
 import { CategoriasPage } from '../pages/categorias/categorias';
+import { NewPostPage } from '../pages/new-post/new-post';
 import { PopoverEmpresaCardPage } from '../pages/big-app/popoverEmpresaCard';
+import { MomentModule } from 'angular2-moment';
+
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
+import { Camera } from '@ionic-native/camera';
+
+import { ComentarioService } from '../services/comentarioService';
 import { PopoverProductoCardPage } from '../pages/big-app/popoverProductoCard'; 
 import { NgMasonryGridModule } from 'ng-masonry-grid';
 import { GoogleMaps } from '@ionic-native/google-maps';
@@ -47,11 +55,14 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     PopoverEmpresaCardPage,
     PopoverProductoCardPage,
     CategoriasPage,
-    ProductosPage
+    ProductosPage,
+    NewPostPage,
+    PopoverProductoCardPage
   ],
   imports: [
     BrowserModule,
     HttpModule,
+    MomentModule,
     NgMasonryGridModule,
     IonicModule.forRoot(MyApp)
   ],
@@ -73,13 +84,20 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     PopoverEmpresaCardPage,
     PopoverProductoCardPage,
     CategoriasPage,
-    ProductosPage
+    ProductosPage,
+    NewPostPage,
+    PopoverProductoCardPage
   ],
   providers: [
-    StatusBar,
+    StatusBar,  
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UsuarioService,
+    ComentarioService,
+    FileTransfer,
+    FileTransferObject,
+    File,
+    Camera,
     GoogleMaps,
     OneSignal
   ]
