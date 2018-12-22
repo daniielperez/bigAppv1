@@ -15,7 +15,7 @@ import { MapaPage } from '../pages/mapa/mapa';
 import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
 import { ContactosPage } from '../pages/contactos/contactos';
-import { ComentariosPage } from '../pages/comentarios/comentarios';
+import { ComentariosPage } from '../pages/comentarios/comentarios'; 
 import { CategoriasPage } from '../pages/categorias/categorias';
 import { PopoverEmpresaCardPage } from '../pages/big-app/popoverEmpresaCard';
 import { PopoverProductoCardPage } from '../pages/big-app/popoverProductoCard'; 
