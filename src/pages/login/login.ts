@@ -34,9 +34,11 @@ export class LoginPage {
   onLogin(){
   this._UsuarioService.loginAction(this.usuario).subscribe(
       response => {
+        console.log("ok");
           window.localStorage.setItem('username', this.usuario.username);
           window.localStorage.setItem('token', response.access_token);
           this.navCtrl.setRoot(BigAppPage);
+          
       }, 
       error => {
           this.errorMessage = <any>error;

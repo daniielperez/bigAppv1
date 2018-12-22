@@ -19,12 +19,16 @@
         {{usuario.username}}
       </h2>
     </ion-item>
+    <ion-grid style="background-color: white"> 
+      <ion-row>
+        <ion-col col-4><button (click)='goToNewPostPage(usuario)' ion-button color="dark" clear block large > <ion-icon name="image" style="font-size: 2.7em;"></ion-icon></button></ion-col>
+        <ion-col col-4><button (click)='goToNewPostVideoPage(usuario)' ion-button color="dark" clear block large > <ion-icon name="logo-youtube" style="font-size: 2.7em;"></ion-icon></button></ion-col>
+        <ion-col col-4><button (click)='goToNewPostTextPage(usuario)' ion-button color="dark" clear block large > <ion-icon name="text" style="font-size: 2.7em;"></ion-icon></button></ion-col>
+      </ion-row>
+    </ion-grid>
+    
   </ion-list>
-  <ion-card id="perfil-card27">
-    <ion-list>
-    </ion-list>
-  </ion-card>
-  <ion-card *ngFor="let publicacion of publicaciones">
+  <ion-card *ngFor="let publicacion of publicacionesInfo">
       <ion-item>
         <ion-avatar item-start>
           <img src="http://192.168.1.75/bigApp/bigApp/web/uploads/usuario/fotosPerfil/{{publicacion.fotoPerfil}}">
@@ -33,7 +37,7 @@
         <p>{{publicacion.fecha| date}}</p>
       </ion-item>
       <img *ngIf="publicacion.imagen !=null" src="http://192.168.1.75/bigApp/bigApp/web/uploads/publicaciones/{{publicacion.imagen}}">
-      <iframe *ngIf="publicacion.urlVideo !=null" width="100%" height="315" [src]='sanitizer.bypassSecurityTrustResourceUrl(publicacion.urlVideo)' frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      <img (click)='goToVideo(publicacion.urlVideo)' *ngIf="publicacion.urlVideo !=null" src="{{publicacion.imagenVideo}}" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
       <ion-card-content>
         <p>{{publicacion.contenido}}</p>
       </ion-card-content>
@@ -46,7 +50,7 @@
         </ion-col>
         <ion-col center text-center>
           <ion-note>
-            11h ago
+            {{ publicacion.fecha | amLocale:'es' | amTimeAgo  }} 
           </ion-note>
         </ion-col>
       </ion-row>

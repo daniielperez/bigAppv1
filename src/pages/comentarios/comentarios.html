@@ -28,3 +28,12 @@
     </ion-item-sliding>
   </ion-list>
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+      <ion-item>
+        <ion-label stacked>Comentario</ion-label>
+        <ion-input [(ngModel)]="params.contenido" type="text"></ion-input>
+      </ion-item>
+      <button ion-button full dark (click)="enviar()">Publicar</button>
+  </ion-toolbar>
+</ion-footer>

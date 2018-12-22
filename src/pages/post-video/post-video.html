@@ -1,0 +1,25 @@
+<ion-header>
+    <ion-navbar color="primary">
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>
+        {{usuario.nombres}}
+      </ion-title>
+    </ion-navbar>
+  </ion-header>
+<ion-content class="color-fondo">
+  <ion-item>
+    <ion-label stacked>Contenido</ion-label>
+    <ion-input [(ngModel)]="params.contenido" type="text"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label stacked>Url Video</ion-label>
+    <ion-input [(ngModel)]="params.urlYoutube" type="text"></ion-input>
+  </ion-item>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+      <button ion-button full dark (click)="enviar()">Publicar</button>
+  </ion-toolbar>
+</ion-footer>
