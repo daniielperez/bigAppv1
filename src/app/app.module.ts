@@ -8,25 +8,34 @@ import { ConversacionesPage } from '../pages/conversaciones/conversaciones';
 import { PerfilPage } from '../pages/perfil/perfil';
 import { MunicipiosPage } from '../pages/municipios/municipios';
 import { EmpresasPage } from '../pages/empresas/empresas';
+import { ProductosPage } from '../pages/productos/productos';
 import { EmpresaPage } from '../pages/empresa/empresa';
 import { ChatPage } from '../pages/chat/chat';
 import { MapaPage } from '../pages/mapa/mapa';
 import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
 import { ContactosPage } from '../pages/contactos/contactos';
-import { ComentariosPage } from '../pages/comentarios/comentarios';
-import { NewPostPage } from '../pages/new-post/new-post';
 import { PostVideoPage } from '../pages/post-video/post-video';
 import { YoutubePage } from '../pages/youtube/youtube';
 import { TextPostPage } from '../pages/text-post/text-post';
+
+import { YoutubeService } from '../services/youtubeService';
+import { PublicacionService } from '../services/publicacionService';
+import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
+import { ComentariosPage } from '../pages/comentarios/comentarios'; 
+import { CategoriasPage } from '../pages/categorias/categorias';
+import { NewPostPage } from '../pages/new-post/new-post';
 import { PopoverEmpresaCardPage } from '../pages/big-app/popoverEmpresaCard';
 import { MomentModule } from 'angular2-moment';
 
-import { UsuarioService } from '../services/usuarioService';
-import { YoutubeService } from '../services/youtubeService';
+
 import { ComentarioService } from '../services/comentarioService';
-import { PublicacionService } from '../services/publicacionService';
-import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
+import { PopoverProductoCardPage } from '../pages/big-app/popoverProductoCard'; 
+import { NgMasonryGridModule } from 'ng-masonry-grid';
+import { GoogleMaps } from '@ionic-native/google-maps';
+
+import { UsuarioService } from '../services/usuarioService';
+import { OneSignal } from '@ionic-native/onesignal';  
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -56,12 +65,17 @@ import { Camera } from '@ionic-native/camera';
     NewPostPage,
     PostVideoPage,
     YoutubePage,
-    TextPostPage
+    TextPostPage,
+    CategoriasPage,
+    ProductosPage,
+    NewPostPage,
+    PopoverProductoCardPage
   ],
   imports: [
     BrowserModule,
     HttpModule,
     MomentModule,
+    NgMasonryGridModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -83,7 +97,12 @@ import { Camera } from '@ionic-native/camera';
     NewPostPage,
     PostVideoPage,
     YoutubePage,
-    TextPostPage
+    TextPostPage,
+    PopoverProductoCardPage,
+    CategoriasPage,
+    ProductosPage,
+    NewPostPage,
+    PopoverProductoCardPage
   ],
   providers: [
     StatusBar,  
@@ -97,7 +116,9 @@ import { Camera } from '@ionic-native/camera';
     Camera,
     PublicacionService,
     YoutubeVideoPlayer,
-    YoutubeService
+    YoutubeService,
+    GoogleMaps,
+    OneSignal
   ]
 })
 export class AppModule {}

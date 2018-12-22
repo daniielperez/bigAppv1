@@ -8,10 +8,26 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding id="page4">
-  <ion-list id="municipios-list2">
-    <ion-item color="none" on-click="goToEmpresas()" id="municipios-list-item14">
-      Item
-    </ion-item>
+
+<ion-content padding id="page4" class="color-fondo">
+
+  <ion-list *ngIf="tipo == 'empresa'">
+    <button  ion-item *ngFor="let municipio of municipios" on-click="goToEmpresas(municipio)">
+      {{municipio.nombre}}
+    </button>  
   </ion-list>
+
+  <ion-list *ngIf="tipo == 'producto'">
+    <button  ion-item *ngFor="let municipio of municipios" on-click="goToCategorias(municipio)">
+      {{municipio.nombre}}
+    </button>  
+  </ion-list>
+
+  <ion-grid *ngIf="!municipios">
+    <ion-row >  
+      <ion-col col-12 text-center >
+        <ion-spinner name="crescent"></ion-spinner>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

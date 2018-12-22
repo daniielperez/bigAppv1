@@ -60,7 +60,6 @@ export class NewPostPage {
     });
   }
 
-
   uploadFile() {
     let loader = this.loadingCtrl.create({
       content: "Uploading..."

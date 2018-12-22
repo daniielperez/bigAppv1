@@ -8,30 +8,24 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding id="page5">
-  <ion-card id="empresas-card23">
-    <ion-list>
-      <ion-item color="none" id="empresas-list-item17">
-        <ion-avatar item-left>
-          <img src="assets/img/2aywOQlSbSqIkJ4yKXkv_ANDRESPARRILLA.png" />
+<ion-content padding id="page5" class="color-fondo">
+  <ion-searchbar [(ngModel)]="empresaNombre" (ionInput)="onFilltro()"></ion-searchbar>
+  <ion-grid *ngIf="!spiner">
+    <ion-row >  
+      <ion-col col-12 text-center >
+        <ion-spinner name="crescent"></ion-spinner>
+      </ion-col>
+    </ion-row> 
+  </ion-grid>
+  <div *ngIf="spiner">
+    <ion-card *ngFor="let empresa of empresas" on-click="presentActionSheet(empresa)">
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="http://192.168.1.61/bigApp/bigApp/web/uploads/empresa/fotosLogo/{{ empresa.logoEmpresa }}">
         </ion-avatar>
-        <h2>
-          Nombre Empresa
-        </h2>
+        <h2>{{empresa.nombreEmpresa}}</h2>
+        <p>November 5, 1955</p>
       </ion-item>
-      <img src="assets/img/md3Ibk3MQC4RRvHetODW_ANDRESPARRILLA.jpg" />
-      <button id="empresas-button10" ion-button color="positive" on-click="goToEmpresa()">
-        Empresa
-      </button>
-      <button id="empresas-button11" ion-button color="positive" on-click="goToChat()">
-        Chat
-      </button>
-      <button id="empresas-button12" ion-button color="positive" on-click="goToMapa()">
-        Mapa
-      </button>
-      <div style="width:100%;height:220px;margin:0px 0px;line-height:250px;background-color:#e8ebef;text-align:center;">
-        <i class="icon ion-image" style="font-size:64px;color:#888;vertical-align:middle;"></i>
-      </div>
-    </ion-list>
-  </ion-card>
+    </ion-card>
+  </div>
 </ion-content>
