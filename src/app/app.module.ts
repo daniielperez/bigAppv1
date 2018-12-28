@@ -25,6 +25,8 @@ import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
 import { ComentariosPage } from '../pages/comentarios/comentarios'; 
 import { CategoriasPage } from '../pages/categorias/categorias';
 import { NewPostPage } from '../pages/new-post/new-post';
+import { FotosPage } from '../pages/fotos/fotos';
+import { SocialPage } from '../pages/social/social';
 import { PopoverEmpresaCardPage } from '../pages/big-app/popoverEmpresaCard';
 import { MomentModule } from 'angular2-moment';
 
@@ -32,7 +34,7 @@ import { MomentModule } from 'angular2-moment';
 import { ComentarioService } from '../services/comentarioService';
 import { PopoverProductoCardPage } from '../pages/big-app/popoverProductoCard'; 
 import { NgMasonryGridModule } from 'ng-masonry-grid';
-import { GoogleMaps } from '@ionic-native/google-maps';
+import { GoogleMaps } from '@ionic-native/google-maps'; 
 
 import { UsuarioService } from '../services/usuarioService';
 import { OneSignal } from '@ionic-native/onesignal';  
@@ -69,7 +71,9 @@ import { Camera } from '@ionic-native/camera';
     CategoriasPage,
     ProductosPage,
     NewPostPage,
-    PopoverProductoCardPage
+    FotosPage,
+    PopoverProductoCardPage,
+    SocialPage
   ],
   imports: [
     BrowserModule,
@@ -102,7 +106,9 @@ import { Camera } from '@ionic-native/camera';
     CategoriasPage,
     ProductosPage,
     NewPostPage,
-    PopoverProductoCardPage
+    FotosPage,
+    PopoverProductoCardPage,
+    SocialPage
   ],
   providers: [
     StatusBar,  

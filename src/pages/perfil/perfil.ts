@@ -4,8 +4,9 @@ import { ComentariosPage } from '../comentarios/comentarios';
 import { UsuarioService } from '../../services/usuarioService';
 import { YoutubeService } from '../../services/youtubeService';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ModalController } from 'ionic-angular';
+import { ModalController } from 'ionic-angular'; 
 import { NewPostPage } from '../new-post/new-post';
+import { FotosPage } from '../fotos/fotos';
 import { PostVideoPage } from '../post-video/post-video';
 import { TextPostPage } from '../text-post/text-post';
 import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
@@ -124,6 +125,13 @@ export class PerfilPage {
   goToVideo(video) {
     console.log("ok");
     this.youtube.openVideo(video);
+  }
+
+
+  goToFotosPage(usuario) {
+    this.navCtrl.push(FotosPage,{
+      usuario:usuario,
+    });
   }
 
 

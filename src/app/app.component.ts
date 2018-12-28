@@ -12,6 +12,7 @@ import { ConversacionesPage } from '../pages/conversaciones/conversaciones';
 import { ContactosPage } from '../pages/contactos/contactos';
 import { PerfilPage } from '../pages/perfil/perfil';
 import { LoginPage } from '../pages/login/login';
+import { SocialPage } from '../pages/social/social';
 import { ComentariosPage } from '../pages/comentarios/comentarios';
 import { OneSignal, OSNotificationPayload } from '@ionic-native/onesignal';
 import { isCordovaAvailable } from '../common/is-cordova-available';
@@ -27,7 +28,7 @@ import { BigAppPage } from '../pages/big-app/big-app';
 })
 export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
-    rootPage:any = LoginPage ;
+    rootPage:any = SocialPage ;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,private oneSignal: OneSignal) {
 
@@ -39,9 +40,9 @@ export class MyApp {
     statusBar.styleBlackTranslucent();
     statusBar.show();
     if (window.localStorage.getItem('username') == null) {
-      this.rootPage = LoginPage;
+      this.rootPage = SocialPage;
     }else{
-      this.rootPage = BigAppPage;
+      this.rootPage = SocialPage;
     }
     // this.rootPage = LoginPage;
     platform.ready().then(() => {
@@ -89,6 +90,11 @@ export class MyApp {
     if (!params) params = {};
     this.navCtrl.setRoot(ComentariosPage);
   }
+  goToSocial(params){
+    if (!params) params = {};
+    this.navCtrl.setRoot(SocialPage);
+  }
+  
   private onPushReceived(payload: OSNotificationPayload) {
     alert('Push recevied:' + payload.body);
   }

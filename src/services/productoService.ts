@@ -54,3 +54,5 @@ export class ProductoService {
 							  .map(res => res.json());
 	}
 }
+
+

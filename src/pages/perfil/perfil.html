@@ -6,14 +6,14 @@
     <ion-title>
       {{usuario.nombres}}
     </ion-title>
-  </ion-navbar>
+  </ion-navbar> 
 </ion-header>
 <ion-content id="page3" class="color-fondo">
-  <img src="http://192.168.1.61/bigApp/bigApp/web/uploads/usuario/fotosPortada/{{usuario.fotoPortada}}" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+  <img (click)='goToFotosPage(usuario)' src="http://192.168.1.75/bigApp/bigApp/web/uploads/usuario/fotosPortada/{{usuario.fotoPortada}}" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
   <ion-list id="perfil-list7">
     <ion-item color="none" id="perfil-list-item31">
       <ion-avatar item-left>
-        <img src="http://192.168.1.61/bigApp/bigApp/web/uploads/usuario/fotosPerfil/{{usuario.fotoPerfil}}" />
+        <img src="http://192.168.1.75/bigApp/bigApp/web/uploads/usuario/fotosPerfil/{{usuario.fotoPerfil}}" />
       </ion-avatar>
       <h2>
         {{usuario.username}}
@@ -31,7 +31,7 @@
   <ion-card *ngFor="let publicacion of publicacionesInfo">
       <ion-item>
         <ion-avatar item-start>
-          <img src="http://192.168.1.61/bigApp/bigApp/web/uploads/usuario/fotosPerfil/{{publicacion.fotoPerfil}}">
+          <img src="http://192.168.1.75/bigApp/bigApp/web/uploads/usuario/fotosPerfil/{{publicacion.fotoPerfil}}">
         </ion-avatar>
         <h2>{{publicacion.nombres}}</h2>
         <p>{{publicacion.fecha| date}}</p>

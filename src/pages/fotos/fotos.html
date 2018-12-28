@@ -1,0 +1,33 @@
+<ion-header>
+    <ion-navbar color="primary">
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>
+        {{usuario.nombres}}
+      </ion-title>
+    </ion-navbar>
+  </ion-header>
+<ion-content class="color-fondo">
+  <ion-list>
+    <ion-item>
+      <ion-label>Tipo de Fotografía</ion-label>
+      <ion-select [(ngModel)]="params.tipo">
+        <ion-option value="perfil">Perfil</ion-option>
+        <ion-option value="portada">Portada</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <ion-grid style="background-color: white"> 
+      <ion-row>
+        <ion-col col-4></ion-col>
+        <ion-col col-4><button ion-button full dark large round (click)="getImage()"><ion-icon name="image" style="font-size: 2.7em;"></ion-icon></button></ion-col>
+        <ion-col col-4></ion-col>
+      </ion-row>
+    </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+      <button ion-button full dark (click)="uploadFile()">Publicar</button>
+  </ion-toolbar>
+</ion-footer>

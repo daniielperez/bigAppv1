@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Social
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content class="color-fondo">
+  <ion-card *ngFor="let publicacion of publicacionesInfo">
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="http://192.168.1.75/bigApp/bigApp/web/uploads/usuario/fotosPerfil/{{publicacion.fotoPerfil}}">
+      </ion-avatar>
+      <h2>{{publicacion.nombres}}</h2>
+      <p>{{publicacion.fecha| date}}</p>
+    </ion-item>
+    <img *ngIf="publicacion.imagen !=null" src="http://192.168.1.75/bigApp/bigApp/web/uploads/publicaciones/{{publicacion.imagen}}">
+    <img (click)='goToVideo(publicacion.urlVideo)' *ngIf="publicacion.urlVideo !=null" src="{{publicacion.imagenVideo}}" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+    <ion-card-content>
+      <p>{{publicacion.contenido}}</p>
+    </ion-card-content>
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-start clear small on-click="goToComentarios(publicacion.id)">
+          <ion-icon name="text"></ion-icon>
+          <div>Comentarios</div>
+        </button>
+      </ion-col>
+      <ion-col center text-center>
+        <ion-note>
+          {{ publicacion.fecha | amLocale:'es' | amTimeAgo  }} 
+        </ion-note>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
+ 
