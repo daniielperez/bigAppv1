@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Comentarios
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding id="page12">
+  <ion-list id="comentarios-list8">
+    <ion-item-sliding *ngFor="let comentario of comentarios">
+      <ion-item color="none" id="comentarios-list-item44">
+        <ion-avatar item-left>
+          <img src="http://192.168.1.75/bigApp/bigApp/web/uploads/usuario/fotosPerfil/{{comentario.imagen}}">
+        </ion-avatar>
+        {{comentario.username}}
+        <h2>
+          {{comentario.contenido}}
+        </h2>
+      </ion-item>
+      <ion-item-options side="left" on-click="eliminarComentario(comentario.id)">
+        <button ion-button color="assertive">
+          Eliminar
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

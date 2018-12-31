@@ -8,6 +8,7 @@ import { EmpresasPage } from '../pages/empresas/empresas';
 import { EmpresaPage } from '../pages/empresa/empresa';
 import { MapaPage } from '../pages/mapa/mapa';
 import { ChatPage } from '../pages/chat/chat';
+import { SubastaPage } from '../pages/subasta/subasta';
 import { ConversacionesPage } from '../pages/conversaciones/conversaciones';
 import { ContactosPage } from '../pages/contactos/contactos';
 import { PerfilPage } from '../pages/perfil/perfil';
@@ -39,12 +40,13 @@ export class MyApp {
     statusBar.backgroundColorByHexString('#ffffff');
     statusBar.styleBlackTranslucent();
     statusBar.show();
+    
     if (window.localStorage.getItem('username') == null) {
       this.rootPage = LoginPage;
     }else{
       this.rootPage = BigAppPage;
     }
-    // this.rootPage = LoginPage;
+    
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -89,6 +91,9 @@ export class MyApp {
   }goToComentarios(params){
     if (!params) params = {};
     this.navCtrl.setRoot(ComentariosPage);
+  }goToSubasta(params){
+    if (!params) params = {};
+    this.navCtrl.setRoot(SubastaPage);
   }
   private onPushReceived(payload: OSNotificationPayload) {
     alert('Push recevied:' + payload.body);

@@ -6,6 +6,7 @@ import { MyApp } from './app.component';
 import { BigAppPage } from '../pages/big-app/big-app';
 import { ConversacionesPage } from '../pages/conversaciones/conversaciones';
 import { PerfilPage } from '../pages/perfil/perfil';
+import { SubastaPage } from '../pages/subasta/subasta';
 import { MunicipiosPage } from '../pages/municipios/municipios';
 import { EmpresasPage } from '../pages/empresas/empresas';
 import { ProductosPage } from '../pages/productos/productos';
@@ -21,7 +22,7 @@ import { NewPostPage } from '../pages/new-post/new-post';
 import { PopoverEmpresaCardPage } from '../pages/big-app/popoverEmpresaCard';
 import { MomentModule } from 'angular2-moment';
 
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 import { Camera } from '@ionic-native/camera';
 
@@ -36,6 +37,11 @@ import { OneSignal } from '@ionic-native/onesignal';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { HttpClientModule } from '@angular/common/http'
+
+import { EmojiProvider } from '../providers/emoji';
+import { EmojiPickerComponent } from '../components/emoji-picker/emoji-picker';
+
 
 @NgModule({
   declarations: [
@@ -57,12 +63,15 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     CategoriasPage,
     ProductosPage,
     NewPostPage,
-    PopoverProductoCardPage
+    PopoverProductoCardPage,
+    EmojiPickerComponent,
+    SubastaPage
   ],
   imports: [
     BrowserModule,
     HttpModule,
     MomentModule,
+    HttpClientModule,
     NgMasonryGridModule,
     IonicModule.forRoot(MyApp)
   ],
@@ -86,7 +95,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     CategoriasPage,
     ProductosPage,
     NewPostPage,
-    PopoverProductoCardPage
+    PopoverProductoCardPage,
+    SubastaPage
   ],
   providers: [
     StatusBar,  
@@ -99,7 +109,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     File,
     Camera,
     GoogleMaps,
-    OneSignal
+    OneSignal,
+    EmojiProvider,
   ]
-})
+}) 
 export class AppModule {}
