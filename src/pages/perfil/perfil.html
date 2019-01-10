@@ -6,10 +6,10 @@
     <ion-title>
       {{usuario.nombres}}
     </ion-title>
-  </ion-navbar>
+  </ion-navbar> 
 </ion-header>
 <ion-content id="page3" class="color-fondo">
-  <img src="http://192.168.1.61/bigApp/bigApp/web/uploads/usuario/fotosPortada/{{usuario.fotoPortada}}" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+  <img (click)='goToFotosPage(usuario)' src="http://192.168.1.61/bigApp/bigApp/web/uploads/usuario/fotosPortada/{{usuario.fotoPortada}}" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
   <ion-list id="perfil-list7">
     <ion-item color="none" id="perfil-list-item31">
       <ion-avatar item-left>
@@ -19,9 +19,16 @@
         {{usuario.username}}
       </h2>
     </ion-item>
-    <button ion-button large color="dark" (click)='goToNewPostPage(usuario)' block>Crear Publicación</button>
+    <ion-grid style="background-color: white"> 
+      <ion-row>
+        <ion-col col-4><button (click)='goToNewPostPage(usuario)' ion-button color="dark" clear block large > <ion-icon name="image" style="font-size: 2.7em;"></ion-icon></button></ion-col>
+        <ion-col col-4><button (click)='goToNewPostVideoPage(usuario)' ion-button color="dark" clear block large > <ion-icon name="logo-youtube" style="font-size: 2.7em;"></ion-icon></button></ion-col>
+        <ion-col col-4><button (click)='goToNewPostTextPage(usuario)' ion-button color="dark" clear block large > <ion-icon name="text" style="font-size: 2.7em;"></ion-icon></button></ion-col>
+      </ion-row>
+    </ion-grid>
+    
   </ion-list>
-  <ion-card *ngFor="let publicacion of publicaciones">
+  <ion-card *ngFor="let publicacion of publicacionesInfo">
       <ion-item>
         <ion-avatar item-start>
           <img src="http://192.168.1.61/bigApp/bigApp/web/uploads/usuario/fotosPerfil/{{publicacion.fotoPerfil}}">
@@ -30,7 +37,7 @@
         <p>{{publicacion.fecha| date}}</p>
       </ion-item>
       <img *ngIf="publicacion.imagen !=null" src="http://192.168.1.61/bigApp/bigApp/web/uploads/publicaciones/{{publicacion.imagen}}">
-      <iframe *ngIf="publicacion.urlVideo !=null" width="100%" height="315" [src]='sanitizer.bypassSecurityTrustResourceUrl(publicacion.urlVideo)' frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      <img (click)='goToVideo(publicacion.urlVideo)' *ngIf="publicacion.urlVideo !=null" src="{{publicacion.imagenVideo}}" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
       <ion-card-content>
         <p>{{publicacion.contenido}}</p>
       </ion-card-content>

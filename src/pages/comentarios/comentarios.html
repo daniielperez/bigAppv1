@@ -13,7 +13,7 @@
     <ion-item-sliding *ngFor="let comentario of comentarios">
       <ion-item color="none" id="comentarios-list-item44">
         <ion-avatar item-left>
-          <img src="http://192.168.1.75/bigApp/bigApp/web/uploads/usuario/fotosPerfil/{{comentario.imagen}}">
+          <img src="http://192.168.1.61/bigApp/bigApp/web/uploads/usuario/fotosPerfil/{{comentario.imagen}}">
         </ion-avatar>
         {{comentario.username}}
         <h2>
@@ -28,3 +28,12 @@
     </ion-item-sliding>
   </ion-list>
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+      <ion-item>
+        <ion-label stacked>Comentario</ion-label>
+        <ion-input [(ngModel)]="params.contenido" type="text"></ion-input>
+      </ion-item>
+      <button ion-button full dark (click)="enviar()">Publicar</button>
+  </ion-toolbar>
+</ion-footer>

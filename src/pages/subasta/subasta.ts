@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { ComentariosPage } from '../comentarios/comentarios';
+import { NavController,LoadingController } from 'ionic-angular';
+import { ComentariosSubastaPage } from '../comentariosSubasta/comentariosSubasta';
 import { SubastaService } from '../../services/subastaService';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser'; 
 import { ModalController } from 'ionic-angular';
-import { NewPostPage } from '../new-post/new-post';
+import { NewSubastaPage } from '../new-subasta/new-subasta';
 
 @Component({
   selector: 'page-subasta',
@@ -25,21 +25,31 @@ export class SubastaPage {
 
   public errorMessage;
 
-  constructor(public modalCtrl: ModalController,public navCtrl: NavController,public _SubastaService: SubastaService,public sanitizer: DomSanitizer) {
+  constructor(
+    public modalCtrl: ModalController,
+    public navCtrl: NavController,
+    public _SubastaService: SubastaService,
+    public sanitizer: DomSanitizer,
+    public loadingCtrl: LoadingController
+  ) {
   }
-  goToComentarios(publicacionId){
-    console.log(publicacionId);
-    this.navCtrl.push(ComentariosPage,{
-      item:publicacionId,
+  goToComentarios(subastaId){
+    console.log(subastaId);
+    this.navCtrl.push(ComentariosSubastaPage,{
+      item:subastaId,
     });
   }
 
   ngOnInit(){
+    let loader = this.loadingCtrl.create({
+      content: "Cargando Subastas...",
+    });
+    loader.present();
     this._SubastaService.IndexAction(this.usuario).subscribe(
       response => {
         this.usuario = response.usuario;
         this.subastas = response.subastas;
-        console.log(this.subastas);
+        loader.dismiss();
       }, 
       error => {
           this.errorMessage = <any>error;
@@ -51,9 +61,9 @@ export class SubastaPage {
   );
   }
 
-  goToNewPostPage(usuario) {
+  goToNewSubastaPage(usuario) {
     console.log(usuario);
-    this.navCtrl.push(NewPostPage,{
+    this.navCtrl.push(NewSubastaPage,{
       usuario:usuario,
     });
   }

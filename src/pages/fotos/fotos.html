@@ -9,10 +9,15 @@
     </ion-navbar>
   </ion-header>
 <ion-content class="color-fondo">
-  <ion-item>
-    <ion-label stacked>Contenido</ion-label>
-    <ion-input [(ngModel)]="params.contenido" type="text"></ion-input>
-  </ion-item>
+  <ion-list>
+    <ion-item>
+      <ion-label>Tipo de Fotografía</ion-label>
+      <ion-select [(ngModel)]="params.tipo">
+        <ion-option value="perfil">Perfil</ion-option>
+        <ion-option value="portada">Portada</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
   <ion-grid style="background-color: white"> 
       <ion-row>
         <ion-col col-4></ion-col>

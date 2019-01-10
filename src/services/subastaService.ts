@@ -29,7 +29,6 @@ export class SubastaService {
 	}
 
 	NewAction(subasta:any){
-	
 		let json = JSON.stringify(subasta);
 		let headers = new Headers({'Content-Type':'application/json','Authorization': 'Bearer ' + sessionStorage.getItem('token')});
  			return this._http.post(this.url+"/new", json, {headers: headers})

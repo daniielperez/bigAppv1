@@ -1,0 +1,39 @@
+<ion-header>
+    <ion-navbar color="primary">
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>
+        Suabsta
+      </ion-title>
+    </ion-navbar>
+  </ion-header>
+<ion-content class="color-fondo">
+
+    <ion-list>
+      
+      <ion-item>
+        <ion-label>Categoria</ion-label>
+        <ion-select [(ngModel)]="params.categoria" interface="popover">
+            <ion-option *ngFor="let categoria of categorias" [value]="categoria.id">{{categoria.nombre}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label >Municipio</ion-label>
+        <ion-select interface="popover" [(ngModel)]="params.municipio">
+          <ion-option  *ngFor="let municipio of municipios" [value]="municipio.id">{{municipio.nombre}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Contenido</ion-label>
+        <ion-input [(ngModel)]="params.contenido" type="text"></ion-input>
+      </ion-item>
+    
+      </ion-list>
+    
+      <div padding>
+        <button ion-button color="dark" (click)="enviar()" block>Publicar</button>
+      </div>
+</ion-content>

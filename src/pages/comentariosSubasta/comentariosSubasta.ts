@@ -1,28 +1,46 @@
 import { Component } from '@angular/core';
-import { NavController,NavParams } from 'ionic-angular';
-import { ComentarioService } from '../../services/comentarioService';
+import { NavController,NavParams,LoadingController } from 'ionic-angular';
+import { ComentarioSubastaService } from '../../services/comentarioSubastaService';
 
 
 @Component({
   selector: 'page-comentariosSubasta',
-  templateUrl: 'comentariosSubasta.html'
+  templateUrl: 'comentariosSubasta.html',
+  providers: [
+    ComentarioSubastaService
+  ],
 })
-export class ComentariosPage {
+export class ComentariosSubastaPage {
 
   errorMessage:any;
   usuario:any = false;
   comentarios:any = false;
   spiner:any=false;
   parametros:any;
+  params={
+    'usuario':window.localStorage.getItem("username"),
+    'subastaId':"",
+    'contenido':""
+  }
 
-  constructor(public navCtrl: NavController,private navParams: NavParams,public _ComentarioService: ComentarioService,) {
-    this.parametros = {'publicacionId':navParams.get('item')};
+  constructor(
+    public navCtrl: NavController,
+    private navParams: NavParams,
+    public _ComentarioSubastaService: ComentarioSubastaService,
+    public loadingCtrl: LoadingController
+  ) {
+    this.params.subastaId = navParams.get('item');
   }
   
 ngOnInit(){
-  this._ComentarioService.comentarioPublicacionAction(this.parametros).subscribe(
+  const loader = this.loadingCtrl.create({
+    content: "Cargando Comentarios..."
+  });
+  loader.present();
+  this._ComentarioSubastaService.comentarioSubastaAction(this.params).subscribe(
     response => {
         this.comentarios = response.datos; 
+        loader.dismiss();
     }, 
     error => {
         this.errorMessage = <any>error;
@@ -31,14 +49,14 @@ ngOnInit(){
       }
     }
 );
-}
+} 
 
 eliminarComentario(comentarioId){
   let datos={
     comentarioId:comentarioId
   }
   console.log(datos);
-  this._ComentarioService.comentarioPublicacionDeleteAction(datos).subscribe(
+  this._ComentarioSubastaService.comentarioSubastaDeleteAction(datos).subscribe(
     response => {
         this.comentarios = response.datos; 
         console.log(response);
@@ -52,6 +70,24 @@ eliminarComentario(comentarioId){
   );
   this.ngOnInit();
 
+}
+
+enviar(){
+  
+  this._ComentarioSubastaService.newComentarioAction(this.params).subscribe(
+    response => {
+        this.comentarios = response.datos; 
+        this.params.contenido = "";
+        this.ngOnInit();
+    }, 
+    error => {
+        this.errorMessage = <any>error;
+        if(this.errorMessage != null){
+          alert(this.errorMessage);
+      }
+    }
+  );
+  
 }
   
 }

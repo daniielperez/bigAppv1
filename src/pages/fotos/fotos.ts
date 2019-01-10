@@ -5,7 +5,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { PerfilPage } from '../perfil/perfil';
 
 /**
- * Generated class for the NewPostPage page.
+ * Generated class for the FotosPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -13,15 +13,14 @@ import { PerfilPage } from '../perfil/perfil';
 
 @IonicPage()
 @Component({
-  selector: 'page-new-post',
-  templateUrl: 'new-post.html',
+  selector: 'page-fotos',
+  templateUrl: 'fotos.html',
 })
-export class NewPostPage {
+export class FotosPage {
   usuario:any;
   params = {
-    contenido:"",
-    emisor: window.localStorage.getItem('username'),
-    receptor: ""
+    tipo:"",
+    usuario: window.localStorage.getItem('username'),
   }
 
   imageURI:any; 
@@ -37,8 +36,6 @@ export class NewPostPage {
   
   ) {
     this.usuario = this.navParams.get('usuario');
-    this.params.receptor = this.usuario.username;
-    console.log(this.usuario.username);
   }
 
   ionViewDidLoad() {
@@ -77,11 +74,8 @@ export class NewPostPage {
 
     options.params = this.params
   
-    fileTransfer.upload(this.imageURI, "http://192.168.1.61/bigApp/bigApp/web/api/publicacion/imagen", options)
+    fileTransfer.upload(this.imageURI, "http://192.168.1.61/bigApp/bigApp/web/api/usuario/fotosperfil", options)
       .then((data) => {
-      console.log(data);
-      this.imageFileName = "http://192.168.1.61/bigApp/bigApp/web/uploads/empresa/imagen/"
-     
       loader.dismiss();
       
       this.presentToast("Se Subio la imagen correctamente");

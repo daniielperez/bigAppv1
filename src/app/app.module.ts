@@ -13,23 +13,32 @@ import { ProductosPage } from '../pages/productos/productos';
 import { EmpresaPage } from '../pages/empresa/empresa';
 import { ChatPage } from '../pages/chat/chat';
 import { MapaPage } from '../pages/mapa/mapa';
+import { NewSubastaPage } from '../pages/new-subasta/new-subasta';  
 import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
 import { ContactosPage } from '../pages/contactos/contactos';
+import { PostVideoPage } from '../pages/post-video/post-video';
+import { YoutubePage } from '../pages/youtube/youtube';
+import { TextPostPage } from '../pages/text-post/text-post';
+
+import { YoutubeService } from '../services/youtubeService';
+import { PublicacionService } from '../services/publicacionService';
+import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player'; 
 import { ComentariosPage } from '../pages/comentarios/comentarios'; 
 import { CategoriasPage } from '../pages/categorias/categorias';
+import { ComentariosSubastaPage } from '../pages/comentariosSubasta/comentariosSubasta';
 import { NewPostPage } from '../pages/new-post/new-post';
+import { FotosPage } from '../pages/fotos/fotos';
+import { SocialPage } from '../pages/social/social';
 import { PopoverEmpresaCardPage } from '../pages/big-app/popoverEmpresaCard';
 import { MomentModule } from 'angular2-moment';
 
-import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
-import { File } from '@ionic-native/file';
-import { Camera } from '@ionic-native/camera';
+
 
 import { ComentarioService } from '../services/comentarioService';
 import { PopoverProductoCardPage } from '../pages/big-app/popoverProductoCard'; 
 import { NgMasonryGridModule } from 'ng-masonry-grid';
-import { GoogleMaps } from '@ionic-native/google-maps';
+import { GoogleMaps } from '@ionic-native/google-maps'; 
 
 import { UsuarioService } from '../services/usuarioService';
 import { OneSignal } from '@ionic-native/onesignal';  
@@ -42,6 +51,11 @@ import { HttpClientModule } from '@angular/common/http'
 import { EmojiProvider } from '../providers/emoji';
 import { EmojiPickerComponent } from '../components/emoji-picker/emoji-picker';
 
+
+
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
+import { Camera } from '@ionic-native/camera';
 
 @NgModule({
   declarations: [
@@ -59,13 +73,20 @@ import { EmojiPickerComponent } from '../components/emoji-picker/emoji-picker';
     ContactosPage,
     ComentariosPage,
     PopoverEmpresaCardPage,
-    PopoverProductoCardPage,
+    NewPostPage,
+    PostVideoPage,
+    YoutubePage,
+    TextPostPage,
     CategoriasPage,
     ProductosPage,
-    NewPostPage,
     PopoverProductoCardPage,
     EmojiPickerComponent,
-    SubastaPage
+    SubastaPage,
+    FotosPage,
+    PopoverProductoCardPage,
+    SocialPage,
+    ComentariosSubastaPage,
+    NewSubastaPage
   ],
   imports: [
     BrowserModule,
@@ -91,12 +112,20 @@ import { EmojiPickerComponent } from '../components/emoji-picker/emoji-picker';
     ContactosPage,
     ComentariosPage,
     PopoverEmpresaCardPage,
+    NewPostPage,
+    PostVideoPage,
+    YoutubePage,
+    TextPostPage,
     PopoverProductoCardPage,
     CategoriasPage,
     ProductosPage,
-    NewPostPage,
     PopoverProductoCardPage,
-    SubastaPage
+    SubastaPage,
+    FotosPage,
+    PopoverProductoCardPage,
+    SocialPage,
+    ComentariosSubastaPage,
+    NewSubastaPage,
   ],
   providers: [
     StatusBar,  
@@ -108,6 +137,9 @@ import { EmojiPickerComponent } from '../components/emoji-picker/emoji-picker';
     FileTransferObject,
     File,
     Camera,
+    PublicacionService,
+    YoutubeVideoPlayer,
+    YoutubeService,
     GoogleMaps,
     OneSignal,
     EmojiProvider,

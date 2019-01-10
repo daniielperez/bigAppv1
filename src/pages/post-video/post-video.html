@@ -13,16 +13,13 @@
     <ion-label stacked>Contenido</ion-label>
     <ion-input [(ngModel)]="params.contenido" type="text"></ion-input>
   </ion-item>
-  <ion-grid style="background-color: white"> 
-      <ion-row>
-        <ion-col col-4></ion-col>
-        <ion-col col-4><button ion-button full dark large round (click)="getImage()"><ion-icon name="image" style="font-size: 2.7em;"></ion-icon></button></ion-col>
-        <ion-col col-4></ion-col>
-      </ion-row>
-    </ion-grid>
+  <ion-item>
+    <ion-label stacked>Url Video</ion-label>
+    <ion-input [(ngModel)]="params.urlYoutube" type="text"></ion-input>
+  </ion-item>
 </ion-content>
 <ion-footer>
   <ion-toolbar>
-      <button ion-button full dark (click)="uploadFile()">Publicar</button>
+      <button ion-button full dark (click)="enviar()">Publicar</button>
   </ion-toolbar>
 </ion-footer>

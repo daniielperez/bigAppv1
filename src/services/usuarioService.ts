@@ -54,4 +54,11 @@ export class UsuarioService {
  			return this._http.post(this.url+"/edit", json, {headers: headers})
 							  .map(res => res.json());
 	}
+
+	IndexPaginatorAction(idPagina:any){
+		let json = JSON.stringify(idPagina);
+		let headers = new Headers({'Content-Type':'application/json','Authorization': 'Bearer ' + sessionStorage.getItem('token')});
+ 			return this._http.post(this.url+"/publicaciones/list/paginator", json, {headers: headers})
+			 .map(res => res.json()); 
+	}
 }
