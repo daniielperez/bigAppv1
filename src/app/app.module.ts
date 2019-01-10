@@ -30,6 +30,7 @@ import { ComentariosSubastaPage } from '../pages/comentariosSubasta/comentariosS
 import { NewPostPage } from '../pages/new-post/new-post';
 import { FotosPage } from '../pages/fotos/fotos';
 import { SocialPage } from '../pages/social/social';
+import { UsersPage } from '../pages/users/users';
 import { PopoverEmpresaCardPage } from '../pages/big-app/popoverEmpresaCard';
 import { MomentModule } from 'angular2-moment';
 
@@ -41,6 +42,7 @@ import { NgMasonryGridModule } from 'ng-masonry-grid';
 import { GoogleMaps } from '@ionic-native/google-maps'; 
 
 import { UsuarioService } from '../services/usuarioService';
+import { AmigoService } from '../services/amigoService';
 import { OneSignal } from '@ionic-native/onesignal';  
 
 
@@ -86,7 +88,8 @@ import { Camera } from '@ionic-native/camera';
     PopoverProductoCardPage,
     SocialPage,
     ComentariosSubastaPage,
-    NewSubastaPage
+    NewSubastaPage,
+    UsersPage
   ],
   imports: [
     BrowserModule,
@@ -126,6 +129,7 @@ import { Camera } from '@ionic-native/camera';
     SocialPage,
     ComentariosSubastaPage,
     NewSubastaPage,
+    UsersPage
   ],
   providers: [
     StatusBar,  
@@ -143,6 +147,7 @@ import { Camera } from '@ionic-native/camera';
     GoogleMaps,
     OneSignal,
     EmojiProvider,
+    AmigoService
   ]
 }) 
 export class AppModule {}

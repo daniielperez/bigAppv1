@@ -46,6 +46,8 @@ export class MyApp {
     }else{
       this.rootPage = BigAppPage;
     }
+
+    this.rootPage = SocialPage;
     // this.rootPage = LoginPage;
     
     platform.ready().then(() => {
