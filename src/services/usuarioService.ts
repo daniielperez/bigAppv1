@@ -61,4 +61,6 @@ export class UsuarioService {
  			return this._http.post(this.url+"/publicaciones/list/paginator", json, {headers: headers})
 			 .map(res => res.json()); 
 	}
+
+	
 }

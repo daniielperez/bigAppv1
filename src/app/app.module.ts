@@ -27,6 +27,7 @@ import { CategoriasPage } from '../pages/categorias/categorias';
 import { NewPostPage } from '../pages/new-post/new-post';
 import { FotosPage } from '../pages/fotos/fotos';
 import { SocialPage } from '../pages/social/social';
+import { UsersPage } from '../pages/users/users';
 import { PopoverEmpresaCardPage } from '../pages/big-app/popoverEmpresaCard';
 import { MomentModule } from 'angular2-moment';
 
@@ -37,6 +38,7 @@ import { NgMasonryGridModule } from 'ng-masonry-grid';
 import { GoogleMaps } from '@ionic-native/google-maps'; 
 
 import { UsuarioService } from '../services/usuarioService';
+import { AmigoService } from '../services/amigoService';
 import { OneSignal } from '@ionic-native/onesignal';  
 
 
@@ -73,7 +75,8 @@ import { Camera } from '@ionic-native/camera';
     NewPostPage,
     FotosPage,
     PopoverProductoCardPage,
-    SocialPage
+    SocialPage,
+    UsersPage
   ],
   imports: [
     BrowserModule,
@@ -108,7 +111,8 @@ import { Camera } from '@ionic-native/camera';
     NewPostPage,
     FotosPage,
     PopoverProductoCardPage,
-    SocialPage
+    SocialPage,
+    UsersPage
   ],
   providers: [
     StatusBar,  
@@ -124,7 +128,8 @@ import { Camera } from '@ionic-native/camera';
     YoutubeVideoPlayer,
     YoutubeService,
     GoogleMaps,
-    OneSignal
+    OneSignal,
+    AmigoService
   ]
 })
 export class AppModule {}

@@ -3,9 +3,14 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>
-      Social
-    </ion-title>
+    <ion-toolbar color="primary">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-8><ion-searchbar  [(ngModel)]="stringBusqueda"></ion-searchbar></ion-col>
+          <ion-col col-4> <button (click)="goToUsersPage()" ion-button color="dark">Buscar</button></ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-toolbar>
   </ion-navbar>
 </ion-header>
 <ion-content class="color-fondo">

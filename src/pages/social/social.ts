@@ -4,7 +4,7 @@ import { LoadingController } from 'ionic-angular';
 import { UsuarioService } from '../../services/usuarioService';
 import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
 import { YoutubeService } from '../../services/youtubeService';
-
+import { UsersPage } from '../users/users';
 /**
  * Generated class for the SocialPage page.
  *
@@ -31,6 +31,7 @@ export class SocialPage {
   public publicacionesInfoScroll=[];
   public idPagina = 1;
   infiniteScroll:any= false;
+  public stringBusqueda;
 
   constructor(private YoutubeService:YoutubeService, private youtube: YoutubeVideoPlayer,public _UsuarioService: UsuarioService,public loadingCtrl: LoadingController,public navCtrl: NavController, public navParams: NavParams) {
     let loader = this.loadingCtrl.create({
@@ -174,6 +175,12 @@ export class SocialPage {
           console.log(error);
         }
     );
+  }
+
+  goToUsersPage() {
+    this.navCtrl.push(UsersPage,{
+      stringBusqueda:this.stringBusqueda,
+    });
   }
 
 }
