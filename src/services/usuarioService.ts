@@ -7,12 +7,12 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class UsuarioService {
 	public Authorization = sessionStorage.getItem('token');
-	public url = "http://192.168.1.75/bigApp/bigApp/web/api/usuario";
+	public url = "http://192.168.1.61/bigApp/bigApp/web/api/usuario";
 	constructor(private _http: Http){
 	}
 
 	 loginAction(json:any){
-		return this._http.post("http://192.168.1.75/bigApp/bigApp/web/oauth/v2/token",json,{headers: new Headers({'Content-Type':'application/json'})})
+		return this._http.post("http://192.168.1.61/bigApp/bigApp/web/oauth/v2/token",json,{headers: new Headers({'Content-Type':'application/json'})})
 		.map(res => res.json());
 	}
 

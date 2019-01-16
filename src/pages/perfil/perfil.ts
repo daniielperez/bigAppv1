@@ -48,48 +48,48 @@ export class PerfilPage {
       response => {
         this.usuario = response.usuario;
         this.publicaciones = response.publicaciones;
-
-        this.publicaciones.forEach(p => {
-          this.YoutubeService.infoAction(p.urlVideo).subscribe(
-            response => {
-              if(p.urlVideo == null){
-                let array = {
-                  'id':p.id,
-                  'contenido':p.contenido,
-                  'nombres':p.nombres,
-                  'imagen':p.imagen,
-                  'urlVideo':p.urlVideo,
-                  'fecha':p.fecha,
-                  'fotoPerfil':p.fotoPerfil,
-                  
-                } 
-                this.publicacionesInfo.push(array);
-              }else{
-                let array = {
-                  'id':p.id,
-                  'contenido':p.contenido,
-                  'nombres':p.nombres,
-                  'imagen':p.imagen,
-                  'urlVideo':p.urlVideo,
-                  'fotoPerfil':p.fotoPerfil,
-                  'fecha':p.fecha,
-                  'imagenVideo':response.items[0].snippet.thumbnails.high.url,
+        if (this.publicaciones) {
+          this.publicaciones.forEach(p => {
+            this.YoutubeService.infoAction(p.urlVideo).subscribe(
+              response => {
+                if(p.urlVideo == null){
+                  let array = {
+                    'id':p.id,
+                    'contenido':p.contenido,
+                    'nombres':p.nombres,
+                    'imagen':p.imagen,
+                    'urlVideo':p.urlVideo,
+                    'fecha':p.fecha,
+                    'fotoPerfil':p.fotoPerfil,
+                    
+                  } 
+                  this.publicacionesInfo.push(array);
+                }else{
+                  let array = {
+                    'id':p.id,
+                    'contenido':p.contenido,
+                    'nombres':p.nombres,
+                    'imagen':p.imagen,
+                    'urlVideo':p.urlVideo,
+                    'fotoPerfil':p.fotoPerfil,
+                    'fecha':p.fecha,
+                    'imagenVideo':response.items[0].snippet.thumbnails.high.url,
+                  }
+                   this.publicacionesInfo.push(array);
                 }
-                 this.publicacionesInfo.push(array);
+                
+              }, 
+              error => {
+                  this.errorMessage = <any>error;
+                  if(this.errorMessage != null){
+                    if (this.errorMessage.statusText == 'Bad Request') {
+                      }
+                }
               }
-              
-            }, 
-            error => {
-                this.errorMessage = <any>error;
-                if(this.errorMessage != null){
-                  if (this.errorMessage.statusText == 'Bad Request') {
-                    }
-              }
-            }
-          
-        );
-        });
-        
+            
+          );
+          });
+        }
         loader.dismiss();
       }, 
       error => {

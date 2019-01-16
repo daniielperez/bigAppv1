@@ -5,27 +5,27 @@ import  {Http, Headers} from "@angular/http";
 import 'rxjs/add/operator/map';
 
 @Injectable()
-export class ComentarioService {
+export class ComentarioSubastaService {
 	public Authorization = sessionStorage.getItem('token');
-	public url = "http://192.168.1.61/bigApp/bigApp/web/api/comentario";
+	public url = "http://192.168.1.61/bigApp/bigApp/web/api/comentarioSubasta";
 	constructor(private _http: Http){
 	}
 
-	comentarioPublicacionAction(datos:any){
+	comentarioSubastaAction(datos:any){
+		let json = JSON.stringify(datos); 
+		let headers = new Headers({'Content-Type':'application/json','Authorization': 'Bearer ' + sessionStorage.getItem('token')});
+ 			return this._http.post(this.url+"/subasta/show", json, {headers: headers})
+							  .map(res => res.json());
+	}
+
+	crearSubastaAction(datos:any){
 		let json = JSON.stringify(datos);
 		let headers = new Headers({'Content-Type':'application/json','Authorization': 'Bearer ' + sessionStorage.getItem('token')});
  			return this._http.post(this.url+"/publicacion/show", json, {headers: headers})
 							  .map(res => res.json());
 	}
 
-	crearPublicacionAction(datos:any){
-		let json = JSON.stringify(datos);
-		let headers = new Headers({'Content-Type':'application/json','Authorization': 'Bearer ' + sessionStorage.getItem('token')});
- 			return this._http.post(this.url+"/publicacion/show", json, {headers: headers})
-							  .map(res => res.json());
-	}
-
-	comentarioPublicacionDeleteAction(datos:any){
+	comentarioSubastaDeleteAction(datos:any){
 		let json = JSON.stringify(datos);
 		let headers = new Headers({'Content-Type':'application/json','Authorization': 'Bearer ' + sessionStorage.getItem('token')});
  			return this._http.post(this.url+"/publicacion/delete", json, {headers: headers})

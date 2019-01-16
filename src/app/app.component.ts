@@ -8,6 +8,7 @@ import { EmpresasPage } from '../pages/empresas/empresas';
 import { EmpresaPage } from '../pages/empresa/empresa';
 import { MapaPage } from '../pages/mapa/mapa';
 import { ChatPage } from '../pages/chat/chat';
+import { SubastaPage } from '../pages/subasta/subasta';
 import { ConversacionesPage } from '../pages/conversaciones/conversaciones';
 import { ContactosPage } from '../pages/contactos/contactos';
 import { PerfilPage } from '../pages/perfil/perfil';
@@ -28,7 +29,7 @@ import { BigAppPage } from '../pages/big-app/big-app';
 })
 export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
-    rootPage:any = SocialPage ;
+    rootPage:any = BigAppPage ;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,private oneSignal: OneSignal) {
 
@@ -39,14 +40,16 @@ export class MyApp {
     statusBar.backgroundColorByHexString('#ffffff');
     statusBar.styleBlackTranslucent();
     statusBar.show();
+    
     if (window.localStorage.getItem('username') == null) {
-      this.rootPage = SocialPage;
+      this.rootPage = LoginPage;
     }else{
-      this.rootPage = SocialPage;
+      this.rootPage = BigAppPage;
     }
 
     this.rootPage = LoginPage;
     // this.rootPage = LoginPage;
+    
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -91,6 +94,9 @@ export class MyApp {
   }goToComentarios(params){
     if (!params) params = {};
     this.navCtrl.setRoot(ComentariosPage);
+  }goToSubasta(params){
+    if (!params) params = {};
+    this.navCtrl.setRoot(SubastaPage);
   }
   goToSocial(params){
     if (!params) params = {};

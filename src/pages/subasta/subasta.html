@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      {{usuario.nombres}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content id="page3" class="color-fondo">
+  <ion-list id="perfil-list7">
+    <ion-item color="none" id="perfil-list-item31">
+      <ion-avatar item-left>
+        <img src="http://192.168.1.61/bigApp/bigApp/web/uploads/usuario/fotosPerfil/{{usuario.fotoPerfil}}" />
+      </ion-avatar>
+      <h2>
+        {{usuario.username}}
+      </h2>
+    </ion-item>
+    <button ion-button large color="dark" (click)='goToNewSubastaPage(usuario)' block>Crear Subasta</button>
+  </ion-list>
+  <ion-card *ngFor="let subasta of subastas">
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="http://192.168.1.61/bigApp/bigApp/web/uploads/usuario/fotosPerfil/{{subasta.fotoPerfil}}">
+        </ion-avatar>
+        <h2>{{usuario.username}}</h2>
+        <p>{{subasta.fecha| date}}</p>
+      </ion-item>
+      <ion-card-content>
+        <p>{{subasta.peticion}}</p>
+      </ion-card-content>
+      <ion-row>
+        <ion-col>
+          <button ion-button icon-start clear small on-click="goToComentarios(subasta.id)">
+            <ion-icon name="text"></ion-icon>
+            <div>Comentarios</div>
+          </button>
+        </ion-col>
+        <ion-col center text-center>
+          <ion-note>
+            {{ subasta.fecha | amLocale:'es' | amTimeAgo  }} 
+          </ion-note>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+</ion-content>
