@@ -6,22 +6,24 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>Usuarios</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content>
+<ion-content class="color-fondo" padding>
+
+  <ion-searchbar [(ngModel)]="datos.stringBusqueda" (ionInput)="onFilltro()"></ion-searchbar>
 
   <ion-list>
-      <ion-item-sliding *ngIf="user">
+      <ion-item-sliding *ngFor="let usuario of usuarios">
         <ion-item>
           <ion-avatar item-start>
-            <img src="http://192.168.1.75/bigApp/bigApp/web/uploads/usuario/fotosPerfil/{{user.fotoPerfil}}">
+            <img src="http://192.168.1.61/bigApp/bigApp/web/uploads/usuario/fotosPerfil/{{usuario.fotoPerfil}}">
           </ion-avatar>
-          <h2>{{user.nombres}} {{user.apellidos}}</h2>
+          <h2>{{usuario.username}}</h2>
         </ion-item>
         <ion-item-options>
           <button ion-button color="primary">

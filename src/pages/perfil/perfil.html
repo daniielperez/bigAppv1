@@ -34,7 +34,7 @@
           <img src="http://192.168.1.61/bigApp/bigApp/web/uploads/usuario/fotosPerfil/{{publicacion.fotoPerfil}}">
         </ion-avatar>
         <h2>{{publicacion.nombres}}</h2>
-        <p>{{publicacion.fecha| date}}</p>
+        <p>{{publicacion.fecha| date}}</p> 
       </ion-item>
       <img *ngIf="publicacion.imagen !=null" src="http://192.168.1.61/bigApp/bigApp/web/uploads/publicaciones/{{publicacion.imagen}}">
       <img (click)='goToVideo(publicacion.urlVideo)' *ngIf="publicacion.urlVideo !=null" src="{{publicacion.imagenVideo}}" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />

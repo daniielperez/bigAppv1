@@ -19,19 +19,17 @@ export class UsersPage {
     'stringBusqueda':""
   }
   stringBusqueda:any;
+  usuarios:any=null;
   user:any=null;
+  busqueda:any=null;
   errorMessage:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public _amigoService:AmigoService) {
 
-    this.datos.stringBusqueda = this.navParams.get('stringBusqueda');
-    console.log(this.stringBusqueda);
-
-    this._amigoService.FindAmigoUsurio(this.datos).subscribe(
+    this._amigoService.IndexPagAction().subscribe(
       response => {
         if(response.status ='success'){
-            this.user=response.user;
-            console.log(this.user);
+            this.usuarios = response.usuarios;
           }
       },   
       error => {
@@ -41,8 +39,23 @@ export class UsersPage {
     );
   }
 
-  ionViewDidLoad() {
+  onFilltro(): void {
+    console.log(this.datos.stringBusqueda);
+
+    this._amigoService.FindAmigoUsurio(this.datos).subscribe(
+      response => {
+        if(response.status ='success'){
+            this.usuarios=response.usuarios;
+            console.log(this.usuarios);
+          }
+      },   
+      error => { 
+          this.errorMessage = <any>error;
+          console.log(error);
+        }
+    );
     
+  
   }
 
 }

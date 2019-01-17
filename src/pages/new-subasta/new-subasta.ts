@@ -4,6 +4,7 @@ import { SubastaPage } from '../subasta/subasta';
 import { MunicipioService } from '../../services/municipioService';
 import { CategoriaService } from '../../services/categoriaService'; 
 import { SubastaService } from '../../services/subastaService';
+import { NotificacionService } from '../../services/notificacionService';
  
 /**
  * Generated class for the NewSubastaPage page.
@@ -20,6 +21,7 @@ import { SubastaService } from '../../services/subastaService';
     MunicipioService,
     CategoriaService,
     SubastaService,
+    NotificacionService,
   ],
 })
 export class NewSubastaPage implements OnInit{
@@ -45,6 +47,7 @@ export class NewSubastaPage implements OnInit{
     public _MunicipioService: MunicipioService,
     public _CategoriaService: CategoriaService,
     public _SubastaService: SubastaService,
+    public _NotificacionService: NotificacionService,
   
   ) {
     this.usuario = this.navParams.get('usuario');
@@ -99,16 +102,16 @@ export class NewSubastaPage implements OnInit{
   }
   enviar(){
     console.log(this.params);
-    this._SubastaService.NewAction(this.params).subscribe(
+    let datos = {
+        "app_id" : "861d4c12-f510-40c7-b0ca-e389b4d1345c",
+        "include_player_ids" :["ce108ef4-a5bc-481f-a528-2d395144aeb2"],
+        "data" : {"foo":"bar"}, 
+        "contents": {"en":"content"} 
+     
+    }
+    this._NotificacionService.sendUsuarios(datos).subscribe(
       response => {
-          if (response.status=='success') {
-            this.navCtrl.setRoot(SubastaPage);
-            const toast = this.toastCtrl.create({
-              message: 'Subasta publicada',
-              duration: 3000
-            });
-            toast.present();
-          }
+          console.log(response);
       }, 
       error => {
           this.errorMessage = <any>error;
@@ -117,6 +120,24 @@ export class NewSubastaPage implements OnInit{
         }
       }
     );
+    // this._SubastaService.NewAction(this.params).subscribe(
+    //   response => {
+    //       if (response.status=='success') {
+    //         this.navCtrl.setRoot(SubastaPage);
+    //         const toast = this.toastCtrl.create({
+    //           message: 'Subasta publicada',
+    //           duration: 3000
+    //         });
+    //         toast.present();
+    //       }
+    //   }, 
+    //   error => {
+    //       this.errorMessage = <any>error;
+    //       if(this.errorMessage != null){
+    //         alert(this.errorMessage);
+    //     }
+    //   }
+    // );
   }
 
 }

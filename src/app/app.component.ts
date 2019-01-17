@@ -18,6 +18,7 @@ import { ComentariosPage } from '../pages/comentarios/comentarios';
 import { OneSignal, OSNotificationPayload } from '@ionic-native/onesignal';
 import { isCordovaAvailable } from '../common/is-cordova-available';
 import { oneSignalAppId, sender_id } from '../config';
+import { UsuarioService } from '../services/usuarioService'; 
 
 
 import { BigAppPage } from '../pages/big-app/big-app';
@@ -25,16 +26,21 @@ import { BigAppPage } from '../pages/big-app/big-app';
 
  
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.html',
+  providers: [
+    UsuarioService
+  ],
 })
 export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
-    rootPage:any = BigAppPage ;
+    rootPage:any = BigAppPage;
+    errorMessage;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,private oneSignal: OneSignal) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,private oneSignal: OneSignal,private _usuarioService:UsuarioService) {
 
     // let status bar overlay webview
     statusBar.overlaysWebView(true);
+
 
     // set status bar to white
     statusBar.backgroundColorByHexString('#ffffff');
@@ -47,8 +53,7 @@ export class MyApp {
       this.rootPage = BigAppPage;
     }
 
-    this.rootPage = SocialPage;
-    // this.rootPage = LoginPage;
+    // this.rootPage = SocialPage;
     
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -62,9 +67,26 @@ export class MyApp {
       this.oneSignal.handleNotificationReceived().subscribe(data => this.onPushReceived(data.payload));
       this.oneSignal.handleNotificationOpened().subscribe(data => this.onPushOpened(data.notification.payload));
       this.oneSignal.endInit();
+      this.oneSignal.getIds().then((id) => {
+        let datos={
+          'username': window.localStorage.getItem('username'),
+          'playerId': id.userId
+        }
+        this._usuarioService.SetPlayerIdAction(datos).subscribe(
+          response => {
+              console.log(response);
+          }, 
+          error => {
+              this.errorMessage = <any>error;
+              if(this.errorMessage != null){
+                alert(this.errorMessage);
+            }
+          }
+        );
+      });
     }
-  }
-  goToBigApp(params){
+  } 
+  goToBigApp(params){ 
     if (!params) params = {};
     this.navCtrl.setRoot(BigAppPage);
   }goToMunicipios(params){
@@ -103,6 +125,7 @@ export class MyApp {
     this.navCtrl.setRoot(SocialPage);
   }
   
+  
   private onPushReceived(payload: OSNotificationPayload) {
     alert('Push recevied:' + payload.body);
   }
@@ -110,4 +133,7 @@ export class MyApp {
   private onPushOpened(payload: OSNotificationPayload) {
     alert('Push opened: ' + payload.body);
   }
+ 
+
+  
 }
