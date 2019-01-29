@@ -12,15 +12,22 @@
   <button id="conversaciones-button20" ion-button color="positive" block on-click="goToContactos()">
     Contactos
   </button>
-  <ion-list>
+  <ion-list *ngIf="spiner">
 
-    <ion-item (click)="goToChat()">
+    <ion-item *ngFor="let conversacion of conversaciones" (click)="goToChat()" >
       <ion-avatar item-left>
-        <img src="https://github.com/HsuanXyz/ionic3-chat/blob/master/src/assets/to-user.jpg?raw=true">
+        <img src="http://192.168.1.61/bigApp/bigApp/web/uploads/usuario/fotosPerfil/{{conversacion.foto}}">
       </ion-avatar>
-    <h2>Hancock</h2>
-    <p>If at first you don’t succeed, call it version 1.0</p>
+    <h2>{{conversacion.nombre}}</h2>
+    <!-- <p>If at first you don’t succeed, call it version 1.0</p> --> 
     </ion-item>
     
   </ion-list>
+  <ion-grid *ngIf="!spiner">
+    <ion-row >  
+      <ion-col col-12 text-center >
+        <ion-spinner name="crescent"></ion-spinner>
+      </ion-col>
+    </ion-row> 
+  </ion-grid>
 </ion-content>

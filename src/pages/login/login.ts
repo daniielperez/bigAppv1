@@ -3,6 +3,10 @@ import { NavController } from 'ionic-angular';
 import { SignupPage } from '../signup/signup';
 import { BigAppPage } from '../big-app/big-app';
 import { UsuarioService } from '../../services/usuarioService';
+import { OneSignal, OSNotificationPayload } from '@ionic-native/onesignal';
+import { isCordovaAvailable } from '../../common/is-cordova-available';
+import { oneSignalAppId, sender_id } from '../../config';
+
 
 @Component({
   selector: 'page-login',
@@ -24,7 +28,9 @@ export class LoginPage {
 
   constructor(
     public navCtrl: NavController,
-    public _UsuarioService: UsuarioService,) {
+    public _UsuarioService: UsuarioService,
+    private oneSignal: OneSignal
+  ) {
   }
   goToSignup(params){
     if (!params) params = {};
@@ -34,9 +40,32 @@ export class LoginPage {
   onLogin(){
   this._UsuarioService.loginAction(this.usuario).subscribe(
       response => {
-        console.log("ok");
+        
           window.localStorage.setItem('username', this.usuario.username);
           window.localStorage.setItem('token', response.access_token);
+          if (isCordovaAvailable()){
+            this.oneSignal.startInit(oneSignalAppId, sender_id);
+            this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.Notification);
+            this.oneSignal.endInit();
+            
+            this.oneSignal.getIds().then((id) => { 
+              let datos={
+                'username': window.localStorage.getItem('username'),
+                'playerId': id.userId 
+              } 
+              this._UsuarioService.SetPlayerIdAction(datos).subscribe(
+                response => {
+                    console.log(response);
+                }, 
+                error => {
+                    this.errorMessage = <any>error;
+                    if(this.errorMessage != null){
+                      alert(this.errorMessage);
+                  }
+                }
+              );
+            });
+          }
           this.navCtrl.setRoot(BigAppPage);
           
       }, 

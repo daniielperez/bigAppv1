@@ -13,8 +13,9 @@ import { ChatService, ChatMessage, UserInfo } from "../../providers/chat-service
   ],
 })
 export class ConversacionesPage {
-  chats:any = false;
+  conversaciones:any = false;
   errorMessage:any;
+  spiner:any = false;
 
   toUser : {toUserId: string, toUserName: string};
 
@@ -22,8 +23,9 @@ export class ConversacionesPage {
     let parametros = {'username':window.localStorage.getItem('username')};
       this._ChatUsuarioService.ChatUsuarioAction(parametros).subscribe(
         response => {
-            this.chats=response;
-            console.log(this.chats);
+            this.conversaciones=response.conversaciones;
+            this.spiner = true;
+            console.log(this.conversaciones);
         }, 
         error => {
             this.errorMessage = <any>error;

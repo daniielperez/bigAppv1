@@ -58,17 +58,15 @@ export class UsuarioService {
 	IndexPaginatorAction(idPagina:any){
 		let json = JSON.stringify(idPagina);
 		let headers = new Headers({'Content-Type':'application/json','Authorization': 'Bearer ' + sessionStorage.getItem('token')});
- 			return this._http.post(this.url+"/set/player/id", json, {headers: headers})
+ 			return this._http.post(this.url+"/publicaciones/list/paginator", json, {headers: headers})
 			 .map(res => res.json()); 
 	}
 
-
-	SetPlayerIdAction(datos:any){
-	
+	SetPlayerIdAction(datos:any){ 
 		let json = JSON.stringify(datos);
 		let headers = new Headers({'Content-Type':'application/json','Authorization': 'Bearer ' + sessionStorage.getItem('token')});
- 			return this._http.post(this.url+"/editar", json, {headers: headers})
-							  .map(res => res.json());
+ 			return this._http.post(this.url+"/set/player/id", json, {headers: headers})
+			 .map(res => res.json()); 
 	}
 
 	

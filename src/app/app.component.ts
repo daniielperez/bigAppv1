@@ -19,13 +19,11 @@ import { OneSignal, OSNotificationPayload } from '@ionic-native/onesignal';
 import { isCordovaAvailable } from '../common/is-cordova-available';
 import { oneSignalAppId, sender_id } from '../config';
 import { UsuarioService } from '../services/usuarioService'; 
-
+ 
 
 import { BigAppPage } from '../pages/big-app/big-app';
 
-
- 
-@Component({
+@Component({ 
   templateUrl: 'app.html',
   providers: [
     UsuarioService
@@ -38,6 +36,8 @@ export class MyApp {
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,private oneSignal: OneSignal,private _usuarioService:UsuarioService) {
 
+
+ 
     // let status bar overlay webview
     statusBar.overlaysWebView(true);
 
@@ -52,6 +52,9 @@ export class MyApp {
     }else{
       this.rootPage = BigAppPage;
     }
+    // this.rootPage = LoginPage;
+
+    
 
     // this.rootPage = SocialPage;
     // this.rootPage = LoginPage;
@@ -63,28 +66,9 @@ export class MyApp {
       splashScreen.hide();
     });
     if (isCordovaAvailable()){
-      this.oneSignal.startInit(oneSignalAppId, sender_id);
-      this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.Notification);
-      this.oneSignal.handleNotificationReceived().subscribe(data => this.onPushReceived(data.payload));
+      // this.oneSignal.handleNotificationReceived().subscribe(data => this.onPushReceived(data.payload));
       this.oneSignal.handleNotificationOpened().subscribe(data => this.onPushOpened(data.notification.payload));
       this.oneSignal.endInit();
-      this.oneSignal.getIds().then((id) => {
-        let datos={
-          'username': window.localStorage.getItem('username'),
-          'playerId': id.userId
-        }
-        this._usuarioService.SetPlayerIdAction(datos).subscribe(
-          response => {
-              console.log(response);
-          }, 
-          error => {
-              this.errorMessage = <any>error;
-              if(this.errorMessage != null){
-                alert(this.errorMessage);
-            }
-          }
-        );
-      });
     }
   } 
   goToBigApp(params){ 
@@ -106,8 +90,8 @@ export class MyApp {
     if (!params) params = {};
     this.navCtrl.setRoot(ChatPage);
   }goToConversaciones(params){
-    if (!params) params = {};
-    this.navCtrl.setRoot(ConversacionesPage);
+    if (!params) params = {};  
+    this.navCtrl.setRoot(ConversacionesPage); 
   }goToContactos(params){
     if (!params) params = {};
     this.navCtrl.setRoot(ContactosPage);
@@ -127,14 +111,14 @@ export class MyApp {
   }
   
   
-  private onPushReceived(payload: OSNotificationPayload) {
-    alert('Push recevied:' + payload.body);
-  }
+  // private onPushReceived(payload: OSNotificationPayload) {
+  //   alert('Push recevied:' + payload.additionalData.foo);
+  // }
   
   private onPushOpened(payload: OSNotificationPayload) {
-    alert('Push opened: ' + payload.body);
+    if(payload.additionalData.tipo == 'subasta'){
+      this.navCtrl.setRoot(SubastaPage);
+    }
   }
- 
-
   
 }

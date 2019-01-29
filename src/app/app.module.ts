@@ -128,10 +128,10 @@ import { Camera } from '@ionic-native/camera';
     PopoverProductoCardPage,
     SocialPage,
     ComentariosSubastaPage,
-    NewSubastaPage,
-    UsersPage
-  ],
-  providers: [
+    NewSubastaPage,  
+    UsersPage       
+  ], 
+  providers: [ 
     StatusBar,  
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
