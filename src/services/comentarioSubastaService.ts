@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class ComentarioSubastaService {
 	public Authorization = sessionStorage.getItem('token');
-	public url = "http://192.168.1.61/bigApp/bigApp/web/api/comentarioSubasta";
+	public url = "http://192.168.1.73/bigApp/bigApp/web/api/comentarioSubasta";
 	constructor(private _http: Http){
 	}
 

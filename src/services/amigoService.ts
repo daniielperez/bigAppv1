@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class AmigoService {
 	public Authorization = sessionStorage.getItem('token');
-	public url = "http://192.168.1.75/bigApp/bigApp/web/api/amigo";
+	public url = "http://192.168.1.73/bigApp/bigApp/web/api/amigo";
 	constructor(private _http: Http){
 	}
 

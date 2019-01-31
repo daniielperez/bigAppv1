@@ -30,6 +30,8 @@ import { BigAppPage } from '../pages/big-app/big-app';
 export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
     rootPage:any = BigAppPage ;
+    username = localStorage.getItem("username");
+    fotoPerfil = localStorage.getItem("fotoPerfil");
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,private oneSignal: OneSignal) {
 
@@ -41,13 +43,13 @@ export class MyApp {
     statusBar.styleBlackTranslucent();
     statusBar.show();
     
-    if (window.localStorage.getItem('username') == null) {
+    if (this.username == null) {
       this.rootPage = LoginPage;
     }else{
       this.rootPage = BigAppPage;
     }
 
-    this.rootPage = LoginPage;
+   // this.rootPage = LoginPage;
     // this.rootPage = LoginPage;
     
     platform.ready().then(() => {

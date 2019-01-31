@@ -3,6 +3,8 @@ import { NavController } from 'ionic-angular';
 import { SignupPage } from '../signup/signup';
 import { BigAppPage } from '../big-app/big-app';
 import { UsuarioService } from '../../services/usuarioService';
+import { LoadingController } from 'ionic-angular';
+
 
 @Component({
   selector: 'page-login',
@@ -24,7 +26,9 @@ export class LoginPage {
 
   constructor(
     public navCtrl: NavController,
-    public _UsuarioService: UsuarioService,) {
+    public _UsuarioService: UsuarioService,
+    public loadingCtrl: LoadingController,
+  ) {
   }
   goToSignup(params){
     if (!params) params = {};
@@ -32,13 +36,16 @@ export class LoginPage {
   }
 
   onLogin(){
+    let loader = this.loadingCtrl.create({
+      content: "Validando Datos...",
+    });
+    loader.present();
   this._UsuarioService.loginAction(this.usuario).subscribe(
       response => {
-        console.log("ok");
           window.localStorage.setItem('username', this.usuario.username);
           window.localStorage.setItem('token', response.access_token);
           this.navCtrl.setRoot(BigAppPage);
-          
+          loader.dismiss();
       }, 
       error => {
           this.errorMessage = <any>error;
