@@ -6,8 +6,10 @@
     <ion-toolbar color="primary">
       <ion-grid>
         <ion-row>
-          <ion-col col-8><ion-searchbar  [(ngModel)]="stringBusqueda"></ion-searchbar></ion-col>
-          <ion-col col-4> <button (click)="goToUsersPage()" ion-button color="dark">Buscar</button></ion-col>
+          <ion-col col-9></ion-col>
+          <ion-col col-3 style="text-align: right;"> 
+              <ion-icon style="font-size: 20px; color:white;" (click)="goToUsersPage()" item-right="" name="person-add" role="img" class="icon icon-lg ion-lg-person-add item-icon" ></ion-icon>
+          </ion-col>
         </ion-row>
       </ion-grid>
     </ion-toolbar>

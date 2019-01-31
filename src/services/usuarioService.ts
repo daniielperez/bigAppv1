@@ -62,5 +62,12 @@ export class UsuarioService {
 			 .map(res => res.json()); 
 	}
 
+	SetPlayerIdAction(datos:any){ 
+		let json = JSON.stringify(datos);
+		let headers = new Headers({'Content-Type':'application/json','Authorization': 'Bearer ' + sessionStorage.getItem('token')});
+ 			return this._http.post(this.url+"/set/player/id", json, {headers: headers})
+			 .map(res => res.json()); 
+	}
+
 	
 }

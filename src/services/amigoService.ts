@@ -17,4 +17,8 @@ export class AmigoService {
  			return this._http.post(this.url+"/find/user", json, {headers: headers})
 			 .map(res => res.json()); 
 	}
+
+	IndexPagAction(){ 
+		return this._http.get(this.url+"/user/pag",{headers: new Headers({'Content-Type':'application/json','Authorization': 'Bearer ' + sessionStorage.getItem('token')})}).map(res => res.json());
+	}
 }

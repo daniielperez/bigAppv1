@@ -4,6 +4,7 @@ import { SubastaPage } from '../subasta/subasta';
 import { MunicipioService } from '../../services/municipioService';
 import { CategoriaService } from '../../services/categoriaService'; 
 import { SubastaService } from '../../services/subastaService';
+import { NotificacionService } from '../../services/notificacionService';
  
 /**
  * Generated class for the NewSubastaPage page.
@@ -20,6 +21,7 @@ import { SubastaService } from '../../services/subastaService';
     MunicipioService,
     CategoriaService,
     SubastaService,
+    NotificacionService,
   ],
 })
 export class NewSubastaPage implements OnInit{
@@ -45,6 +47,7 @@ export class NewSubastaPage implements OnInit{
     public _MunicipioService: MunicipioService,
     public _CategoriaService: CategoriaService,
     public _SubastaService: SubastaService,
+    public _NotificacionService: NotificacionService,
   
   ) {
     this.usuario = this.navParams.get('usuario');
@@ -98,16 +101,39 @@ export class NewSubastaPage implements OnInit{
     });
   }
   enviar(){
-    console.log(this.params);
     this._SubastaService.NewAction(this.params).subscribe(
-      response => {
-          if (response.status=='success') {
-            this.navCtrl.setRoot(SubastaPage);
-            const toast = this.toastCtrl.create({
-              message: 'Subasta publicada',
-              duration: 3000
-            });
-            toast.present();
+      responseSubasta => {
+        // console.log(responseSubasta);  
+          if (responseSubasta.status=='success') {
+            if(responseSubasta.arrayPlayersId != ''){
+              let datos = {
+                "app_id" : "861d4c12-f510-40c7-b0ca-e389b4d1345c",
+                "include_player_ids" : responseSubasta.arrayPlayersId,
+                "data" : {"tipo":"subasta"}, 
+                "headings":{"en":'Nueva peticion de subasta'}, 
+                "android_group" : responseSubasta.contenido, 
+                "contents": {"en":responseSubasta.contenido}
+             
+            }
+            console.log(datos);
+            this._NotificacionService.sendUsuarios(datos).subscribe(
+              responseNotificacion => { 
+                  this.navCtrl.setRoot(SubastaPage);
+                  const toast = this.toastCtrl.create({
+                    message: 'Subasta publicada',
+                    duration: 3000
+                  });
+                  toast.present();
+                }, 
+                error => {
+                    this.errorMessage = <any>error;
+                    if(this.errorMessage != null){
+                      alert(this.errorMessage);
+                  }
+                }
+              );
+            }
+            
           }
       }, 
       error => {

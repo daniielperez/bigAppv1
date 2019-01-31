@@ -18,14 +18,16 @@ import { ComentariosPage } from '../pages/comentarios/comentarios';
 import { OneSignal, OSNotificationPayload } from '@ionic-native/onesignal';
 import { isCordovaAvailable } from '../common/is-cordova-available';
 import { oneSignalAppId, sender_id } from '../config';
-
+import { UsuarioService } from '../services/usuarioService'; 
+ 
 
 import { BigAppPage } from '../pages/big-app/big-app';
 
-
- 
-@Component({
-  templateUrl: 'app.html'
+@Component({ 
+  templateUrl: 'app.html',
+  providers: [
+    UsuarioService
+  ],
 })
 export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
@@ -33,10 +35,13 @@ export class MyApp {
     username = localStorage.getItem("username");
     fotoPerfil = localStorage.getItem("fotoPerfil");
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,private oneSignal: OneSignal) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,private oneSignal: OneSignal,private _usuarioService:UsuarioService) {
 
+
+ 
     // let status bar overlay webview
     statusBar.overlaysWebView(true);
+
 
     // set status bar to white
     statusBar.backgroundColorByHexString('#ffffff');
@@ -48,9 +53,8 @@ export class MyApp {
     }else{
       this.rootPage = BigAppPage;
     }
-
-   // this.rootPage = LoginPage;
     // this.rootPage = LoginPage;
+
     
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -59,14 +63,12 @@ export class MyApp {
       splashScreen.hide();
     });
     if (isCordovaAvailable()){
-      this.oneSignal.startInit(oneSignalAppId, sender_id);
-      this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.Notification);
-      this.oneSignal.handleNotificationReceived().subscribe(data => this.onPushReceived(data.payload));
+      // this.oneSignal.handleNotificationReceived().subscribe(data => this.onPushReceived(data.payload));
       this.oneSignal.handleNotificationOpened().subscribe(data => this.onPushOpened(data.notification.payload));
       this.oneSignal.endInit();
     }
-  }
-  goToBigApp(params){
+  } 
+  goToBigApp(params){ 
     if (!params) params = {};
     this.navCtrl.setRoot(BigAppPage);
   }goToMunicipios(params){
@@ -85,8 +87,8 @@ export class MyApp {
     if (!params) params = {};
     this.navCtrl.setRoot(ChatPage);
   }goToConversaciones(params){
-    if (!params) params = {};
-    this.navCtrl.setRoot(ConversacionesPage);
+    if (!params) params = {};  
+    this.navCtrl.setRoot(ConversacionesPage); 
   }goToContactos(params){
     if (!params) params = {};
     this.navCtrl.setRoot(ContactosPage);
@@ -105,11 +107,15 @@ export class MyApp {
     this.navCtrl.setRoot(SocialPage);
   }
   
-  private onPushReceived(payload: OSNotificationPayload) {
-    alert('Push recevied:' + payload.body);
-  }
+  
+  // private onPushReceived(payload: OSNotificationPayload) {
+  //   alert('Push recevied:' + payload.additionalData.foo);
+  // }
   
   private onPushOpened(payload: OSNotificationPayload) {
-    alert('Push opened: ' + payload.body);
+    if(payload.additionalData.tipo == 'subasta'){
+      this.navCtrl.setRoot(SubastaPage);
+    }
   }
+  
 }

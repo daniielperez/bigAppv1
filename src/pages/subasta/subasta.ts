@@ -5,6 +5,7 @@ import { SubastaService } from '../../services/subastaService';
 import { DomSanitizer } from '@angular/platform-browser'; 
 import { ModalController } from 'ionic-angular';
 import { NewSubastaPage } from '../new-subasta/new-subasta';
+// import { OneSignal, OSNotificationPayload } from '@ionic-native/onesignal';
 
 @Component({
   selector: 'page-subasta',
@@ -30,8 +31,13 @@ export class SubastaPage {
     public navCtrl: NavController,
     public _SubastaService: SubastaService,
     public sanitizer: DomSanitizer,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    // private oneSignal: OneSignal,
   ) {
+
+      // this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.Notification);
+      // this.oneSignal.handleNotificationReceived().subscribe(data => this.onPushReceived(data.payload));
+      // this.oneSignal.endInit();
   }
   goToComentarios(subastaId){
     console.log(subastaId);
@@ -61,6 +67,10 @@ export class SubastaPage {
   );
   }
 
+  // private onPushReceived(payload: OSNotificationPayload) {
+  //   alert('Push recevied desde subasta:' + payload.body);
+  // }
+  
   goToNewSubastaPage(usuario) {
     console.log(usuario);
     this.navCtrl.push(NewSubastaPage,{
