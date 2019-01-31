@@ -7,7 +7,9 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class CategoriaService {
 	public Authorization = sessionStorage.getItem('token');
+
 	public url = "http://192.168.1.99/bigApp/bigApp/web/api/categoria";
+
 	constructor(private _http: Http){
 	}
 

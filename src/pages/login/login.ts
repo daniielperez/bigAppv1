@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import { SignupPage } from '../signup/signup';
 import { BigAppPage } from '../big-app/big-app';
 import { UsuarioService } from '../../services/usuarioService';
+import { LoadingController } from 'ionic-angular';
 import { OneSignal, OSNotificationPayload } from '@ionic-native/onesignal';
 import { isCordovaAvailable } from '../../common/is-cordova-available';
 import { oneSignalAppId, sender_id } from '../../config';
@@ -29,6 +30,7 @@ export class LoginPage {
   constructor(
     public navCtrl: NavController,
     public _UsuarioService: UsuarioService,
+    public loadingCtrl: LoadingController,
     private oneSignal: OneSignal
   ) {
   }
@@ -38,9 +40,12 @@ export class LoginPage {
   }
 
   onLogin(){
+    let loader = this.loadingCtrl.create({
+      content: "Validando Datos...",
+    });
+    loader.present();
   this._UsuarioService.loginAction(this.usuario).subscribe(
       response => {
-        
           window.localStorage.setItem('username', this.usuario.username);
           window.localStorage.setItem('token', response.access_token);
           if (isCordovaAvailable()){
@@ -68,7 +73,7 @@ export class LoginPage {
             });
           }
           this.navCtrl.setRoot(BigAppPage);
-          
+          loader.dismiss();
       }, 
       error => {
           this.errorMessage = <any>error;
