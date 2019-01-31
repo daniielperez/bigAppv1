@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class ProductoService {
 	public Authorization = sessionStorage.getItem('token');
-	public url = "http://192.168.1.61/bigApp/bigApp/web/api/producto";
+	public url = "http://192.168.1.99/bigApp/bigApp/web/api/producto";
 	constructor(private _http: Http){
 	}
 

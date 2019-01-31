@@ -17,7 +17,13 @@ export class ConversacionesPage {
   errorMessage:any;
   spiner:any = false;
 
-  toUser : {toUserId: string, toUserName: string};
+  toUser : {
+    conversacionId: string,
+    toUserName:string
+    toUserNombre:string,
+    toUserFoto:string,
+    oneSignalId:string,
+  };
 
   constructor(public navCtrl: NavController,public _ChatUsuarioService: ChatUsuarioService) {
     let parametros = {'username':window.localStorage.getItem('username')};
@@ -34,13 +40,18 @@ export class ConversacionesPage {
           }
         }
     );
-    this.toUser = {
-      toUserId:'210000198410281948',
-      toUserName:'Hancock'
-    }
+    
   }
-  goToChat(params){
-    if (!params) params = {};
+  goToChat(conversacion){
+    this.toUser = {
+      conversacionId:conversacion.conversacionId,
+      toUserName:conversacion.username,
+      toUserNombre:conversacion.nombre,
+      toUserFoto:conversacion.foto,
+      oneSignalId:conversacion.oneSignalId,
+    }
+    console.log(this.toUser); 
+    if (!conversacion) conversacion = {};
     this.navCtrl.push(ChatPage, this.toUser);
   }goToContactos(params){
     if (!params) params = {};

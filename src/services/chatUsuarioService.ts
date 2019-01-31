@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class ChatUsuarioService {
 	public Authorization = sessionStorage.getItem('token');
-	public url = "http://192.168.1.61/bigApp/bigApp/web/api/chatUsuario";
+	public url = "http://192.168.1.99/bigApp/bigApp/web/api/chatUsuario";
 	constructor(private _http: Http){
 	}
 
@@ -15,6 +15,20 @@ export class ChatUsuarioService {
 		let json = JSON.stringify(datos);
 		let headers = new Headers({'Content-Type':'application/json','Authorization': 'Bearer ' + sessionStorage.getItem('token')});
  			return this._http.post(this.url+"/usuario", json, {headers: headers})
+							  .map(res => res.json());
+	}
+
+	GetChatsAction(datos:any){  
+		let json = JSON.stringify(datos);
+		let headers = new Headers({'Content-Type':'application/json','Authorization': 'Bearer ' + sessionStorage.getItem('token')});
+ 			return this._http.post(this.url+"/chats", json, {headers: headers})
+							  .map(res => res.json());
+	}
+
+	newChatsAction(datos:any){  
+		let json = JSON.stringify(datos);
+		let headers = new Headers({'Content-Type':'application/json','Authorization': 'Bearer ' + sessionStorage.getItem('token')});
+ 			return this._http.post(this.url+"/new", json, {headers: headers})
 							  .map(res => res.json());
 	}
 }

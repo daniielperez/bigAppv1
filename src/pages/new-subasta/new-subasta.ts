@@ -113,7 +113,6 @@ export class NewSubastaPage implements OnInit{
                 "headings":{"en":'Nueva peticion de subasta'}, 
                 "android_group" : responseSubasta.contenido, 
                 "contents": {"en":responseSubasta.contenido}
-             
             }
             console.log(datos);
             this._NotificacionService.sendUsuarios(datos).subscribe(

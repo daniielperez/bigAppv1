@@ -94,8 +94,8 @@
     <allow-navigation href="http://192.168.1.75:8100" sessionid="29a2d739" />
     <plugin name="cordova-plugin-file-transfer" spec="1.7.1" />
     <plugin name="cordova-plugin-camera" spec="4.0.3" />
-    <plugin name="onesignal-cordova-plugin" spec="2.4.5" />
     <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
+    <plugin name="onesignal-cordova-plugin" spec="2.4.5" />
     <engine name="android" spec="7.1.4" />
     <engine name="browser" spec="5.0.4" />
 </widget>

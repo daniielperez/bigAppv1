@@ -41,7 +41,7 @@ export class MyApp {
     // let status bar overlay webview
     statusBar.overlaysWebView(true);
 
-
+    
     // set status bar to white
     statusBar.backgroundColorByHexString('#ffffff');
     statusBar.styleBlackTranslucent();

@@ -48,6 +48,7 @@ export class LoginPage {
             this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.Notification);
             this.oneSignal.endInit();
             
+            
             this.oneSignal.getIds().then((id) => { 
               let datos={
                 'username': window.localStorage.getItem('username'),
@@ -71,6 +72,7 @@ export class LoginPage {
       }, 
       error => {
           this.errorMessage = <any>error;
+          alert(this.errorMessage);
           if(this.errorMessage != null){
             if (this.errorMessage.statusText == 'Bad Request') {
               }
@@ -82,6 +84,7 @@ export class LoginPage {
     response => {
       window.localStorage.setItem('fotoPerfil', response.usuario.fotoPerfil);
       window.localStorage.setItem('fotoPortada', response.usuario.fotoPortada);
+      window.localStorage.setItem('nombres', response.usuario.nombres);
       console.log(response);
     }, 
     error => {

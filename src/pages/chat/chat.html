@@ -1,32 +1,39 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{toUser.name}}</ion-title>
+    <ion-title>{{parametros.toUserName}}</ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content style="" class="color-fondo">
-  <div style="padding: 0px !important" class="message-wrap">
-
-    <div *ngFor="let msg of msgList"
+<ion-content style="" class="color-fondo" >
+  <div class="message-wrap">
+    <div *ngFor="let chat of chats"
          class="message" style="    margin-left: 25px;margin-right: 25px;"
-         [class.left]=" msg.userId === toUser.id "
-         [class.right]=" msg.userId === user.id ">
-      <img class="user-img" [src]="msg.userAvatar" alt="" >
-      <ion-spinner name="dots" *ngIf="msg.status === 'pending'"></ion-spinner>
+         [class.left]=" chat.toUser ===  parametros.toUserName"
+         [class.right]=" chat.toUser ===  myUsername ">
+      <img class="user-img" src="http://192.168.1.99/bigApp/bigApp/web/uploads/usuario/fotosPerfil/{{chat.toUserFoto}}" alt="" >
+      <ion-spinner name="dots" *ngIf="chat.status === 'pending'"></ion-spinner>
       <div class="msg-detail">
         <div class="msg-info">
           <p>
-            {{msg.userName}}&nbsp;&nbsp;&nbsp;{{msg.time | amLocale:'es' | amTimeAgo  }}</p>
+            {{chat.toUserNames}}</p>
         </div>
         <div class="msg-content">
           <span class="triangle"></span>
-          <p class="line-breaker ">{{msg.message}}</p>
+          <p class="line-breaker ">{{chat.mensaje}}</p>
         </div>
       </div>
     </div>
 
   </div>
 </ion-content>
+
+<ion-grid *ngIf="spiner">
+  <ion-row >  
+    <ion-col col-12 text-center >
+      <ion-spinner name="crescent"></ion-spinner>
+    </ion-col>
+  </ion-row> 
+</ion-grid>
 
 <ion-footer no-border [style.height]="showEmojiPicker ? '255px' : '55px'">
   <div class="input-wrap">
