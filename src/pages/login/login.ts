@@ -90,7 +90,7 @@ export class LoginPage {
       window.localStorage.setItem('fotoPerfil', response.usuario.fotoPerfil);
       window.localStorage.setItem('fotoPortada', response.usuario.fotoPortada);
       window.localStorage.setItem('nombres', response.usuario.nombres);
-      console.log(response);
+      window.localStorage.setItem('oneSignalId', response.usuario.oneSignalId);
     }, 
     error => {
         this.errorMessage = <any>error;

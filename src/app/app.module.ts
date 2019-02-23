@@ -31,6 +31,7 @@ import { NewPostPage } from '../pages/new-post/new-post';
 import { FotosPage } from '../pages/fotos/fotos';
 import { SocialPage } from '../pages/social/social';
 import { UsersPage } from '../pages/users/users';
+import { BuscarProductosPage } from '../pages/buscar-productos/buscar-productos';
 import { PopoverEmpresaCardPage } from '../pages/big-app/popoverEmpresaCard';
 import { MomentModule } from 'angular2-moment';
 
@@ -89,7 +90,8 @@ import { Camera } from '@ionic-native/camera';
     SocialPage,
     ComentariosSubastaPage,
     NewSubastaPage,
-    UsersPage
+    UsersPage,
+    BuscarProductosPage
   ],
   imports: [
     BrowserModule,
@@ -129,7 +131,8 @@ import { Camera } from '@ionic-native/camera';
     SocialPage,
     ComentariosSubastaPage,
     NewSubastaPage,  
-    UsersPage       
+    UsersPage,
+    BuscarProductosPage    
   ], 
   providers: [ 
     StatusBar,  

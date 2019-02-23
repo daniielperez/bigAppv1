@@ -23,6 +23,7 @@ export class ChatPage {
   errorMessage:any;
   myUsername:any;
   myFoto:any;
+  myOneSignalId:any;
   myUserNames:any;
   chats:any=[];
   spiner:any = false;
@@ -43,6 +44,7 @@ export class ChatPage {
     this.myUsername = window.localStorage.getItem('username');
     this.myFoto = window.localStorage.getItem('fotoPerfil');
     this.myUserNames = window.localStorage.getItem('nombres');
+    this.myOneSignalId = window.localStorage.getItem('oneSignalId');
 
     console.log(this.myUsername);
     
@@ -54,9 +56,6 @@ export class ChatPage {
       toUserNombre: navParams.get('toUserNombre'),
       oneSignalId: navParams.get('oneSignalId'),
     };
-
-    
-
   }
 
   ionViewDidEnter() {
@@ -102,47 +101,34 @@ export class ChatPage {
       'myUserNames': this.parametros.toUserNombre,
       'myUserFoto': this.parametros.toUserFoto,
       'myUser': this.parametros.toUserName,
-      'status': 'success'
+      'status': 'pending'
     }
 
     console.log(this.parametros)
     if (this.chats) {
       this.chats.push(arrayPush);
-      this.editorMsg = '';
-      this.content.resize();
-      this.scrollToBottom();
-
-      this._ChatUsuarioService.newChatsAction(arrayPush).subscribe(
-          response => {
-            this.sendNotification(arrayPush);
-            let index = this.getMsgIndexById(id);
-            if (index !== -1) {
-              this.chats[index].status = 'success';
-            }
-          }, 
-          error => {
-              this.errorMessage = <any>error;
-              if(this.errorMessage != null){
-                alert(this.errorMessage);
-            }
-          }
-      );
-      
     } else {
-
-      this._ChatUsuarioService.newChatsAction(arrayPush).subscribe(
-        response => {
-         this.sendNotification(arrayPush);
-        }, 
-        error => {
-            this.errorMessage = <any>error;
-            if(this.errorMessage != null){
-              alert(this.errorMessage);
-          }
-        }
-    );
-      
+      this.chats = [arrayPush]; 
     }
+    this.editorMsg = '';
+    this.content.resize();
+    this.scrollToBottom();
+    this._ChatUsuarioService.newChatsAction(arrayPush).subscribe(
+      response => {
+        this.parametros.conversacionId = response.conversacionId;
+        let index = this.getMsgIndexById(id);
+        if (index !== -1) {
+          this.chats[index].status = 'success';
+        }
+        this.sendNotification(arrayPush);
+      }, 
+      error => {
+          this.errorMessage = <any>error;
+          if(this.errorMessage != null){
+            alert(this.errorMessage);
+        }
+      }
+  );
   }
 
   
@@ -151,7 +137,7 @@ export class ChatPage {
       if (this.content.scrollToBottom) {
         this.content.scrollToBottom();
       }
-    }, 400)
+    }, 1000)
   }
 
   private focus() {
@@ -166,9 +152,9 @@ export class ChatPage {
   }
 
   private onPushReceived(payload: OSNotificationPayload) {
-    this.chats.push(payload.additionalData);
+    this.chats.push(payload.additionalData.mensaje);
     this.editorMsg = '';
-    this.scrollToBottom();
+    this.scrollToBottom(); 
   }
 
   private getMensajes(){
@@ -190,14 +176,25 @@ export class ChatPage {
 
 
   private sendNotification(arrayPush){
+
+    let notifi ={
+      conversacionId: this.parametros.conversacionId,
+      toUserName: this.myUsername,
+      toUserFoto: this.myFoto,
+      toUserNombre: this.myUserNames,
+      oneSignalId:this.myOneSignalId,
+    }
     let datos = {
       "app_id" : "861d4c12-f510-40c7-b0ca-e389b4d1345c",
       "include_player_ids" : [this.parametros.oneSignalId],
-      "data" : arrayPush, 
+      "data" : {
+        'tipo':'chat',
+        'mensaje':arrayPush,
+        'params':notifi
+      }, 
       "headings":{"en":this.myUserNames}, 
       "android_group" : 'chat'+this.parametros.conversacionId, 
       "contents": {"en":arrayPush.mensaje},
-      'status': 'pending'
   }
   console.log(datos);
   this._NotificacionService.sendUsuarios(datos).subscribe(

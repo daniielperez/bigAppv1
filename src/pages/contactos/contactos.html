@@ -10,13 +10,22 @@
 </ion-header>
 <ion-content padding id="page11">
   <ion-list id="contactos-list6">
-    <ion-item color="none" on-click="goToChat()" id="contactos-list-item30">
+
+    <ion-item *ngFor="let amigo of amigos" color="none" on-click="goToChat(amigo)" id="contactos-list-item30">
       <ion-avatar item-left>
-        <img src="assets/img/O8Yn7E6RfmK2b8HmHJMm_ANDRESPARRILLA.png" />
+        <img src="http://192.168.1.99/bigApp/bigApp/web/uploads/usuario/fotosPerfil/{{amigo.foto}}" /> 
       </ion-avatar>
       <h2>
-        Contacto
+          {{amigo.username}} 
       </h2>
     </ion-item>
+
   </ion-list>
+  <ion-grid *ngIf="!spiner">
+    <ion-row >  
+      <ion-col col-12 text-center >
+        <ion-spinner name="crescent"></ion-spinner>
+      </ion-col>
+    </ion-row> 
+  </ion-grid>
 </ion-content>

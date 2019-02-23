@@ -3,6 +3,7 @@ import { NavController,NavParams } from 'ionic-angular';
 import { EmpresaPage } from '../empresa/empresa';
 import { ProductoService } from '../../services/productoService';
 import { MapaPage } from '../mapa/mapa';
+import { ChatPage } from '../chat/chat';
 @Component({
   selector: 'page-productos',
   templateUrl: 'productos.html',
@@ -49,8 +50,19 @@ export class ProductosPage {
     this.navCtrl.push(MapaPage, {
       lat: producto.lat,
       lng: producto.lng,
-      nombre: producto.nombre
+      nombre: producto.nombreProducto
     });
+  }
+  goToChat(producto){
+    let toUser = {
+      conversacionId:producto.conversacionId,
+      toUserName:producto.username,
+      toUserFoto:producto.foto,
+      oneSignalId:producto.oneSignalId,
+    }
+    console.log(toUser); 
+    if (!producto) producto = {};
+    this.navCtrl.push(ChatPage, toUser);
   }
   onFilltro(value: string): void {
     this.spiner=false;

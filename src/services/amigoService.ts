@@ -18,6 +18,13 @@ export class AmigoService {
 			 .map(res => res.json()); 
 	}
 
+	FindUsurioAmigos(datos){
+		let json = JSON.stringify(datos);
+		let headers = new Headers({'Content-Type':'application/json','Authorization': 'Bearer ' + sessionStorage.getItem('token')});
+ 			return this._http.post(this.url+"/find/amigos", json, {headers: headers})
+			 .map(res => res.json()); 
+	}
+
 	IndexPagAction(){ 
 		return this._http.get(this.url+"/user/pag",{headers: new Headers({'Content-Type':'application/json','Authorization': 'Bearer ' + sessionStorage.getItem('token')})}).map(res => res.json());
 	}
