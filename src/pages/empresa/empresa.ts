@@ -61,9 +61,16 @@ export class EmpresaPage {
       lng: empresa.lng,
       nombre: empresa.nombre
     });
-  }goToChat(params){
-    if (!params) params = {};
-    this.navCtrl.push(ChatPage);
+  }goToChat(producto){
+    let toUser = {
+      conversacionId:producto.conversacionId,
+      toUserName:producto.username,
+      toUserFoto:producto.foto,
+      oneSignalId:producto.oneSignalId,
+    }
+    console.log(toUser); 
+    if (!producto) producto = {};
+    this.navCtrl.push(ChatPage, toUser);
   }goToSubasta(tipoSubasta){
     if (!tipoSubasta) tipoSubasta = {};
     this.navCtrl.setRoot(SubastaPage, {
