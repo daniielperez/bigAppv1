@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class SubastaService {
 	public Authorization = sessionStorage.getItem('token');
-	public url = "http://192.168.1.99/bigApp/bigApp/web/api/subasta";
+	public url = "http://192.168.1.68/bigApp/bigApp/web/api/subasta";
 	constructor(private _http: Http){
 	}
 
@@ -16,6 +16,13 @@ export class SubastaService {
 		let json = JSON.stringify(username);
 		let headers = new Headers({'Content-Type':'application/json','Authorization': 'Bearer ' + sessionStorage.getItem('token')});
  			return this._http.post(this.url+"/", json, {headers: headers})
+							  .map(res => res.json());
+	}
+
+	IndexEmpresaAction(empresaId:any){
+		let json = JSON.stringify(empresaId);
+		let headers = new Headers({'Content-Type':'application/json','Authorization': 'Bearer ' + sessionStorage.getItem('token')});
+ 			return this._http.post(this.url+"/empresa", json, {headers: headers})
 							  .map(res => res.json());
 	}
 

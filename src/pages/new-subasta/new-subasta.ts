@@ -114,10 +114,11 @@ export class NewSubastaPage implements OnInit{
                 "android_group" : responseSubasta.contenido, 
                 "contents": {"en":responseSubasta.contenido}
             }
-            console.log(datos);
             this._NotificacionService.sendUsuarios(datos).subscribe(
               responseNotificacion => { 
-                  this.navCtrl.setRoot(SubastaPage);
+                  this.navCtrl.setRoot(SubastaPage, {
+                    tipoSubasta: 'subastaUsuario'
+                  });
                   const toast = this.toastCtrl.create({
                     message: 'Subasta publicada',
                     duration: 3000

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { MapaPage } from '../mapa/mapa';
 import { ChatPage } from '../chat/chat';
+import { SubastaPage } from '../subasta/subasta';
 import { EmpresaService } from '../../services/empresaService'; 
 
 
@@ -21,7 +22,9 @@ export class EmpresaPage {
   redes:any;
   productos:any;
   spiner:boolean = false;
+  propietario:boolean = false;
   errorMessage:any;
+  empresaIdUsuario = localStorage.getItem("empresaId");
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -30,6 +33,10 @@ export class EmpresaPage {
     this.idEmpresa = this.navParams.get('idEmpresa');
     let parametros = {
       'id': this.idEmpresa
+    }
+
+    if (this.empresaIdUsuario ==  this.idEmpresa) {
+      this.propietario = true;
     }
 
     this._EmpresaService.empresaShowAction(parametros).subscribe( 
@@ -57,5 +64,10 @@ export class EmpresaPage {
   }goToChat(params){
     if (!params) params = {};
     this.navCtrl.push(ChatPage);
+  }goToSubasta(tipoSubasta){
+    if (!tipoSubasta) tipoSubasta = {};
+    this.navCtrl.setRoot(SubastaPage, {
+      tipoSubasta: tipoSubasta
+    });
   }   
 }

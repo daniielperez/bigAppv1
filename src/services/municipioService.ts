@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class MunicipioService {
 	public Authorization = sessionStorage.getItem('token');
-	public url = "http://192.168.1.99/bigApp/bigApp/web/api/municipio";
+	public url = "http://192.168.1.68/bigApp/bigApp/web/api/municipio";
 	constructor(private _http: Http){
 	}
 

@@ -91,6 +91,8 @@ export class LoginPage {
       window.localStorage.setItem('fotoPortada', response.usuario.fotoPortada);
       window.localStorage.setItem('nombres', response.usuario.nombres);
       window.localStorage.setItem('oneSignalId', response.usuario.oneSignalId);
+      window.localStorage.setItem('empresaId', response.usuario.empresaId);
+      // alert(response.usuario.empresaId); 
     }, 
     error => {
         this.errorMessage = <any>error;

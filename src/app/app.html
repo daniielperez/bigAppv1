@@ -5,7 +5,7 @@
       <ion-item-sliding>
         <ion-item color="none" id="menu-list-item47">
           <ion-avatar item-left>
-            <img src="http://192.168.1.99/bigApp/bigApp/web/uploads/usuario/fotosPerfil/{{fotoPerfil}}" />
+            <img src="http://192.168.1.68/bigApp/bigApp/web/uploads/usuario/fotosPerfil/{{fotoPerfil}}" />
           </ion-avatar>
           <h2>
             {{username}} 
@@ -33,8 +33,12 @@
         Mis histórias
         <ion-icon name="person" item-right></ion-icon>
       </ion-item>
-      <ion-item color="none" menuClose="" on-click="goToSubasta()" id="menu-list-item4">
+      <ion-item color="none" menuClose="" on-click="goToSubasta('subastaUsuario')" id="menu-list-item4">
         Subasta
+        <ion-icon name="person" item-right></ion-icon>
+      </ion-item>
+      <ion-item *ngIf="empresaId != 'null' " color="none" menuClose="" on-click="goToEmpresa()" id="menu-list-item4">
+        Mi empresa
         <ion-icon name="person" item-right></ion-icon>
       </ion-item>
     </ion-list>

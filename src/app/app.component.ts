@@ -34,14 +34,12 @@ export class MyApp {
     rootPage:any = BigAppPage ;
     username = localStorage.getItem("username");
     fotoPerfil = localStorage.getItem("fotoPerfil");
+    empresaId = localStorage.getItem("empresaId");
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,private oneSignal: OneSignal,private _usuarioService:UsuarioService) {
 
-
- 
     // let status bar overlay webview
     statusBar.overlaysWebView(true);
-
     
     // set status bar to white
     statusBar.backgroundColorByHexString('#ffffff');
@@ -53,7 +51,8 @@ export class MyApp {
     }else{
       this.rootPage = BigAppPage;
     }
-    // this.rootPage = LoginPage;
+    // this.rootPage = LoginPage; 
+    // alert(this.empresaId);
 
     
     platform.ready().then(() => {
@@ -80,9 +79,10 @@ export class MyApp {
   }goToEmpresas(params){
     if (!params) params = {};
     this.navCtrl.setRoot(EmpresasPage);
-  }goToEmpresa(params){
-    if (!params) params = {};
-    this.navCtrl.setRoot(EmpresaPage);
+  }goToEmpresa(){
+    this.navCtrl.setRoot(EmpresaPage, {
+      idEmpresa: this.empresaId
+    });
   }goToMapa(params){
     if (!params) params = {};
     this.navCtrl.setRoot(MapaPage);
@@ -98,15 +98,18 @@ export class MyApp {
   }goToComentarios(params){
     if (!params) params = {};
     this.navCtrl.setRoot(ComentariosPage);
-  }goToSubasta(params){
-    if (!params) params = {};
-    this.navCtrl.setRoot(SubastaPage);
+  }goToSubasta(tipoSubasta){
+    if (!tipoSubasta) tipoSubasta = {};
+    this.navCtrl.setRoot(SubastaPage, {
+      tipoSubasta: tipoSubasta
+    });
   }
   goToSocial(params){
     if (!params) params = {};
     this.navCtrl.setRoot(SocialPage);
   }
-  
+
+
   
   // private onPushReceived(payload: OSNotificationPayload) {
   //   alert('Push recevied:' + payload.additionalData.foo);
@@ -114,7 +117,9 @@ export class MyApp {
   
   private onPushOpened(payload: OSNotificationPayload) {
     if(payload.additionalData.tipo == 'subasta'){
-      this.navCtrl.setRoot(SubastaPage);
+      this.navCtrl.setRoot(SubastaPage, {
+        tipoSubasta: 'subastaEmpresa'
+      });
     }
     if (payload.additionalData.tipo == 'chat') {
         let toUser = payload.additionalData.params

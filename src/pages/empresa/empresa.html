@@ -1,13 +1,4 @@
-<ion-header>
-    <ion-navbar *ngIf="spiner">
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-      <ion-title>
-          {{empresa.nombre}}
-      </ion-title>
-    </ion-navbar>
-  </ion-header>
+
 <ion-content id="page6">
     <ion-grid *ngIf="!spiner">
       <ion-row >  
@@ -17,11 +8,13 @@
       </ion-row> 
     </ion-grid>
   <div *ngIf="spiner">
-    <img src="http://192.168.1.99/bigApp/bigApp/web/uploads/empresa/fotosPortada/{{empresa.portada}}" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+    <img src="http://192.168.1.68/bigApp/bigApp/web/uploads/empresa/fotosPortada/{{empresa.portada}}" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
     <ion-item >
       <div style="text-align:center;">
+          <button *ngIf='propietario' ion-button large color="dark" on-click="goToSubasta('subastaEmpresa')"  block>Subastas</button>
+          {{empresa.nombre}}
           <ion-avatar >
-            <img style='margin:10px auto;display:block;' src="http://192.168.1.99/bigApp/bigApp/web/uploads/empresa/fotosLogo/{{empresa.logo}}">
+            <img style='margin:10px auto;display:block;' src="http://192.168.1.68/bigApp/bigApp/web/uploads/empresa/fotosLogo/{{empresa.logo}}">
           </ion-avatar>
           <h2></h2>
           <div>
@@ -40,7 +33,7 @@
       Productos
     </h4>
     <ion-card *ngFor="let producto of productos">
-      <img src="http://192.168.1.99/bigApp/bigApp/web/uploads/producto/{{ producto.imagen }}"/>
+      <img src="http://192.168.1.68/bigApp/bigApp/web/uploads/producto/{{ producto.imagen }}"/>
       <ion-card-content>
         <ion-card-title>
           <h2>{{ producto.nombreProducto }}</h2>
