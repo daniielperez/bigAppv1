@@ -53,7 +53,7 @@ export class MyApp {
     }else{
       this.rootPage = BigAppPage;
     }
-    // this.rootPage = LoginPage;
+    //this.rootPage = LoginPage;
 
     
     platform.ready().then(() => {

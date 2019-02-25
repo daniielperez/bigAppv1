@@ -5,20 +5,17 @@ import  {Http, Headers} from "@angular/http";
 import 'rxjs/add/operator/map';
 
 @Injectable()
-export class AmigoService {
+export class PedidoService {
 	public Authorization = sessionStorage.getItem('token');
-	public url = "http://192.168.1.73/bigApp/bigApp/web/api/amigo";
+	public url = "http://192.168.1.73/bigApp/bigApp/web/api/pedido";
 	constructor(private _http: Http){
 	}
 
-	FindAmigoUsurio(datos){
+	enviarAction(datos){
 		let json = JSON.stringify(datos);
 		let headers = new Headers({'Content-Type':'application/json','Authorization': 'Bearer ' + sessionStorage.getItem('token')});
- 			return this._http.post(this.url+"/find/user", json, {headers: headers})
+ 			return this._http.post(this.url+"/new", json, {headers: headers})
 			 .map(res => res.json()); 
 	}
 
-	IndexPagAction(){ 
-		return this._http.get(this.url+"/user/pag",{headers: new Headers({'Content-Type':'application/json','Authorization': 'Bearer ' + sessionStorage.getItem('token')})}).map(res => res.json());
-	}
 }

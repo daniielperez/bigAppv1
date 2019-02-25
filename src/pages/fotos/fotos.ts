@@ -74,7 +74,7 @@ export class FotosPage {
 
     options.params = this.params
   
-    fileTransfer.upload(this.imageURI, "http://192.168.1.99/bigApp/bigApp/web/api/usuario/fotosperfil", options)
+    fileTransfer.upload(this.imageURI, "http://192.168.1.73/bigApp/bigApp/web/api/usuario/fotosperfil", options)
       .then((data) => {
       loader.dismiss();
       

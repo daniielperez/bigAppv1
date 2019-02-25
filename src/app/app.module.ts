@@ -23,6 +23,7 @@ import { TextPostPage } from '../pages/text-post/text-post';
 
 import { YoutubeService } from '../services/youtubeService';
 import { PublicacionService } from '../services/publicacionService';
+import { PedidoService } from '../services/pedidoService';
 import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player'; 
 import { ComentariosPage } from '../pages/comentarios/comentarios'; 
 import { CategoriasPage } from '../pages/categorias/categorias';
@@ -33,10 +34,12 @@ import { SocialPage } from '../pages/social/social';
 import { UsersPage } from '../pages/users/users';
 import { PopoverEmpresaCardPage } from '../pages/big-app/popoverEmpresaCard';
 import { MomentModule } from 'angular2-moment';
+import { PedidoPage } from '../pages/pedido/pedido';
 
 
 
 import { ComentarioService } from '../services/comentarioService';
+import { MedioPagoService } from '../services/medioPagoService';
 import { PopoverProductoCardPage } from '../pages/big-app/popoverProductoCard'; 
 import { NgMasonryGridModule } from 'ng-masonry-grid';
 import { GoogleMaps } from '@ionic-native/google-maps'; 
@@ -89,7 +92,8 @@ import { Camera } from '@ionic-native/camera';
     SocialPage,
     ComentariosSubastaPage,
     NewSubastaPage,
-    UsersPage
+    UsersPage,
+    PedidoPage
   ],
   imports: [
     BrowserModule,
@@ -129,7 +133,8 @@ import { Camera } from '@ionic-native/camera';
     SocialPage,
     ComentariosSubastaPage,
     NewSubastaPage,  
-    UsersPage       
+    UsersPage,
+    PedidoPage       
   ], 
   providers: [ 
     StatusBar,  
@@ -147,7 +152,9 @@ import { Camera } from '@ionic-native/camera';
     GoogleMaps,
     OneSignal,
     EmojiProvider,
-    AmigoService
+    AmigoService,
+    MedioPagoService,
+    PedidoService
   ]
 }) 
 export class AppModule {}

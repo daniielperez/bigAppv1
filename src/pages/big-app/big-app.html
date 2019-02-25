@@ -4,7 +4,7 @@
   <ion-slides pager>
     
     <ion-slide *ngFor="let publicidad of publicidades">
-        <img src="http://192.168.1.99/bigApp/bigApp/web/uploads/banerpublicidad/{{publicidad.url}}" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+        <img src="http://192.168.1.73/bigApp/bigApp/web/uploads/banerpublicidad/{{publicidad.url}}" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
     </ion-slide>
   </ion-slides>
 
@@ -19,7 +19,7 @@
         <ion-card *ngFor="let empresa of empresas">
             <ion-item>
               <ion-avatar item-start>
-                <img on-click="goToEmpresa(empresa)" src="http://192.168.1.99/bigApp/bigApp/web/uploads/empresa/fotosLogo/{{empresa.logoEmpresa}}">
+                <img on-click="goToEmpresa(empresa)" src="http://192.168.1.73/bigApp/bigApp/web/uploads/empresa/fotosLogo/{{empresa.logoEmpresa}}">
               </ion-avatar>
               <h2> 
                   {{empresa.nombreEmpresa}}
@@ -30,7 +30,7 @@
               <p style='margin-top: -16px;'>November 5, 1955  
                 </p>
             </ion-item>
-            <img on-click="goToEmpresa(empresa)" src="http://192.168.1.99/bigApp/bigApp/web/uploads/empresa/fotosPortada/{{empresa.portadaEmpresa}}">
+            <img on-click="goToEmpresa(empresa)" src="http://192.168.1.73/bigApp/bigApp/web/uploads/empresa/fotosPortada/{{empresa.portadaEmpresa}}">
         </ion-card>
     </ion-scroll>
 
@@ -48,7 +48,7 @@
       <ng-masonry-grid-item class="ancho" id="{{'producto-'+producto.id}}" *ngFor="let producto of productos" > 
         <!-- Grid Content  --> 
         <ion-card>
-            <img  src="http://192.168.1.99/bigApp/bigApp/web/uploads/producto/{{ producto.imagen }}"/>
+            <img  src="http://192.168.1.73/bigApp/bigApp/web/uploads/producto/{{ producto.imagen }}"/>
             <ion-card-content>
               <ion-card-title>
                 <h2>{{ producto.nombre }}</h2>
@@ -68,18 +68,23 @@
                 </ion-note>
             </div>
             <ion-row>
-                <ion-col col-4>
+                <ion-col col-3>
                   <button on-click="goToChat()" style="color:#c62828" ion-button icon-start clear small>
                     <ion-icon name="text"></ion-icon>
                   </button>
                 </ion-col>
-                <ion-col col-4>
+                <ion-col col-3>
                   <button on-click="goToMap(producto)" ion-button icon-start clear small>
                     <ion-icon name="navigate" style="color:#8e0000"></ion-icon>
                   </button>
                 </ion-col>
-                <ion-col col-4>
+                <ion-col col-3>
                   <button on-click="goToEmpresa(producto.idEmpresa)" style="color:#ff5f52" ion-button icon-start clear small>
+                    <ion-icon name="briefcase"></ion-icon>
+                  </button>
+                </ion-col>
+                <ion-col col-3>
+                  <button on-click="goToPedidoPage(producto)" style="color:#ff5f52" ion-button icon-start clear small>
                     <ion-icon name="briefcase"></ion-icon>
                   </button>
                 </ion-col>
