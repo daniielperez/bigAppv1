@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>pedido</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label fixed>Descripcion</ion-label>
+      <ion-input [(ngModel)]="pedido.descripcion" type="text" value=""></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>Direccion</ion-label>
+      <ion-input [(ngModel)]="pedido.direccion" type="text" value=""></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>Medio de pago</ion-label>
+        <ion-select [(ngModel)]="pedido.medioPagoId">
+          <ion-option *ngFor="let medioPago of mediosPago" value="{{medioPago.id}}">{{medioPago.nombre}}</ion-option>
+        </ion-select>
+      </ion-item>
+  </ion-list>
+
+  <button ion-button full dark (click)="enviar()">Enviar</button>
+</ion-content>

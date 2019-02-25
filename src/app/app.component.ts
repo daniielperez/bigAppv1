@@ -51,8 +51,7 @@ export class MyApp {
     }else{
       this.rootPage = BigAppPage;
     }
-    // this.rootPage = LoginPage; 
-    // alert(this.empresaId);
+    //this.rootPage = LoginPage;
 
     
     platform.ready().then(() => {

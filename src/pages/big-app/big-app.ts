@@ -12,6 +12,7 @@ import { ProductoService } from '../../services/productoService';
 import { BanerPublicidadService } from '../../services/banerPublicidadService';
 import { EmpresaService } from '../../services/empresaService'; 
 import { Masonry,} from 'ng-masonry-grid';
+import { PedidoPage } from '../pedido/pedido';
 
 
 @Component({
@@ -150,6 +151,11 @@ export class BigAppPage {
       lat: producto.lat,
       lng: producto.lng,
       nombre: producto.nombreProducto
+    });
+  }
+  goToPedidoPage(producto){
+    this.navCtrl.push(PedidoPage, {
+      producto: producto
     });
   }
 

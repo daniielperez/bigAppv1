@@ -23,6 +23,7 @@ import { TextPostPage } from '../pages/text-post/text-post';
 
 import { YoutubeService } from '../services/youtubeService';
 import { PublicacionService } from '../services/publicacionService';
+import { PedidoService } from '../services/pedidoService';
 import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player'; 
 import { ComentariosPage } from '../pages/comentarios/comentarios'; 
 import { CategoriasPage } from '../pages/categorias/categorias';
@@ -34,10 +35,12 @@ import { UsersPage } from '../pages/users/users';
 import { BuscarProductosPage } from '../pages/buscar-productos/buscar-productos';
 import { PopoverEmpresaCardPage } from '../pages/big-app/popoverEmpresaCard';
 import { MomentModule } from 'angular2-moment';
+import { PedidoPage } from '../pages/pedido/pedido';
 
 
 
 import { ComentarioService } from '../services/comentarioService';
+import { MedioPagoService } from '../services/medioPagoService';
 import { PopoverProductoCardPage } from '../pages/big-app/popoverProductoCard'; 
 import { NgMasonryGridModule } from 'ng-masonry-grid';
 import { GoogleMaps } from '@ionic-native/google-maps'; 
@@ -91,6 +94,7 @@ import { Camera } from '@ionic-native/camera';
     ComentariosSubastaPage,
     NewSubastaPage,
     UsersPage,
+    PedidoPage,
     BuscarProductosPage
   ],
   imports: [
@@ -132,6 +136,7 @@ import { Camera } from '@ionic-native/camera';
     ComentariosSubastaPage,
     NewSubastaPage,  
     UsersPage,
+    PedidoPage,       
     BuscarProductosPage    
   ], 
   providers: [ 
@@ -150,7 +155,9 @@ import { Camera } from '@ionic-native/camera';
     GoogleMaps,
     OneSignal,
     EmojiProvider,
-    AmigoService
+    AmigoService,
+    MedioPagoService,
+    PedidoService
   ]
 }) 
 export class AppModule {}
