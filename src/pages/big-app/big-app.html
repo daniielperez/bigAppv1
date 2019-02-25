@@ -7,6 +7,11 @@
         <img src="http://192.168.1.73/bigApp/bigApp/web/uploads/banerpublicidad/{{publicidad.url}}" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
     </ion-slide>
   </ion-slides>
+  <ion-item>
+    <ion-label>Que quieres buscar hoy?</ion-label>
+    <ion-input type="text" [(ngModel)]="stringBusquedaProducto"></ion-input>
+    <button ion-button medium (click)="buscarProducto()" item-end>Ir</button>
+  </ion-item>
 
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
@@ -33,6 +38,7 @@
             <img on-click="goToEmpresa(empresa)" src="http://192.168.1.73/bigApp/bigApp/web/uploads/empresa/fotosPortada/{{empresa.portadaEmpresa}}">
         </ion-card>
     </ion-scroll>
+    
 
   <h4 on-click="goToMunicipiosProducto()" id="bigApp-heading1" style="color:#000000;text-align:center;">
     Productos  <ion-icon ios="ios-options" md="md-options"></ion-icon>
@@ -51,7 +57,7 @@
             <img  src="http://192.168.1.73/bigApp/bigApp/web/uploads/producto/{{ producto.imagen }}"/>
             <ion-card-content>
               <ion-card-title>
-                <h2>{{ producto.nombre }}</h2>
+                <h2>{{ producto.nombreProducto }}</h2>
                 <h3>${{ producto.valor }}</h3>
 
                 <!-- <p align="right" style="position:relative; top: -22px;">
@@ -68,8 +74,8 @@
                 </ion-note>
             </div>
             <ion-row>
-                <ion-col col-3>
-                  <button on-click="goToChat()" style="color:#c62828" ion-button icon-start clear small>
+                <ion-col col-4>
+                  <button on-click="goToChat(producto)" style="color:#c62828" ion-button icon-start clear small>
                     <ion-icon name="text"></ion-icon>
                   </button>
                 </ion-col>

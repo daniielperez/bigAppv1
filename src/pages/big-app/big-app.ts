@@ -5,6 +5,7 @@ import { EmpresasPage } from '../empresas/empresas';
 import { EmpresaPage } from '../empresa/empresa';
 import { MapaPage } from '../mapa/mapa';
 import { ChatPage } from '../chat/chat';
+import { BuscarProductosPage } from '../buscar-productos/buscar-productos';
 import { PopoverEmpresaCardPage } from './popoverEmpresaCard';
 import { PopoverProductoCardPage } from './popoverProductoCard';
 import { ProductoService } from '../../services/productoService';
@@ -35,6 +36,7 @@ export class BigAppPage {
   infiniteScroll:any= false;
   idPagina:any = 1;
   show:any = true;
+  stringBusquedaProducto;
 
   constructor(
     public navCtrl: NavController,
@@ -109,7 +111,7 @@ export class BigAppPage {
     });
   }
   presentPopoverProducto(myEvent,producto) {
-    let popover = this.popoverCtrl.create(PopoverProductoCardPage,{lat:producto.lat,lng:producto.lng,label:producto.nombre}, { cssClass: 'edit-opty-popover-producto' });
+    let popover = this.popoverCtrl.create(PopoverProductoCardPage,{lat:producto.lat,lng:producto.lng,label:producto.nombreProducto}, { cssClass: 'edit-opty-popover-producto' });
     
     popover.present({
       ev: myEvent
@@ -134,14 +136,21 @@ export class BigAppPage {
     this.navCtrl.push(EmpresaPage, {
       idEmpresa: empresa.id
     });
-  }goToChat(params){
-    if (!params) params = {};
-    this.navCtrl.push(ChatPage);
+  }goToChat(producto){
+    let toUser = {
+      conversacionId:producto.conversacionId,
+      toUserName:producto.username,
+      toUserFoto:producto.foto,
+      oneSignalId:producto.oneSignalId,
+    }
+    console.log(toUser); 
+    if (!producto) producto = {};
+    this.navCtrl.push(ChatPage, toUser);
   }goToMap(producto){
     this.navCtrl.push(MapaPage, {
       lat: producto.lat,
       lng: producto.lng,
-      nombre: producto.nombre
+      nombre: producto.nombreProducto
     });
   }
   goToPedidoPage(producto){
@@ -222,5 +231,11 @@ export class BigAppPage {
           console.log(error);
         }
     );
+  }
+
+  buscarProducto(){
+    this.navCtrl.push(BuscarProductosPage, {
+      stringBusquedaProducto: this.stringBusquedaProducto 
+    });
   }
 }

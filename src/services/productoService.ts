@@ -53,6 +53,14 @@ export class ProductoService {
  			return this._http.post(this.url+"/edit", json, {headers: headers})
 							  .map(res => res.json());
 	}
+
+	BusquedaGeneralAction(producto:any){
+	
+		let json = JSON.stringify(producto);
+		let headers = new Headers({'Content-Type':'application/json','Authorization': 'Bearer ' + sessionStorage.getItem('token')});
+ 			return this._http.post(this.url+"/buscar/general", json, {headers: headers})
+							  .map(res => res.json());
+	}
 }
 
 

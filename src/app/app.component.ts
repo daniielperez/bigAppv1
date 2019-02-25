@@ -47,7 +47,7 @@ export class MyApp {
     statusBar.backgroundColorByHexString('#ffffff');
     statusBar.styleBlackTranslucent();
     statusBar.show();
-    
+       
     if (this.username == null) {
       this.rootPage = LoginPage;
     }else{
@@ -68,6 +68,9 @@ export class MyApp {
       this.oneSignal.endInit();
     }
   } 
+
+  
+
   goToBigApp(params){ 
     if (!params) params = {};
     this.navCtrl.setRoot(BigAppPage);
@@ -83,9 +86,6 @@ export class MyApp {
   }goToMapa(params){
     if (!params) params = {};
     this.navCtrl.setRoot(MapaPage);
-  }goToChat(params){
-    if (!params) params = {};
-    this.navCtrl.setRoot(ChatPage);
   }goToConversaciones(params){
     if (!params) params = {};  
     this.navCtrl.setRoot(ConversacionesPage); 
@@ -115,6 +115,11 @@ export class MyApp {
   private onPushOpened(payload: OSNotificationPayload) {
     if(payload.additionalData.tipo == 'subasta'){
       this.navCtrl.setRoot(SubastaPage);
+    }
+    if (payload.additionalData.tipo == 'chat') {
+        let toUser = payload.additionalData.params
+        if (!toUser) toUser = {};
+        this.navCtrl.setRoot(ChatPage, toUser);
     }
   }
   
