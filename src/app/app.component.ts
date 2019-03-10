@@ -14,6 +14,7 @@ import { ContactosPage } from '../pages/contactos/contactos';
 import { PerfilPage } from '../pages/perfil/perfil';
 import { LoginPage } from '../pages/login/login';
 import { SocialPage } from '../pages/social/social';
+
 import { ComentariosPage } from '../pages/comentarios/comentarios';
 import { OneSignal, OSNotificationPayload } from '@ionic-native/onesignal';
 import { isCordovaAvailable } from '../common/is-cordova-available';
@@ -51,7 +52,7 @@ export class MyApp {
     }else{
       this.rootPage = BigAppPage;
     }
-    this.rootPage = LoginPage;
+    this.rootPage = BigAppPage;
 
     
     platform.ready().then(() => {

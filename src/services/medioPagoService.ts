@@ -8,7 +8,7 @@ import 'rxjs/add/operator/map';
 export class MedioPagoService {
 	public Authorization = sessionStorage.getItem('token');
 
-	public url = "http://192.168.1.68/bigApp/bigApp/web/api/medioPago";
+	public url = "http://192.168.1.70/bigApp/bigApp/web/api/medioPago";
 
 	constructor(private _http: Http){
 	}

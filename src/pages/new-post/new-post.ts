@@ -77,10 +77,10 @@ export class NewPostPage {
 
     options.params = this.params
   
-    fileTransfer.upload(this.imageURI, "http://192.168.1.68/bigApp/bigApp/web/api/publicacion/imagen", options)
+    fileTransfer.upload(this.imageURI, "http://192.168.1.70/bigApp/bigApp/web/api/publicacion/imagen", options)
       .then((data) => {
       console.log(data);
-      this.imageFileName = "http://192.168.1.68/bigApp/bigApp/web/uploads/empresa/imagen/"
+      this.imageFileName = "http://192.168.1.70/bigApp/bigApp/web/uploads/empresa/imagen/"
      
       loader.dismiss();
       

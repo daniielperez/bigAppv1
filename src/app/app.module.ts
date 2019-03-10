@@ -20,7 +20,7 @@ import { ContactosPage } from '../pages/contactos/contactos';
 import { PostVideoPage } from '../pages/post-video/post-video';
 import { YoutubePage } from '../pages/youtube/youtube';
 import { TextPostPage } from '../pages/text-post/text-post';
-
+import { PedidoEmpresaPage } from '../pages/pedido-empresa/pedido-empresa';
 import { YoutubeService } from '../services/youtubeService';
 import { PublicacionService } from '../services/publicacionService';
 import { PedidoService } from '../services/pedidoService';
@@ -95,7 +95,8 @@ import { Camera } from '@ionic-native/camera';
     NewSubastaPage,
     UsersPage,
     PedidoPage,
-    BuscarProductosPage
+    BuscarProductosPage,
+    PedidoEmpresaPage
   ],
   imports: [
     BrowserModule,
@@ -137,7 +138,8 @@ import { Camera } from '@ionic-native/camera';
     NewSubastaPage,  
     UsersPage,
     PedidoPage,       
-    BuscarProductosPage    
+    BuscarProductosPage,
+    PedidoEmpresaPage  
   ], 
   providers: [ 
     StatusBar,  

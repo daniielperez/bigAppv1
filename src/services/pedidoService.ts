@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class PedidoService {
 	public Authorization = sessionStorage.getItem('token');
-	public url = "http://192.168.1.68/bigApp/bigApp/web/api/pedido";
+	public url = "http://192.168.1.70/bigApp/bigApp/web/api/pedido";
 	constructor(private _http: Http){
 	}
  
@@ -15,6 +15,13 @@ export class PedidoService {
 		let json = JSON.stringify(datos);
 		let headers = new Headers({'Content-Type':'application/json','Authorization': 'Bearer ' + sessionStorage.getItem('token')});
  			return this._http.post(this.url+"/new", json, {headers: headers})
+			 .map(res => res.json()); 
+	}
+
+	indexByEmpresaAction(datos){
+		let json = JSON.stringify(datos);
+		let headers = new Headers({'Content-Type':'application/json','Authorization': 'Bearer ' + sessionStorage.getItem('token')});
+ 			return this._http.post(this.url+"/listar/by/empresa", json, {headers: headers})
 			 .map(res => res.json()); 
 	}
 

@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { MapaPage } from '../mapa/mapa';
 import { ChatPage } from '../chat/chat';
 import { SubastaPage } from '../subasta/subasta';
+import { PedidoEmpresaPage } from '../pedido-empresa/pedido-empresa';
 import { EmpresaService } from '../../services/empresaService'; 
 
 
@@ -77,4 +78,11 @@ export class EmpresaPage {
       tipoSubasta: tipoSubasta
     });
   }   
+
+  goToPedido(){
+    console.log(this.idEmpresa);
+    this.navCtrl.setRoot(PedidoEmpresaPage, {
+      empresaId: this.idEmpresa
+    });
+  }
 }
