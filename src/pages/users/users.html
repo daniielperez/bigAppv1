@@ -16,20 +16,17 @@
 <ion-content class="color-fondo" padding>
 
   <ion-searchbar [(ngModel)]="datos.stringBusqueda" (ionInput)="onFilltro()"></ion-searchbar>
-
+  
   <ion-list>
       <ion-item-sliding *ngFor="let usuario of usuarios">
         <ion-item>
           <ion-avatar item-start>
-            <img src="http://192.168.1.70/bigApp/bigApp/web/uploads/usuario/fotosPerfil/{{usuario.fotoPerfil}}">
+            <img src="http://bigapp123.herokuapp.com/web/uploads/usuario/fotosPerfil/{{usuario.fotoPerfil}}">
           </ion-avatar>
           <h2>{{usuario.username}}</h2>
         </ion-item>
         <ion-item-options>
-          <button ion-button color="primary">
-            Ver
-          </button>
-          <button ion-button color="secondary">
+          <button (click)="agregarAmigo(usuario)" ion-button color="secondary">
             Agregar
           </button>
         </ion-item-options>

@@ -20,13 +20,6 @@
       </ion-item>
 
       <ion-item>
-        <ion-label >Municipio</ion-label>
-        <ion-select interface="popover" [(ngModel)]="params.municipio">
-          <ion-option  *ngFor="let municipio of municipios" [value]="municipio.id">{{municipio.nombre}}</ion-option>
-        </ion-select>
-      </ion-item>
-
-      <ion-item>
         <ion-label floating>Contenido</ion-label>
         <ion-input [(ngModel)]="params.contenido" type="text"></ion-input>
       </ion-item>

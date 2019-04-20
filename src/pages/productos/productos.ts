@@ -4,6 +4,7 @@ import { EmpresaPage } from '../empresa/empresa';
 import { ProductoService } from '../../services/productoService';
 import { MapaPage } from '../mapa/mapa';
 import { ChatPage } from '../chat/chat';
+import { PedidoPage } from '../pedido/pedido';
 @Component({
   selector: 'page-productos',
   templateUrl: 'productos.html',
@@ -79,6 +80,11 @@ export class ProductosPage {
             console.log(error);
           }
       );
+    }
+    goToPedidoPage(producto){
+      this.navCtrl.push(PedidoPage, {
+        producto: producto
+      });
     }
   
 }

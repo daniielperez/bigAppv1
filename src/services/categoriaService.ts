@@ -8,7 +8,7 @@ import 'rxjs/add/operator/map';
 export class CategoriaService {
 	public Authorization = sessionStorage.getItem('token');
 
-	public url = "http://192.168.1.70/bigApp/bigApp/web/api/categoria";
+	public url = "http://bigapp123.herokuapp.com/web/api/categoria";
 
 	constructor(private _http: Http){
 	}

@@ -52,23 +52,12 @@ export class NewSubastaPage implements OnInit{
   ) {
     this.usuario = this.navParams.get('usuario');
     this.params.usuario = this.usuario.username;
+    this.params.municipio = this.navParams.get('idMunicipio');
     console.log(this.usuario.username);
   }
 
   ngOnInit() {  
-    this._MunicipioService.IndexAction().subscribe( 
-      response => {
-        if(response.status =='success'){
-            this.municipios=response.datos;
-          }
-      }, 
-      error => {
-          this.errorMessage = <any>error;
-          console.log(error);
-        }
-    );
-
-    this._CategoriaService.IndexAction().subscribe( 
+        this._CategoriaService.IndexAction().subscribe( 
       response => {
         if(response.status == 'success'){
             this.categorias=response.datos;
@@ -105,6 +94,14 @@ export class NewSubastaPage implements OnInit{
       responseSubasta => {
         // console.log(responseSubasta);  
           if (responseSubasta.status=='success') {
+            this.navCtrl.setRoot(SubastaPage, {
+              tipoSubasta: 'subastaUsuario'
+            });
+            const toast = this.toastCtrl.create({
+              message: 'Subasta publicada',
+              duration: 3000
+            });
+            toast.present();
             if(responseSubasta.arrayPlayersId != ''){
               let datos = {
                 "app_id" : "861d4c12-f510-40c7-b0ca-e389b4d1345c",
@@ -116,14 +113,7 @@ export class NewSubastaPage implements OnInit{
             }
             this._NotificacionService.sendUsuarios(datos).subscribe(
               responseNotificacion => { 
-                  this.navCtrl.setRoot(SubastaPage, {
-                    tipoSubasta: 'subastaUsuario'
-                  });
-                  const toast = this.toastCtrl.create({
-                    message: 'Subasta publicada',
-                    duration: 3000
-                  });
-                  toast.present();
+                 
                 }, 
                 error => {
                     this.errorMessage = <any>error;

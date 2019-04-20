@@ -7,6 +7,7 @@ import { LoadingController } from 'ionic-angular';
 import { OneSignal, OSNotificationPayload } from '@ionic-native/onesignal';
 import { isCordovaAvailable } from '../../common/is-cordova-available';
 import { oneSignalAppId, sender_id } from '../../config';
+import { AlertController } from 'ionic-angular';
 
 
 @Component({
@@ -31,7 +32,8 @@ export class LoginPage {
     public navCtrl: NavController,
     public _UsuarioService: UsuarioService,
     public loadingCtrl: LoadingController,
-    private oneSignal: OneSignal
+    private oneSignal: OneSignal,
+    public alertCtrl: AlertController
   ) {
   }
   goToSignup(params){
@@ -40,28 +42,28 @@ export class LoginPage {
   }
 
   onLogin(){
-    let loader = this.loadingCtrl.create({
-      content: "Validando Datos...",
-    });
-    loader.present();
+  let loader = this.loadingCtrl.create({
+    content: "Validando Datos...",
+  });
+  loader.present();
   this._UsuarioService.loginAction(this.usuario).subscribe(
       response => {
-          window.localStorage.setItem('username', this.usuario.username);
-          window.localStorage.setItem('token', response.access_token);
+          console.log(response);
+          localStorage.setItem('username', this.usuario.username);
+          localStorage.setItem('token', response.access_token);
           if (isCordovaAvailable()){
             this.oneSignal.startInit(oneSignalAppId, sender_id);
             this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.Notification);
             this.oneSignal.endInit();
-            
-            
             this.oneSignal.getIds().then((id) => { 
               let datos={
-                'username': window.localStorage.getItem('username'),
+                'username': this.usuario.username, 
                 'playerId': id.userId 
-              } 
+              }
+              console.log(id.userId ); 
               this._UsuarioService.SetPlayerIdAction(datos).subscribe(
                 response => {
-                    console.log(response);
+                   
                 }, 
                 error => {
                     this.errorMessage = <any>error;
@@ -76,33 +78,36 @@ export class LoginPage {
           loader.dismiss();
       }, 
       error => {
-          this.errorMessage = <any>error;
-          alert(this.errorMessage);
-          if(this.errorMessage != null){
-            if (this.errorMessage.statusText == 'Bad Request') {
-              }
-        }
+        loader.dismiss();
+        this.showAlert();
+        
       }
   );
   this.datos.username = this.usuario.username;
   this._UsuarioService.UsuarioAction(this.datos).subscribe(
-    response => {
-      window.localStorage.setItem('fotoPerfil', response.usuario.fotoPerfil);
-      window.localStorage.setItem('fotoPortada', response.usuario.fotoPortada);
-      window.localStorage.setItem('nombres', response.usuario.nombres);
-      window.localStorage.setItem('oneSignalId', response.usuario.oneSignalId);
-      window.localStorage.setItem('empresaId', response.usuario.empresaId);
-      // alert(response.usuario.empresaId); 
-    }, 
-    error => {
-        this.errorMessage = <any>error;
-        if(this.errorMessage != null){
-          if (this.errorMessage.statusText == 'Bad Request') {
-            }
-      }
-    }
-);
-
-
+        response => {
+          localStorage.setItem('fotoPerfil', response.usuario.fotoPerfil);
+          localStorage.setItem('fotoPortada', response.usuario.fotoPortada);
+          localStorage.setItem('nombres', response.usuario.nombres);
+          localStorage.setItem('oneSignalId', response.usuario.oneSignalId);
+          localStorage.setItem('empresaId', response.usuario.empresaId);
+          // alert(response.usuario.empresaId); 
+        }, 
+        error => {
+            this.errorMessage = <any>error;
+            if(this.errorMessage != null){
+              if (this.errorMessage.statusText == 'Bad Request') {
+                }
+          }
+        }
+    );
+  }
+  showAlert() {
+    const alert = this.alertCtrl.create({
+      title: 'Credenciales Incorrectas!',
+      subTitle: 'La combinacion de usuario y contraseña  son incorrectas!!',
+      buttons: ['OK']
+    });
+    alert.present();
   }
 }

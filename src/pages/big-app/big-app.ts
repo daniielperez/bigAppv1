@@ -13,6 +13,7 @@ import { BanerPublicidadService } from '../../services/banerPublicidadService';
 import { EmpresaService } from '../../services/empresaService'; 
 import { Masonry,} from 'ng-masonry-grid';
 import { PedidoPage } from '../pedido/pedido';
+import { LoadingController } from 'ionic-angular';
 
 
 @Component({
@@ -25,7 +26,7 @@ import { PedidoPage } from '../pedido/pedido';
   ],
 })
 export class BigAppPage {
- 
+  today:any ;
   spiner:any=false;
   _masonry: Masonry;
   masonryItems:any[];
@@ -44,12 +45,20 @@ export class BigAppPage {
     public _ProductoService: ProductoService,
     public _EmpresaService: EmpresaService,
     public _BanerPublicidadService: BanerPublicidadService,
+    public loadingCtrl: LoadingController
   ) {
+    
   }
 
   
 
   ngOnInit() { 
+    const loader = this.loadingCtrl.create({
+      content: "Please wait...",
+      
+    });
+    loader.present();
+    this.onNgMasonryInit(this._masonry);
     this.idPagina = 1;
     this.productos = null; 
     this.empresas = null;
@@ -57,19 +66,6 @@ export class BigAppPage {
     let data = {
       'idPagina':1,
     }
-    this._EmpresaService.IndexPaginatorAction(data).subscribe(
-      response => {
-        if(response.status ='success'){
-          if (this._masonry) {
-              this.empresas=response.datos;
-            }
-          }
-      },   
-      error => {
-          this.errorMessage = <any>error;
-          console.log(error);
-        }
-    );
     this._BanerPublicidadService.IndexPaginatorAction(data).subscribe(
       response => {
         if(response.status ='success'){
@@ -83,6 +79,21 @@ export class BigAppPage {
           console.log(error);
         }
     );
+    this._EmpresaService.IndexPaginatorAction(data).subscribe(
+      response => {
+        if(response.status ='success'){
+          if (this._masonry) {
+              this.empresas=response.datos;
+              loader.dismiss();
+            }
+          }
+      },   
+      error => {
+          this.errorMessage = <any>error;
+          console.log(error);
+        }
+    );
+    
     this._ProductoService.IndexPaginatorAction(data).subscribe(
       response => {
        
@@ -100,23 +111,9 @@ export class BigAppPage {
   }
 
   onNgMasonryInit($event: Masonry) {
-    console.log('ssssssssssssssssssss');
     this._masonry = $event;
   }
 
-  presentPopover(myEvent) {
-    let popover = this.popoverCtrl.create(PopoverEmpresaCardPage,{key1:'value1', key2: 'value2'}, { cssClass: 'edit-opty-popover' });
-    popover.present({
-      ev: myEvent
-    });
-  }
-  presentPopoverProducto(myEvent,producto) {
-    let popover = this.popoverCtrl.create(PopoverProductoCardPage,{lat:producto.lat,lng:producto.lng,label:producto.nombreProducto}, { cssClass: 'edit-opty-popover-producto' });
-    
-    popover.present({
-      ev: myEvent
-    });
-  }
 
   goToMunicipiosProducto(params){
     if (!params) params = {};
@@ -134,7 +131,7 @@ export class BigAppPage {
   }goToEmpresa(empresa){
     if (!empresa) empresa = {};
     this.navCtrl.push(EmpresaPage, {
-      idEmpresa: empresa.id
+      idEmpresa: empresa
     });
   }goToChat(producto){
     let toUser = {
@@ -235,7 +232,7 @@ export class BigAppPage {
 
   buscarProducto(){
     this.navCtrl.push(BuscarProductosPage, {
-      stringBusquedaProducto: this.stringBusquedaProducto 
+      stringBusquedaProducto: this.stringBusquedaProducto.toLowerCase()
     });
   }
 }

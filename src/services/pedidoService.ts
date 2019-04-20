@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class PedidoService {
 	public Authorization = sessionStorage.getItem('token');
-	public url = "http://192.168.1.70/bigApp/bigApp/web/api/pedido";
+	public url = "http://bigapp123.herokuapp.com/web/api/pedido";
 	constructor(private _http: Http){
 	}
  

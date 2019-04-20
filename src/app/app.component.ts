@@ -38,38 +38,28 @@ export class MyApp {
     empresaId = localStorage.getItem("empresaId");
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,private oneSignal: OneSignal,private _usuarioService:UsuarioService) {
-
-    // let status bar overlay webview
-    statusBar.overlaysWebView(true);
-    
-    // set status bar to white
-    statusBar.backgroundColorByHexString('#ffffff');
-    statusBar.styleBlackTranslucent();
-    statusBar.show();
-       
-    if (this.username == null) {
-      this.rootPage = LoginPage;
-    }else{
-      this.rootPage = BigAppPage;
-    }
-    this.rootPage = BigAppPage;
-
-    
     platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
+      
+      statusBar.backgroundColorByHexString('#ffffff');
+      statusBar.styleBlackTranslucent();
+      statusBar.show();
       statusBar.styleDefault();
       splashScreen.hide();
+      
+      if (isCordovaAvailable()){
+        this.oneSignal.handleNotificationOpened().subscribe(data => this.onPushOpened(data.notification.payload));
+        this.oneSignal.endInit();
+      }
+
+      if (this.username == null) {
+        this.rootPage = LoginPage;
+      }else{
+        this.rootPage = BigAppPage;
+      }
+      // this.rootPage = LoginPage;
     });
-    if (isCordovaAvailable()){
-      // this.oneSignal.handleNotificationReceived().subscribe(data => this.onPushReceived(data.payload));
-      this.oneSignal.handleNotificationOpened().subscribe(data => this.onPushOpened(data.notification.payload));
-      this.oneSignal.endInit();
-    }
+    
   } 
-
-  
-
   goToBigApp(params){ 
     if (!params) params = {};
     this.navCtrl.setRoot(BigAppPage);
@@ -109,12 +99,17 @@ export class MyApp {
     this.navCtrl.setRoot(SocialPage);
   }
 
+  salir(){
+    localStorage.removeItem('fotoPerfil');
+    localStorage.removeItem('fotoPortada');
+    localStorage.removeItem('nombres');
+    localStorage.removeItem('oneSignalId');
+    localStorage.removeItem('empresaId');
+    localStorage.removeItem('username');
+    localStorage.removeItem('token');
+    this.navCtrl.setRoot(LoginPage);
+  }
 
-  
-  // private onPushReceived(payload: OSNotificationPayload) {
-  //   alert('Push recevied:' + payload.additionalData.foo);
-  // }
-  
   private onPushOpened(payload: OSNotificationPayload) {
     if(payload.additionalData.tipo == 'subasta'){
       this.navCtrl.setRoot(SubastaPage, {

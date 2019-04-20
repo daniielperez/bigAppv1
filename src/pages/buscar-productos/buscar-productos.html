@@ -15,7 +15,7 @@
 
 <ion-content padding>
   <ion-card *ngFor="let producto of productos">
-    <img src="http://192.168.1.70/bigApp/bigApp/web/uploads/producto/{{ producto.imagen }}"/>
+    <img src="http://bigapp123.herokuapp.com/web/uploads/producto/{{ producto.imagen }}"/>
     <ion-card-content>
       <ion-card-title>
         <h2>{{ producto.nombreProducto }}</h2>
@@ -26,19 +26,24 @@
       </p>
     </ion-card-content>
     <ion-row>
-      <ion-col col-4>
+      <ion-col col-3>
         <button on-click="goToChat(producto)" style="color:#c62828" ion-button icon-start clear big>
           <ion-icon name="text"></ion-icon>
         </button>
       </ion-col>
-      <ion-col col-4>
+      <ion-col col-3>
         <button on-click="goToMap(producto)" ion-button icon-start clear big>
           <ion-icon name="navigate" style="color:#8e0000"></ion-icon>
         </button>
       </ion-col>
-      <ion-col col-4>
+      <ion-col col-3>
         <button on-click="goToEmpresa(producto.idEmpresa)" style="color:#ff5f52" ion-button icon-start clear big>
           <ion-icon name="briefcase"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col col-3>
+        <button on-click="goToPedidoPage(producto)" style="color:#521712" ion-button icon-start clear small>
+          <ion-icon name="glasses"></ion-icon>
         </button>
       </ion-col>
     </ion-row>

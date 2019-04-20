@@ -5,6 +5,7 @@ import { UsuarioService } from '../../services/usuarioService';
 import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
 import { YoutubeService } from '../../services/youtubeService';
 import { UsersPage } from '../users/users';
+import { ComentariosPage } from '../comentarios/comentarios';
 /**
  * Generated class for the SocialPage page.
  *
@@ -180,6 +181,12 @@ export class SocialPage {
   goToUsersPage() {
     this.navCtrl.push(UsersPage,{
       stringBusqueda:this.stringBusqueda,
+    });
+  }
+
+  goToComentarios(publicacionId){
+    this.navCtrl.push(ComentariosPage,{
+      item:publicacionId,
     });
   }
 

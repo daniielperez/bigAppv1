@@ -4,6 +4,7 @@ import { ProductoService } from '../../services/productoService';
 import { LoadingController } from 'ionic-angular';
 import { MapaPage } from '../mapa/mapa';
 import { EmpresaPage } from '../empresa/empresa';
+import { PedidoPage } from '../pedido/pedido';
 import { ChatPage } from '../chat/chat';
 
 /**   
@@ -73,8 +74,11 @@ export class BuscarProductosPage {
     this.navCtrl.push(ChatPage, toUser);
   }
 
-  ionViewDidLoad() {
-    console.log(this.stringBusqueda);
+
+  goToPedidoPage(producto){
+    this.navCtrl.push(PedidoPage, {
+      producto: producto
+    });
   }
 
 }

@@ -4,11 +4,11 @@
   <ion-slides pager>
     
     <ion-slide *ngFor="let publicidad of publicidades">
-        <img src="http://192.168.1.70/bigApp/bigApp/web/uploads/banerpublicidad/{{publicidad.url}}" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+        <img src="http://bigapp123.herokuapp.com/web/uploads/banerpublicidad/{{publicidad.url}}" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
     </ion-slide>
   </ion-slides>
   <ion-item>
-    <ion-label>Que quieres buscar hoy?</ion-label>
+    <ion-label>Busqueda amplia</ion-label>
     <ion-input type="text" [(ngModel)]="stringBusquedaProducto"></ion-input>
     <button ion-button medium (click)="buscarProducto()" item-end>Ir</button>
   </ion-item>
@@ -24,24 +24,22 @@
         <ion-card *ngFor="let empresa of empresas">
             <ion-item>
               <ion-avatar item-start>
-                <img on-click="goToEmpresa(empresa)" src="http://192.168.1.70/bigApp/bigApp/web/uploads/empresa/fotosLogo/{{empresa.logoEmpresa}}">
+                <img on-click="goToEmpresa(empresa.id)" src="http://bigapp123.herokuapp.com/web/uploads/empresa/fotosLogo/{{empresa.logoEmpresa}}">
               </ion-avatar>
               <h2> 
                   {{empresa.nombreEmpresa}}
-                  <p align="right" style="position:relative; top:-15px;">
-                      <ion-icon align="right"  (click)="presentPopover($event)"  name="more"></ion-icon>
-                  </p>
               </h2>
-              <p style='margin-top: -16px;'>November 5, 1955  
-                </p>
+              <br>
+              <p style='margin-top: -16px;'>Visita nuestra empresa  
+              </p>
             </ion-item>
-            <img on-click="goToEmpresa(empresa)" src="http://192.168.1.70/bigApp/bigApp/web/uploads/empresa/fotosPortada/{{empresa.portadaEmpresa}}">
+            <img on-click="goToEmpresa(empresa.id)" src="http://bigapp123.herokuapp.com/web/uploads/empresa/fotosPortada/{{empresa.portadaEmpresa}}">
         </ion-card>
     </ion-scroll>
     
 
   <h4 on-click="goToMunicipiosProducto()" id="bigApp-heading1" style="color:#000000;text-align:center;">
-    Productos  <ion-icon ios="ios-options" md="md-options"></ion-icon>
+    Que quieres encontrar hoy ?  <ion-icon ios="ios-options" md="md-options"></ion-icon>
   </h4>
 <div class="padding1" *ngIf='show'>
   <ng-masonry-grid 
@@ -54,25 +52,16 @@
       <ng-masonry-grid-item class="ancho" id="{{'producto-'+producto.id}}" *ngFor="let producto of productos" > 
         <!-- Grid Content  --> 
         <ion-card>
-            <img  src="http://192.168.1.70/bigApp/bigApp/web/uploads/producto/{{ producto.imagen }}"/>
+            <img  src="http://bigapp123.herokuapp.com/web/uploads/producto/{{ producto.imagen }}"/>
             <ion-card-content>
               <ion-card-title>
                 <h2>{{ producto.nombreProducto }}</h2>
                 <h3>${{ producto.valor }}</h3>
-
-                <!-- <p align="right" style="position:relative; top: -22px;">
-                    <ion-icon align="right"  (click)="presentPopoverProducto($event,producto)"  name="more"></ion-icon>
-                </p> -->
                 </ion-card-title>  
               <p> 
                   {{ producto.descripcion }} 
               </p>
             </ion-card-content>
-            <div align="center">
-                <ion-note align="center">
-                 11h ago
-                </ion-note>
-            </div>
             <ion-row>
                 <ion-col col-3>
                   <button on-click="goToChat(producto)" style="color:#c62828" ion-button icon-start clear small>

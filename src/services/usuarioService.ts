@@ -7,12 +7,12 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class UsuarioService {
 	public Authorization = sessionStorage.getItem('token');
-	public url = "http://192.168.1.70/bigApp/bigApp/web/api/usuario";
+	public url = "http://bigapp123.herokuapp.com/web/api/usuario";
 	constructor(private _http: Http){
 	}
 
 	loginAction(json:any){
-		return this._http.post("http://192.168.1.70/bigApp/bigApp/web/oauth/v2/token",json,{headers: new Headers({'Content-Type':'application/json'})})
+		return this._http.post("http://bigapp123.herokuapp.com/web/oauth/v2/token",json,{headers: new Headers({'Content-Type':'application/json'})})
 		.map(res => res.json()); 
 	}
 
@@ -68,6 +68,9 @@ export class UsuarioService {
  			return this._http.post(this.url+"/set/player/id", json, {headers: headers})
 			 .map(res => res.json()); 
 	}
+
+
+	
 
 	
 }

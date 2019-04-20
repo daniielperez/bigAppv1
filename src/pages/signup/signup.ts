@@ -32,6 +32,8 @@ export class SignupPage {
       content: "Por favor Espere...",
     });
     loader.present();
+    this.usuario.username = this.usuario.email.toLowerCase();
+    this.usuario.email = this.usuario.email.toLowerCase();
     this._UsuarioService.NewAction(this.usuario).subscribe(
       response => {
         if(response.status ='success'){

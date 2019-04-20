@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class PublicacionService {
 	public Authorization = sessionStorage.getItem('token');
-	public url = "http://192.168.1.70/bigApp/bigApp/web/api/publicacion";
+	public url = "http://bigapp123.herokuapp.com/web/api/publicacion";
 	constructor(private _http: Http){
 	}
 

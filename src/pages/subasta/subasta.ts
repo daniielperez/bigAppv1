@@ -5,6 +5,7 @@ import { SubastaService } from '../../services/subastaService';
 import { DomSanitizer } from '@angular/platform-browser'; 
 import { ModalController,NavParams } from 'ionic-angular';
 import { NewSubastaPage } from '../new-subasta/new-subasta';
+import { MunicipiosPage } from '../municipios/municipios';
 // import { OneSignal, OSNotificationPayload } from '@ionic-native/onesignal';
 
 @Component({
@@ -102,6 +103,14 @@ export class SubastaPage {
     console.log(usuario);
     this.navCtrl.push(NewSubastaPage,{
       usuario:usuario,
+    });
+  }
+
+  goToMunicipiosEmpresa(usuario){
+    if (!usuario) usuario = {};
+    this.navCtrl.push(MunicipiosPage, {
+      tipo: 'subasta',
+      usuario: usuario
     });
   }
 }

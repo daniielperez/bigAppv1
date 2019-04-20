@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class EmpresaService {
 	public Authorization = sessionStorage.getItem('token');
-	public url = "http://192.168.1.70/bigApp/bigApp/web/api/empresa";
+	public url = "http://bigapp123.herokuapp.com/web/api/empresa";
 	constructor(private _http: Http){
 	}
 
@@ -41,6 +41,13 @@ export class EmpresaService {
 		let json = JSON.stringify(datos);
 		let headers = new Headers({'Content-Type':'application/json','Authorization': 'Bearer ' + sessionStorage.getItem('token')});
  			return this._http.post(this.url+"/show", json, {headers: headers})
+							  .map(res => res.json());
+	}
+
+	empresaNewCalificacionAction(datos:any){
+		let json = JSON.stringify(datos);
+		let headers = new Headers({'Content-Type':'application/json','Authorization': 'Bearer ' + sessionStorage.getItem('token')});
+ 			return this._http.post(this.url+"/new/calificacion", json, {headers: headers})
 							  .map(res => res.json());
 	}
 

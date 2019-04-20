@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class ChatUsuarioService {
 	public Authorization = sessionStorage.getItem('token');
-	public url = "http://192.168.1.70/bigApp/bigApp/web/api/chatUsuario";
+	public url = "http://bigapp123.herokuapp.com/web/api/chatUsuario";
 	constructor(private _http: Http){
 	}
 
